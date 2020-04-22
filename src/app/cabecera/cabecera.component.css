@@ -1,0 +1,59 @@
+
+.btn{
+  border-color:black;
+  color:black;
+}
+
+.btn:hover{
+  background-color: black;
+  color:white;
+}
+
+.login{
+  /*background: linear-gradient(to right, mediumpurple, skyblue);*/
+  color:mediumpurple;
+  border-radius: 20px;
+  text-align: right;
+}
+
+.nombre{
+  color:black;
+}
+
+.cabecera{
+  font-family: "Century Gothic";
+  font-size: 1.2em;
+  background-color: lightgrey;
+}
+
+.menu{
+  background-color: #a683f0;
+  font-family: "Century Gothic";
+}
+
+.nav-link{
+  padding:0;
+}
+
+.boton{
+  border:none;
+  background: none;
+  color:white!important;
+  font-size: 1.3em;
+  padding: 0;
+  margin: 0;
+}
+
+.desplegable{
+  color:yellow!important;
+  background-color: skyblue;
+}
+
+.icono{
+  color:skyblue;
+  font-size: 1.3em;
+}
+
+.active{
+  border: 3px solid yellow;
+}

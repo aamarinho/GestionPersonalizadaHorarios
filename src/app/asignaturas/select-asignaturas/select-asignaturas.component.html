@@ -1,0 +1,14 @@
+
+<fa-icon [icon]="icono"></fa-icon>
+<label for="email" class="label ml-2">Asignatura</label>
+  <mat-form-field class="select">
+    <mat-select class="opciones" [formControl]="asignaturaCtrl" #singleSelect>
+      <mat-option>
+        <ngx-mat-select-search placeholderLabel="Selecciona la asignatura" noEntriesFoundLabel="No se encuentra la asignatura" [formControl]="AsignaturaFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option class="opciones" *ngFor="let asignatura of filteredAsignaturas | async" [value]="asignatura" (click)="submit(asignatura.id)">
+        {{asignatura.id}}-{{asignatura.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+

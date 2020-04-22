@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Usuario} from '../models/Usuario';
+import {Observable} from 'rxjs';
+import {UsuarioAsignatura} from '../models/UsuarioAsignatura';
+import {Asignatura} from '../models/Asignatura';
+import {Config} from 'protractor';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsuarioasignaturaService {
+
+  public url: string;
+
+  constructor(public http: HttpClient) {
+    this.url = 'https://localhost/rest/usuarioasignatura';
+  }
+
+  registrar(asignaturas: Asignatura[],email:string): Observable<any>{
+    let param = new HttpParams().set('email',JSON.stringify(email)).set('asignaturas',JSON.stringify(asignaturas));
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
+  }
+
+  getUsuariosAsignaturas(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
+  }
+
+  eliminar(id: string, email: string): Observable<any>{
+    return this.http.delete(this.url+"/eliminar/"+email+'/'+id,{responseType:'text'});
+  }
+
+}

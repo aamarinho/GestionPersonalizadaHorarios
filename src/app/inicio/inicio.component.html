@@ -1,0 +1,24 @@
+<div class="container inicio">
+  <form #formIniciarSesion="ngForm" (ngSubmit)="onSubmit()" class="forminicio" >
+
+    <h4 class="mb-4 titulo">INICIA SESIÓN EN TU CUENTA</h4>
+    <fa-icon [icon]="iconoUsuario"></fa-icon>
+    <label for="email" class="labels ml-2">Email</label>
+    <input type="email" name="email" class="col inputs" #email="ngModel" [(ngModel)]="usuario.email" required />
+    <span class="validaciones" *ngIf="email.touched && !email.valid">
+      El email no es válido
+    </span>
+
+    <br/>
+    <fa-icon [icon]="iconoCandado"></fa-icon>
+    <label for="contrasena" class="mt-3 ml-2 labels" >Contraseña</label>
+    <input type="password" name="contrasena" class="col inputs" #contrasena="ngModel" [(ngModel)]="usuario.contrasena" required/>
+
+    <span class="validaciones" *ngIf="contrasena.touched && !contrasena.valid">
+      Debes introducir la contraseña
+    </span>
+
+    <input type="submit" value="ENTRAR" class="btn btn-lg botoninicio" [disabled]="!formIniciarSesion.form.valid" />
+
+  </form>
+</div>

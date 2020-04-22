@@ -1,0 +1,14 @@
+.piePagina{
+  background-color: lightgrey;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.icon{
+  padding: 5px;
+}
+
+.icons{
+}
+

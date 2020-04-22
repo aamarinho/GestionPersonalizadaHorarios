@@ -1,0 +1,33 @@
+<div class="container contenido mt-5">
+
+  <fa-icon [icon]="iconoLibro"></fa-icon>
+  <label for="asignaturas" class="label ml-2">Selecciona las asignaturas que cursa/imparte</label>
+  <mat-form-field class="select">
+    <mat-select class="select" [formControl]="asignaturasMultiCtrl" [multiple]="true" #multiSelect>
+      <ngx-mat-select-search placeholderLabel="Selecciona las asignaturas" noEntriesFoundLabel="No se encuentra la asignatura" [formControl]="asignaturasMultiFilterCtrl"></ngx-mat-select-search>
+      <mat-option *ngFor="let asignatura of filteredAsignaturasMulti | async" [value]="asignatura" (click)="onSubmit(asignatura)">
+        {{asignatura.id}}-{{asignatura.nombre}} ({{asignatura.curso}}º)
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<input type="submit" value="CONFIRMAR" class="btn boton mt-2" (click)="registrar()">
+  <div class="row">
+    <div class="col-6">
+  <p class="resultado mt-3">
+    ASIGNATURAS ASIGNADAS
+  </p>
+  <ul *ngFor="let asignatura of asignaturasAsignadas">
+    <li>{{asignatura.id}}<input class="ml-3" (click)="eliminar(asignatura.id)" type="image" src="../../assets/delete.svg" alt="Eliminar" width="20" height="20"></li>
+  </ul>
+    </div>
+    <div class="col-6">
+  <p class="resultado mt-3">
+    ASIGNATURAS NUEVAS SELECCIONADAS
+  </p>
+  <ul *ngFor="let asignatura of asignaturasMultiCtrl?.value">
+    <li>{{asignatura.id}}</li>
+  </ul>
+    </div>
+  </div>
+</div>

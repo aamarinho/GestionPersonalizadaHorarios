@@ -1,0 +1,48 @@
+.inputs{
+  border-bottom: 1px solid #4b4b4b;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent!important;
+}
+
+.labels{
+  font-size: 1.2em;
+}
+
+.validaciones{
+  color: #990000;
+}
+
+.titulo{
+  font-size: 1.6em;
+  text-align: center;
+}
+
+.inicio{
+  margin-top: 8%;
+  width: 34%;
+  font-family: "Century Gothic";
+  color: #4b4b4b !important;
+}
+
+.forminicio{
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5%;
+}
+
+.botoninicio{
+  margin-top:8%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  padding-left: 20%;
+  padding-right: 20%;
+  border-radius: 30px;
+  border:none;
+  color:white;
+  font-size:1.4em;
+  background: linear-gradient(to right, mediumpurple, skyblue);
+
+}

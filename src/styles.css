@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body{
+  height: 100%;
+  margin-bottom: 90px!important;
+  font-family: "Century Gothic", sans-serif;
+}
+
+.bg-img{
+  background-image: url("/assets/uni.jpg");
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+}
