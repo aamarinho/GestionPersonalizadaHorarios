@@ -1,0 +1,21 @@
+<div class="container contenido mt-5">
+
+  <fa-icon [icon]="iconoLibro"></fa-icon>
+  <label for="asignaturas" class="label ml-2">Selecciona los grupos de los que deseas generar el calendario</label>
+  <mat-form-field class="select">
+    <mat-select class="select" [formControl]="gruposMultiCtrl" [multiple]="true" #multiSelect>
+      <ngx-mat-select-search placeholderLabel="Selecciona los grupos" noEntriesFoundLabel="No se encuentra el grupo" [formControl]="gruposMultiFilterCtrl"></ngx-mat-select-search>
+      <mat-option *ngFor="let grupo of filteredGruposMulti | async" [value]="grupo" (click)="onSubmit(grupo)">
+        {{grupo.id}} - {{grupo.tipo}} ({{grupo.id_asignatura}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <input type="submit" value="CONFIRMAR" class="btn boton mt-2" (click)="registrar()">
+      <p class="resultado mt-3">
+        GRUPOS SELECCIONADOS
+      </p>
+      <ul *ngFor="let grupo of gruposMultiCtrl?.value">
+        <li>{{grupo.id}}</li>
+      </ul>
+</div>

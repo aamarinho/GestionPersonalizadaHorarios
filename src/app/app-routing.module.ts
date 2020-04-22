@@ -13,6 +13,8 @@ import {RegistroGrupoComponent} from './grupos-reducidos/registro-grupo/registro
 import {MultiSelectAsignaturasComponent} from './asignaturas/multi-select-asignaturas/multi-select-asignaturas.component';
 import {MultiSelectGruposComponent} from './grupos-reducidos/multi-select-grupos/multi-select-grupos.component';
 import {CalendarioComponent} from './calendario/calendario.component';
+import {GenerarCalendarioComponent} from './calendario/generar-calendario/generar-calendario.component';
+import {MenuCalendarioComponent} from './calendario/menu-calendario/menu-calendario.component';
 
 
 const routes: Routes = [
@@ -28,7 +30,11 @@ const routes: Routes = [
   {path: 'registrogrupo', component: RegistroGrupoComponent},
   {path: 'gestionasignaturas', component: MultiSelectAsignaturasComponent},
   {path: 'gestiongrupos', component: MultiSelectGruposComponent},
-  {path: 'calendario', component:CalendarioComponent}
+  {path: 'menucalendario', component:MenuCalendarioComponent},
+  {path: 'generarcalendario', component:GenerarCalendarioComponent},
+  {path: 'calendario', component:CalendarioComponent},
+
+
 ];
 
 @NgModule({

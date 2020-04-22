@@ -32,6 +32,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { GenerarCalendarioComponent } from './calendario/generar-calendario/generar-calendario.component';
+import { MenuCalendarioComponent } from './calendario/menu-calendario/menu-calendario.component';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { CalendarioComponent } from './calendario/calendario.component';
     MultiSelectAsignaturasComponent,
     MultiSelectGruposComponent,
     CalendarioComponent,
+    GenerarCalendarioComponent,
+    MenuCalendarioComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 
+
 const colors: any = { //colores para los eventos del calendario
   red: {
     primary: '#ad2121',
