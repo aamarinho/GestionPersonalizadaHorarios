@@ -9,6 +9,7 @@ import {GruposreducidosService} from '../../../services/gruposreducidos.service'
 import {GrupoReducido} from '../../../models/GrupoReducido';
 import {UsuarioGrupo} from '../../../models/UsuarioGrupo';
 import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
+import {CalendarioService} from '../../../services/calendario.service';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   protected _onDestroy = new Subject<void>();
 
 
-  constructor(private gruposReducidosService : GruposreducidosService, private usuarioGrupoService :UsuariogrupoService, private router: Router) {
+  constructor(private gruposReducidosService : GruposreducidosService, private usuarioGrupoService :UsuariogrupoService, private router: Router, private calendarioService:CalendarioService) {
     this.grupos=new Array<GrupoReducido>();
     this.resultado=new Array<GrupoReducido>();
     this.gruposAsignados=new Array<UsuarioGrupo>();
@@ -70,10 +71,9 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
         console.log("array de ids grupos---->");
         console.log(this.idsgrupos);
         for(let a of result){
-          if(!this.idsgrupos.includes(a.id)){
-            console.log(a.id);
+          //if(!this.idsgrupos.includes(a.id)){
             this.grupos.push(a);
-          }
+          //}
         }
         console.log(this.grupos);
         console.log(this.idsgrupos);
@@ -152,15 +152,15 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   }
 
   registrar(){
-    console.log(this.resultado);
-    /*this.usuarioGrupoService.registrar(this.resultado,window.sessionStorage.getItem('gestiongrupos')).subscribe(
+    //console.log(this.resultado);
+    this.calendarioService.registrar(this.resultado).subscribe(
       result=>{
         this.ngOnInit();
         console.log("gestionados los grupos correctamente");
       } , error=>{
         console.log("error gestionando los grupos");
       }
-    );*/
+    );
   }
 
 }
