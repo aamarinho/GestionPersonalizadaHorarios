@@ -22,6 +22,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import {CalendarioService} from '../../services/calendario.service';
+import {start} from 'repl';
 
 
 const colors: any = { //colores para los eventos del calendario
@@ -48,8 +50,8 @@ const colors: any = { //colores para los eventos del calendario
   styleUrls: ['./calendario.component.css'],
   templateUrl: './calendario.component.html',
 })
-export class CalendarioComponent{
-  constructor(private modal: NgbModal) {}
+export class CalendarioComponent implements OnInit{
+  constructor(private modal: NgbModal, private calendarioService : CalendarioService) {}
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
@@ -162,23 +164,6 @@ export class CalendarioComponent{
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
@@ -189,6 +174,53 @@ export class CalendarioComponent{
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  ngOnInit(){
+    this.calendarioService.getCalendario(window.sessionStorage.getItem('calendariousuario')).subscribe(
+      result=>{
+
+        for(let e of result){
+          let fecha=e.fecha;
+          fecha=fecha.replace(/-/g,',');
+          let horai=e.hora_inicio.substr(0,2);
+          if(horai.charAt(0)==0){
+            horai=horai.replace(/0/,'');
+          }
+          let minutosi=e.hora_inicio.substr(3,2);
+          if(minutosi.charAt(0)==0){
+            minutosi=minutosi.replace(/0/,'');
+          }
+          let horaf=e.hora_fin.substr(0,2);
+          if(horaf.charAt(0)==0){
+            horaf=horaf.replace(/0/,'');
+          }
+          let minutosf=e.hora_fin.substr(3,2);
+          if(minutosf.charAt(0)==0){
+            minutosf=minutosf.replace(/0/,'');
+          }
+
+          this.events = [
+            ...this.events,
+            {
+              title: e.id_grupo+'['+e.aula+']',
+              start: addMinutes(addHours(addDays(startOfDay(new Date(fecha)),1),horai),minutosi),
+              end: addMinutes(addHours(addDays(startOfDay(new Date(fecha)),1),horaf),minutosf),
+              color: colors.purple,
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true,
+              },
+            },
+          ];
+        }
+
+      },
+      error=>{
+        console.log(error);
+        console.log("CALENDARIO EROOOOOOOOOOOOOOOOOOOR");
+      });
   }
 
 

@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { GenerarCalendarioComponent } from './calendario/generar-calendario/generar-calendario.component';
 import { MenuCalendarioComponent } from './calendario/menu-calendario/menu-calendario.component';
+import { SelectTodosUsuariosComponent } from './usuarios/select-todos-usuarios/select-todos-usuarios.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { MenuCalendarioComponent } from './calendario/menu-calendario/menu-calen
     CalendarioComponent,
     GenerarCalendarioComponent,
     MenuCalendarioComponent,
+    SelectTodosUsuariosComponent,
   ],
   imports: [
     BrowserModule,

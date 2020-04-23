@@ -15,6 +15,7 @@ import {MultiSelectGruposComponent} from './grupos-reducidos/multi-select-grupos
 import {CalendarioComponent} from './calendario/calendario.component';
 import {GenerarCalendarioComponent} from './calendario/generar-calendario/generar-calendario.component';
 import {MenuCalendarioComponent} from './calendario/menu-calendario/menu-calendario.component';
+import {SelectTodosUsuariosComponent} from './usuarios/select-todos-usuarios/select-todos-usuarios.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'menucalendario', component:MenuCalendarioComponent},
   {path: 'generarcalendario', component:GenerarCalendarioComponent},
   {path: 'calendario', component:CalendarioComponent},
+  {path: 'seleccionarusuario', component:SelectTodosUsuariosComponent},
 
 
 ];

@@ -19,4 +19,11 @@ export class CalendarioService {
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
   }
+
+  getCalendario(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
+  }
+
+
 }
