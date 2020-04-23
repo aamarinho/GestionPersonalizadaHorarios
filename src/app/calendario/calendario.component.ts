@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef, OnInit,
+  TemplateRef, OnInit, AfterViewInit, ElementRef,
 } from '@angular/core';
 import {
   startOfDay,
@@ -24,7 +24,7 @@ import {
 } from 'angular-calendar';
 import {CalendarioService} from '../../services/calendario.service';
 import {start} from 'repl';
-
+import * as $ from 'jquery';
 
 const colors: any = { //colores para los eventos del calendario
   red: {
@@ -50,10 +50,12 @@ const colors: any = { //colores para los eventos del calendario
   styleUrls: ['./calendario.component.css'],
   templateUrl: './calendario.component.html',
 })
-export class CalendarioComponent implements OnInit{
+export class CalendarioComponent implements OnInit,AfterViewInit{
   constructor(private modal: NgbModal, private calendarioService : CalendarioService) {}
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('myDiv',{ static:true }) myDiv: ElementRef<HTMLElement>;
+
 
   view: CalendarView = CalendarView.Month;
 
@@ -87,45 +89,9 @@ export class CalendarioComponent implements OnInit{
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
-      start: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),9),30),
-      end: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),11),0),
-      title: 'TCL_3',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),9),30),
-      end: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),11),0),
-      title: 'TCL_1',
-      color: colors.red,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),9),30),
-      end: addMinutes(addHours(addDays(startOfDay(new Date(2020,3,20)),1),11),0),
-      title: 'TCL_4',
-      color: colors.purple,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -176,36 +142,35 @@ export class CalendarioComponent implements OnInit{
     this.activeDayIsOpen = false;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.calendarioService.getCalendario(window.sessionStorage.getItem('calendariousuario')).subscribe(
-      result=>{
-
-        for(let e of result){
-          let fecha=e.fecha;
-          fecha=fecha.replace(/-/g,',');
-          let horai=e.hora_inicio.substr(0,2);
-          if(horai.charAt(0)==0){
-            horai=horai.replace(/0/,'');
+      result => {
+        for (let e of result) {
+          let fecha = e.fecha;
+          fecha = fecha.replace(/-/g, ',');
+          let horai = e.hora_inicio.substr(0, 2);
+          if (horai.charAt(0) == 0) {
+            horai = horai.replace(/0/, '');
           }
-          let minutosi=e.hora_inicio.substr(3,2);
-          if(minutosi.charAt(0)==0){
-            minutosi=minutosi.replace(/0/,'');
+          let minutosi = e.hora_inicio.substr(3, 2);
+          if (minutosi.charAt(0) == 0) {
+            minutosi = minutosi.replace(/0/, '');
           }
-          let horaf=e.hora_fin.substr(0,2);
-          if(horaf.charAt(0)==0){
-            horaf=horaf.replace(/0/,'');
+          let horaf = e.hora_fin.substr(0, 2);
+          if (horaf.charAt(0) == 0) {
+            horaf = horaf.replace(/0/, '');
           }
-          let minutosf=e.hora_fin.substr(3,2);
-          if(minutosf.charAt(0)==0){
-            minutosf=minutosf.replace(/0/,'');
+          let minutosf = e.hora_fin.substr(3, 2);
+          if (minutosf.charAt(0) == 0) {
+            minutosf = minutosf.replace(/0/, '');
           }
 
           this.events = [
             ...this.events,
             {
-              title: e.id_grupo+'['+e.aula+']',
-              start: addMinutes(addHours(addDays(startOfDay(new Date(fecha)),1),horai),minutosi),
-              end: addMinutes(addHours(addDays(startOfDay(new Date(fecha)),1),horaf),minutosf),
+              title: e.id_grupo + '[' + e.aula + ']',
+              start: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horai), minutosi),
+              end: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horaf), minutosf),
               color: colors.purple,
               draggable: true,
               resizable: {
@@ -215,12 +180,17 @@ export class CalendarioComponent implements OnInit{
             },
           ];
         }
-
       },
-      error=>{
+      error => {
         console.log(error);
         console.log("CALENDARIO EROOOOOOOOOOOOOOOOOOOR");
       });
+
+  }
+
+  ngAfterViewInit() { //hace click al cargarse la vista
+    let el: HTMLElement=this.myDiv.nativeElement;
+    el.click();
   }
 
 
