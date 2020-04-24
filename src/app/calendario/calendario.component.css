@@ -6,3 +6,15 @@ pre {
   background-color: #f5f5f5;
   padding: 15px;
 }
+/*.cal-day-badge .ng-star-inserted{
+  background-color: mediumpurple!important;
+}*/
+
+.cal-week-view .cal-event{
+  background-color: mediumpurple!important;
+  color:black!important;
+}
+
+.cal-month-view .cal-day-badge{
+  background-color: red!important;
+}

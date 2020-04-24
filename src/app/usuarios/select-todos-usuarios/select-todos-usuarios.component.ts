@@ -42,15 +42,14 @@ export class SelectTodosUsuariosComponent implements OnInit,OnDestroy,AfterViewI
   ngOnInit() {
     this.usuarioService.getUsuarios().subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE TODOS LOS USUARIOS");
+        console.log(result);
         for( let p of result){
           this.usuarios.push(p);
-          console.log(p.id);
         }
         //this.seleccionada= this.asignaturas[0].id;
       },
       error=>{
-        console.log(this.usuarios);
+        console.log(error);
         console.log("DIO ERROR AL OBTENER LOS USUARIOS TODOS");
       });
     // set initial selection

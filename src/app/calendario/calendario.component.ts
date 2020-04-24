@@ -27,34 +27,50 @@ import {start} from 'repl';
 import * as $ from 'jquery';
 
 const colors: any = { //colores para los eventos del calendario
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
+  0: {
+    primary: '#76954a',
   },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
+  1: {
+    primary: '#54f6e3',
   },
-  yellow: {
+  2: {
     primary: '#e3bc08',
-    secondary: '#FDF1BA',
   },
-  purple: {
+  3: {
     primary: '#846be3',
-    secondary: '#b9c4fd',
+  },
+  4: {
+    primary: '#ff9fcd',
+  },
+  5: {
+    primary: '#68e300',
+  },
+  6: {
+    primary: '#e36100',
+  },
+  7: {
+    primary: '#49e388',
+  },
+  8: {
+    primary: '#e3002d',
+  },
+  9: {
+    primary: '#1100e3',
+  },
+  10: {
+    primary: '#fd299d',
   },
 };
 @Component({
   selector: 'app-calendario',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./calendario.component.css'],
   templateUrl: './calendario.component.html',
 })
-export class CalendarioComponent implements OnInit,AfterViewInit{
+export class CalendarioComponent implements OnInit{
   constructor(private modal: NgbModal, private calendarioService : CalendarioService) {}
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  @ViewChild('myDiv',{ static:true }) myDiv: ElementRef<HTMLElement>;
+  @ViewChild('hoy',{ static:true }) hoy: ElementRef<HTMLElement>;
 
 
   view: CalendarView = CalendarView.Month;
@@ -145,9 +161,18 @@ export class CalendarioComponent implements OnInit,AfterViewInit{
   ngOnInit() {
     this.calendarioService.getCalendario(window.sessionStorage.getItem('calendariousuario')).subscribe(
       result => {
+        let asignatura2:string='';
+        let temp=0;
+        let asignatura:string='';
         for (let e of result) {
-          let fecha = e.fecha;
-          fecha = fecha.replace(/-/g, ',');
+          asignatura=e.id_asignatura;//asignatura actual
+
+          let diaFecha = e.fecha.substr(8,2);//restamos un dia a la fecha del calendario porque los dias van desde 0 no desde 1
+          diaFecha=diaFecha-1;
+          let fechaSinDia=e.fecha.substr(0,8);
+          fechaSinDia = fechaSinDia.replace(/-/g, ',');
+          let fecha=fechaSinDia+diaFecha;
+
           let horai = e.hora_inicio.substr(0, 2);
           if (horai.charAt(0) == 0) {
             horai = horai.replace(/0/, '');
@@ -164,14 +189,14 @@ export class CalendarioComponent implements OnInit,AfterViewInit{
           if (minutosf.charAt(0) == 0) {
             minutosf = minutosf.replace(/0/, '');
           }
-
+          console.log(colors[temp].primary);
           this.events = [
             ...this.events,
             {
-              title: e.id_grupo + '[' + e.aula + ']',
+              title: e.id_grupo+'[' + e.aula + ']'+'('+e.nombre+')',
               start: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horai), minutosi),
               end: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horaf), minutosf),
-              color: colors.purple,
+              color: colors[temp],
               draggable: true,
               resizable: {
                 beforeStart: true,
@@ -179,18 +204,20 @@ export class CalendarioComponent implements OnInit,AfterViewInit{
               },
             },
           ];
+          if(asignatura!=asignatura2){
+            if(temp==10){
+              temp=0;
+            } else{
+              temp++;
+            }
+          }
+          asignatura2=asignatura;
         }
       },
       error => {
         console.log(error);
         console.log("CALENDARIO EROOOOOOOOOOOOOOOOOOOR");
       });
-
-  }
-
-  ngAfterViewInit() { //hace click al cargarse la vista
-    let el: HTMLElement=this.myDiv.nativeElement;
-    el.click();
   }
 
 
