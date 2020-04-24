@@ -7,6 +7,7 @@
         mwlCalendarPreviousView
         [view]="view"
         [(viewDate)]="viewDate"
+        [excludeDays]="excludeDays"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
         Anterior
@@ -24,6 +25,7 @@
         mwlCalendarNextView
         [view]="view"
         [(viewDate)]="viewDate"
+        [excludeDays]="excludeDays"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
         Siguiente
@@ -69,6 +71,7 @@
     [events]="events"
     [refresh]="refresh"
     [activeDayIsOpen]="activeDayIsOpen"
+    [excludeDays]="excludeDays"
     (dayClicked)="dayClicked($event.day)"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
@@ -82,6 +85,7 @@
     [dayStartHour]="9"
     [dayEndHour]="20"
     [refresh]="refresh"
+    [excludeDays]="excludeDays"
     (eventClicked)="handleEvent('Clicked', $event.event)"
     (eventTimesChanged)="eventTimesChanged($event)"
   >

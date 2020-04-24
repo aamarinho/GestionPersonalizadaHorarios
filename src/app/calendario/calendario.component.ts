@@ -21,6 +21,7 @@ import {
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
+  DAYS_OF_WEEK
 } from 'angular-calendar';
 import {CalendarioService} from '../../services/calendario.service';
 import {start} from 'repl';
@@ -29,36 +30,47 @@ import * as $ from 'jquery';
 const colors: any = { //colores para los eventos del calendario
   0: {
     primary: '#76954a',
+    secondary: '#76954a',
   },
   1: {
     primary: '#54f6e3',
+    secondary: '#54f6e3',
   },
   2: {
     primary: '#e3bc08',
+    secondary: '#e3bc08',
   },
   3: {
-    primary: '#846be3',
+    primary: '#e35900',
+    secondary: '#e35900',
   },
   4: {
     primary: '#ff9fcd',
+    secondary: '#ff9fcd',
   },
   5: {
     primary: '#68e300',
+    secondary: '#68e300',
   },
   6: {
-    primary: '#e36100',
+    primary: '#c800e3',
+    secondary: '#c800e3',
   },
   7: {
     primary: '#49e388',
+    secondary: '#49e388',
   },
   8: {
     primary: '#e3002d',
+    secondary: '#e3002d',
   },
   9: {
     primary: '#1100e3',
+    secondary: '#1100e3',
   },
   10: {
     primary: '#fd299d',
+    secondary: '#fd299d',
   },
 };
 @Component({
@@ -71,6 +83,8 @@ export class CalendarioComponent implements OnInit{
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('hoy',{ static:true }) hoy: ElementRef<HTMLElement>;
+
+  excludeDays: number[] = [0, 6];
 
 
   view: CalendarView = CalendarView.Month;
@@ -167,11 +181,12 @@ export class CalendarioComponent implements OnInit{
         for (let e of result) {
           asignatura=e.id_asignatura;//asignatura actual
 
+          console.log(e.id_grupo);
           let diaFecha = e.fecha.substr(8,2);//restamos un dia a la fecha del calendario porque los dias van desde 0 no desde 1
           diaFecha=diaFecha-1;
-          let fechaSinDia=e.fecha.substr(0,8);
-          fechaSinDia = fechaSinDia.replace(/-/g, ',');
-          let fecha=fechaSinDia+diaFecha;
+          let mesFecha=e.fecha.substr(5,2);
+          mesFecha=mesFecha-1;
+          let anoFecha=e.fecha.substr(0,4);
 
           let horai = e.hora_inicio.substr(0, 2);
           if (horai.charAt(0) == 0) {
@@ -189,18 +204,17 @@ export class CalendarioComponent implements OnInit{
           if (minutosf.charAt(0) == 0) {
             minutosf = minutosf.replace(/0/, '');
           }
-          console.log(colors[temp].primary);
           this.events = [
             ...this.events,
             {
-              title: e.id_grupo+'[' + e.aula + ']'+'('+e.nombre+')',
-              start: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horai), minutosi),
-              end: addMinutes(addHours(addDays(startOfDay(new Date(fecha)), 1), horaf), minutosf),
+              title: e.id_grupo+' [' + e.aula + ']'+' ('+e.nombre+')',
+              start: addMinutes(addHours(addDays(startOfDay(new Date(anoFecha,mesFecha,diaFecha)), 1), horai), minutosi),
+              end: addMinutes(addHours(addDays(startOfDay(new Date(anoFecha,mesFecha,diaFecha)), 1), horaf), minutosf),
               color: colors[temp],
-              draggable: true,
+              draggable: false,
               resizable: {
-                beforeStart: true,
-                afterEnd: true,
+                beforeStart: false,
+                afterEnd: false,
               },
             },
           ];
