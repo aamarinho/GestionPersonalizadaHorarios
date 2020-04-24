@@ -29,16 +29,16 @@ import * as $ from 'jquery';
 
 const colors: any = { //colores para los eventos del calendario
   0: {
-    primary: '#76954a',
-    secondary: '#76954a',
+    primary: '#32B67A',
+    secondary: '#32B67A',
   },
   1: {
     primary: '#54f6e3',
     secondary: '#54f6e3',
   },
   2: {
-    primary: '#e3bc08',
-    secondary: '#e3bc08',
+    primary: '#F5BF2B',
+    secondary: '#F5BF2B',
   },
   3: {
     primary: '#e35900',
@@ -65,8 +65,8 @@ const colors: any = { //colores para los eventos del calendario
     secondary: '#e3002d',
   },
   9: {
-    primary: '#1100e3',
-    secondary: '#1100e3',
+    primary: '#029AE5',
+    secondary: '#029AE5',
   },
   10: {
     primary: '#fd299d',
