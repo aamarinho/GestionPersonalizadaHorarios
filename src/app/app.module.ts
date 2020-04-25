@@ -35,6 +35,9 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { GenerarCalendarioComponent } from './calendario/generar-calendario/generar-calendario.component';
 import { MenuCalendarioComponent } from './calendario/menu-calendario/menu-calendario.component';
 import { SelectTodosUsuariosComponent } from './usuarios/select-todos-usuarios/select-todos-usuarios.component';
+import { ActividadesDocentesComponent } from './actividades-docentes/actividades-docentes.component';
+import { RegistroActividadDocenteComponent } from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
+import { SelectGruposComponent } from './grupos-reducidos/select-grupos/select-grupos.component';
 
 
 @NgModule({
@@ -59,6 +62,9 @@ import { SelectTodosUsuariosComponent } from './usuarios/select-todos-usuarios/s
     GenerarCalendarioComponent,
     MenuCalendarioComponent,
     SelectTodosUsuariosComponent,
+    ActividadesDocentesComponent,
+    RegistroActividadDocenteComponent,
+    SelectGruposComponent,
   ],
   imports: [
     BrowserModule,
