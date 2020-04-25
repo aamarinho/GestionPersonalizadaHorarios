@@ -30,48 +30,48 @@ import localeEs from '@angular/common/locales/es';
 
 const colors: any = { //colores para los eventos del calendario
   0: {
-    primary: '#e35900',
-    secondary: '#e35900',
+    primary: '#FF637D',
+    secondary: '#FF637D',
   },
   1: {
-    primary: '#54f6e3',
-    secondary: '#54f6e3',
+    primary: '#66D7D1',
+    secondary: '#66D7D1',
   },
   2: {
-    primary: '#F5BF2B',
-    secondary: '#F5BF2B',
+    primary: '#FFF87F',
+    secondary: '#FFF87F',
   },
   3: {
-    primary: '#32B67A',
-    secondary: '#32B67A',
+    primary: '#a7d6a0',
+    secondary: '#a7d6a0',
   },
   4: {
-    primary: '#ff9fcd',
+    primary: '#ffb9e0',
     secondary: '#ff9fcd',
   },
   5: {
-    primary: '#68e300',
-    secondary: '#68e300',
-  },
-  6: {
-    primary: '#c800e3',
-    secondary: '#c800e3',
-  },
-  7: {
     primary: '#e3c09f',
     secondary: '#e3c09f',
   },
+  6: {
+    primary: '#009C8C',
+    secondary: '#009C8C',
+  },
+  7: {
+    primary: '#EFA94A',
+    secondary: '#EFA94A',
+  },
   8: {
-    primary: '#e3002d',
-    secondary: '#e3002d',
+    primary: '#FF6961',
+    secondary: '#FF6961',
   },
   9: {
-    primary: '#029AE5',
-    secondary: '#029AE5',
+    primary: '#81D8D0',
+    secondary: '#81D8D0',
   },
   10: {
-    primary: '#fd299d',
-    secondary: '#fd299d',
+    primary: '#86895D',
+    secondary: '#86895D',
   },
 };
 @Component({
