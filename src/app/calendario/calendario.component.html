@@ -107,19 +107,15 @@
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
+    <h5 class="modal-title">Evento</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <div>
-      Action:
-      <pre>{{ modalData?.action }}</pre>
-    </div>
-    <div>
-      Event:
-      <pre>{{ modalData?.event | json }}</pre>
+    <div class="row">
+      <div class="ml-3 circulo col-auto" [ngStyle]="{'background-color':modalData?.event.color.primary}"></div>
+      <div class="mt-2 titulo col-auto"><p>{{ modalData?.event.title }}</p></div>
     </div>
   </div>
   <div class="modal-footer">
