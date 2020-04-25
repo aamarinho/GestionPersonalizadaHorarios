@@ -25,12 +25,11 @@ import {
 } from 'angular-calendar';
 import {CalendarioService} from '../../services/calendario.service';
 import {start} from 'repl';
-import * as $ from 'jquery';
 
 const colors: any = { //colores para los eventos del calendario
   0: {
-    primary: '#32B67A',
-    secondary: '#32B67A',
+    primary: '#e35900',
+    secondary: '#e35900',
   },
   1: {
     primary: '#54f6e3',
@@ -41,8 +40,8 @@ const colors: any = { //colores para los eventos del calendario
     secondary: '#F5BF2B',
   },
   3: {
-    primary: '#e35900',
-    secondary: '#e35900',
+    primary: '#32B67A',
+    secondary: '#32B67A',
   },
   4: {
     primary: '#ff9fcd',
@@ -57,8 +56,8 @@ const colors: any = { //colores para los eventos del calendario
     secondary: '#c800e3',
   },
   7: {
-    primary: '#49e388',
-    secondary: '#49e388',
+    primary: '#e3c09f',
+    secondary: '#e3c09f',
   },
   8: {
     primary: '#e3002d',
@@ -176,7 +175,7 @@ export class CalendarioComponent implements OnInit{
     this.calendarioService.getCalendario(window.sessionStorage.getItem('calendariousuario')).subscribe(
       result => {
         let asignatura2:string='';
-        let temp=0;
+        let temp=-1;
         let asignatura:string='';
         for (let e of result) {
           asignatura=e.id_asignatura;//asignatura actual
@@ -204,6 +203,14 @@ export class CalendarioComponent implements OnInit{
           if (minutosf.charAt(0) == 0) {
             minutosf = minutosf.replace(/0/, '');
           }
+          if(asignatura!=asignatura2){
+            if(temp==10){
+              temp=0;
+            } else{
+              temp++;
+            }
+          }
+          asignatura2=asignatura;
           this.events = [
             ...this.events,
             {
@@ -218,14 +225,6 @@ export class CalendarioComponent implements OnInit{
               },
             },
           ];
-          if(asignatura!=asignatura2){
-            if(temp==10){
-              temp=0;
-            } else{
-              temp++;
-            }
-          }
-          asignatura2=asignatura;
         }
       },
       error => {
