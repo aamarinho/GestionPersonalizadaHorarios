@@ -25,6 +25,8 @@ import {
 } from 'angular-calendar';
 import {CalendarioService} from '../../services/calendario.service';
 import {start} from 'repl';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 
 const colors: any = { //colores para los eventos del calendario
   0: {
@@ -84,7 +86,6 @@ export class CalendarioComponent implements OnInit{
   @ViewChild('hoy',{ static:true }) hoy: ElementRef<HTMLElement>;
 
   excludeDays: number[] = [0, 6];
-
 
   view: CalendarView = CalendarView.Month;
 

@@ -25,5 +25,10 @@ export class CalendarioService {
     return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
   }
 
+  getEventosCalendario(): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/getall",{headers, responseType: 'json'});
+  }
+
 
 }

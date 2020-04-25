@@ -10,6 +10,7 @@ import {GrupoReducido} from '../../../models/GrupoReducido';
 import {UsuarioGrupo} from '../../../models/UsuarioGrupo';
 import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 import {CalendarioService} from '../../../services/calendario.service';
+import {Calendario} from '../../../models/Calendario';
 
 
 @Component({
@@ -21,8 +22,8 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
 
   public grupos : GrupoReducido[];
   public resultado : GrupoReducido[];
-  public gruposAsignados : UsuarioGrupo[];
-  public idsgrupos : String[];
+  public eventosGenerados : Calendario[];
+  public idseventos : String[];
   iconoLibro = faBook;
 
   /** control for the selected bank for multi-selection */
@@ -43,43 +44,39 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   constructor(private gruposReducidosService : GruposreducidosService, private usuarioGrupoService :UsuariogrupoService, private router: Router, private calendarioService:CalendarioService) {
     this.grupos=new Array<GrupoReducido>();
     this.resultado=new Array<GrupoReducido>();
-    this.gruposAsignados=new Array<UsuarioGrupo>();
-    this.idsgrupos=new Array<String>();
+    this.eventosGenerados=new Array<Calendario>();
+    this.idseventos=new Array<String>();
   }
 
   ngOnInit() {
-    this.gruposAsignados.splice(0,this.gruposAsignados.length);
-    this.idsgrupos.splice(0,this.idsgrupos.length);
+    this.eventosGenerados.splice(0,this.eventosGenerados.length);
+    this.idseventos.splice(0,this.idseventos.length);
     this.grupos.splice(0,this.grupos.length);
     this.gruposMultiCtrl.reset();
-    this.usuarioGrupoService.getUsuariosGrupos(window.sessionStorage.getItem('gestiongrupos')).subscribe(
+    this.calendarioService.getEventosCalendario().subscribe(
       result=>{
         console.log(result);
         for(let a of result){
-          this.gruposAsignados.push(a);
-          this.idsgrupos.push(a.id);
+          this.eventosGenerados.push(a);
+          if(!this.idseventos.includes(a.id_grupo)){
+            this.idseventos.push(a.id_grupo);
+          }
         }
       },
       error=>{
         console.log(error);
-        console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
     this.gruposReducidosService.getGrupos().subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
-        console.log("array de ids grupos---->");
-        console.log(this.idsgrupos);
         for(let a of result){
-          //if(!this.idsgrupos.includes(a.id)){
+          if(!this.idseventos.includes(a.id)){
             this.grupos.push(a);
-          //}
+          }
         }
-        console.log(this.grupos);
-        console.log(this.idsgrupos);
       },
       error=>{
-        console.log("DIO ERROR AL OBTENER LOS GRUPOS");
+        console.log("DIO ERROR AL OBTENER EVENTOS");
       });
 
 
@@ -138,7 +135,7 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   }
 
   onSubmit(value){
-    if(!this.resultado.includes(value.id)){
+    if(!this.resultado.includes(value)){
       this.resultado.push(value);
     } else{
       this.removeItemFromArr(this.resultado,value);
@@ -152,7 +149,6 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   }
 
   registrar(){
-    //console.log(this.resultado);
     this.calendarioService.registrar(this.resultado).subscribe(
       result=>{
         this.ngOnInit();

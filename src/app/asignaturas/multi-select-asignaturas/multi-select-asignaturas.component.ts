@@ -135,7 +135,7 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
   }
 
   onSubmit(value){
-    if(!this.resultado.includes(value.id)){
+    if(!this.resultado.includes(value)){
       this.resultado.push(value);
     } else{
       this.removeItemFromArr(this.resultado,value);
@@ -152,11 +152,8 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     this.usuarioAsignaturaService.eliminar(value,window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log(result);
-        console.log("Eliminada la asignatura de ese usuario correctamente");
       } , error=>{
         console.log(error);
-        console.log("Error eliminando la asignatura de ese ususario");
       }
     );
   }
@@ -165,9 +162,8 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     this.usuarioAsignaturaService.registrar(this.resultado,window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log("gestionadas las asignaturas correctamente");
       } , error=>{
-        console.log("error gestionando las asignaturas");
+        console.log(error);
       }
     );
   }

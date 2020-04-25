@@ -58,6 +58,7 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
           this.gruposAsignados.push(a);
           this.idsgrupos.push(a.id);
         }
+        console.log(this.gruposAsignados);
       },
       error=>{
         console.log(error);
@@ -71,12 +72,9 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         console.log(this.idsgrupos);
         for(let a of result){
           if(!this.idsgrupos.includes(a.id)){
-            console.log(a.id);
             this.grupos.push(a);
           }
         }
-        console.log(this.grupos);
-        console.log(this.idsgrupos);
       },
       error=>{
         console.log("DIO ERROR AL OBTENER LOS GRUPOS");
@@ -138,7 +136,7 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
   }
 
   onSubmit(value){
-    if(!this.resultado.includes(value.id)){
+    if(!this.resultado.includes(value)){
       this.resultado.push(value);
     } else{
       this.removeItemFromArr(this.resultado,value);
