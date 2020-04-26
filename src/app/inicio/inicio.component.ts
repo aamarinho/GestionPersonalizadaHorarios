@@ -41,7 +41,13 @@ export class InicioComponent implements OnInit {
           window.sessionStorage.setItem("email",result.body.email);
           window.sessionStorage.setItem("contrasena",result.body.contrasena);
           window.sessionStorage.setItem("nombre",result.body.nombre);
-          this.router.navigate(['/usuarios']);//a una pagina de inicio
+          window.sessionStorage.setItem("tipo",result.body.tipo);
+          if(result.body.tipo==1){
+            this.router.navigate(['/usuarios']);//a una pagina de inicio
+          } else{
+            window.sessionStorage.setItem('calendariousuario',window.sessionStorage.getItem('email'));
+            this.router.navigate(['/calendario']);
+          }
         } else{
           console.log("NO OK");
         }

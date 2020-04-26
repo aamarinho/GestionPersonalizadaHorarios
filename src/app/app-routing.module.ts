@@ -18,6 +18,7 @@ import {MenuCalendarioComponent} from './calendario/menu-calendario/menu-calenda
 import {SelectTodosUsuariosComponent} from './usuarios/select-todos-usuarios/select-todos-usuarios.component';
 import {ActividadesDocentesComponent} from './actividades-docentes/actividades-docentes.component';
 import {RegistroActividadDocenteComponent} from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
+import {SelectEstudiantesComponent} from './usuarios/select-estudiantes/select-estudiantes.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'seleccionarusuario', component:SelectTodosUsuariosComponent},
   {path: 'actividadesdocentes', component:ActividadesDocentesComponent},
   {path: 'registroactividaddocente', component:RegistroActividadDocenteComponent},
+  {path: 'seleccionarestudiante', component:SelectEstudiantesComponent},
 
 ];
 

@@ -38,6 +38,7 @@ import { SelectTodosUsuariosComponent } from './usuarios/select-todos-usuarios/s
 import { ActividadesDocentesComponent } from './actividades-docentes/actividades-docentes.component';
 import { RegistroActividadDocenteComponent } from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
 import { SelectGruposComponent } from './grupos-reducidos/select-grupos/select-grupos.component';
+import { SelectEstudiantesComponent } from './usuarios/select-estudiantes/select-estudiantes.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { SelectGruposComponent } from './grupos-reducidos/select-grupos/select-g
     ActividadesDocentesComponent,
     RegistroActividadDocenteComponent,
     SelectGruposComponent,
+    SelectEstudiantesComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,9 +8,16 @@ import {Router} from '@angular/router';
 })
 export class MenuCalendarioComponent implements OnInit {
 
+  tipo=window.sessionStorage.getItem('tipo');
+
   constructor(private router:Router) { }
 
   ngOnInit() {
+  }
+
+  irACalendario(){
+    window.sessionStorage.setItem('calendariousuario',window.sessionStorage.getItem('email'));
+    this.router.navigate(['/calendario']);
   }
 
 }

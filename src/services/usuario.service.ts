@@ -36,6 +36,11 @@ export class UsuarioService {
     return this.http.get(this.url+"/usuarios/",{headers, responseType: 'json'});
   }
 
+  getEstudiantesProfesor(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/estudiantes/"+email,{headers, responseType: 'json'});
+  }
+
   registrar(usuario: Usuario): Observable<any>{
     let parametros = 'usuario='+JSON.stringify(usuario);
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');

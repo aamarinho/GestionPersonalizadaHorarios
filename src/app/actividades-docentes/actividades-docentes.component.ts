@@ -13,6 +13,8 @@ export class ActividadesDocentesComponent implements OnInit {
 
   public eventos : Calendario[];
   iconolupa = faSearch;
+  email=window.sessionStorage.getItem('email').split('@');
+  usuario=this.email[0].toUpperCase();
 
   constructor(private calendarioService: CalendarioService, private router: Router) {
     this.eventos = new Array<Calendario>();

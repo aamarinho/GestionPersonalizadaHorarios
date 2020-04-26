@@ -230,7 +230,7 @@ export class CalendarioComponent implements OnInit{
       },
       error => {
         console.log(error);
-        console.log("CALENDARIO EROOOOOOOOOOOOOOOOOOOR");
+        console.log("CALENDARIO ERROOOOOOOOOOOOOOOOOOOR");
       });
   }
 

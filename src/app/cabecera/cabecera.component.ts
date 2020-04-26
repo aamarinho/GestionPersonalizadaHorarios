@@ -14,6 +14,7 @@ export class CabeceraComponent implements OnInit {
   nombreUsuario : string;
 
   navbarOpen = false;
+  tipo=window.sessionStorage.getItem('tipo');
 
 
   constructor(public router:Router) {
@@ -27,6 +28,16 @@ export class CabeceraComponent implements OnInit {
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
+  }
+
+  irACalendarioEstudiante(){
+    window.sessionStorage.setItem('calendariousuario',window.sessionStorage.getItem('email'));
+    this.router.navigate(['/calendario']);
+  }
+
+  irACalendarioProfesor(){
+    window.sessionStorage.setItem('calendariousuario',window.sessionStorage.getItem('email'));
+    this.router.navigate(['/menucalendario']);
   }
 
 }
