@@ -25,4 +25,8 @@ export class GruposreducidosService {
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(this.url+"/registro",parametros,{headers, responseType: 'json'});
   }
+
+  eliminar(id: string): Observable<any>{
+    return this.http.delete(this.url+"/eliminar/"+id,{responseType:'text'});
+  }
 }

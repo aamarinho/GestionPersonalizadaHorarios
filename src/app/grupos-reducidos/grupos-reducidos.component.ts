@@ -19,6 +19,7 @@ export class GruposReducidosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.grupos_reducidos.splice(0,this.grupos_reducidos.length);
     this.grupoService.getGrupos().subscribe(
       result=>{
         console.log(result);
@@ -54,6 +55,19 @@ export class GruposReducidosComponent implements OnInit {
         }
       }
     }
+  }
+
+  eliminar(id){
+    this.grupoService.eliminar(id).subscribe(
+      result=>{
+        console.log(result);
+        console.log("Eliminado el grupo de ese usuario correctamente");
+        this.ngOnInit();
+      } , error=>{
+        console.log(error);
+        console.log("Error eliminando el grupo de ese ususario");
+      }
+    );
   }
 
 }

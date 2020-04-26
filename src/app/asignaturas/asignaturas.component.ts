@@ -20,6 +20,7 @@ export class AsignaturasComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.asignaturas.splice(0,this.asignaturas.length);
     this.asignaturaService.getAsignaturas().subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LAS ASIGNATURAS")
