@@ -19,6 +19,7 @@ export class ProfesoresComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profesores.splice(0,this.profesores.length);
     this.usuarioService.getProfesores().subscribe(
       result=>{
         console.log(result);
@@ -35,7 +36,7 @@ export class ProfesoresComponent implements OnInit {
   }
 
   onSubmit(){
-    window.sessionStorage.setItem('tipo','2');
+    window.sessionStorage.setItem('tipousuario','2');
     this.router.navigate(['/registro']);
   }
 
@@ -66,6 +67,19 @@ export class ProfesoresComponent implements OnInit {
         }
       }
     }
+  }
+
+  eliminar(profesor) {
+    this.usuarioService.eliminar(profesor).subscribe(
+      result=>{
+        console.log(result);
+        console.log("Eliminado el grupo de ese usuario correctamente");
+        this.ngOnInit();
+      } , error=>{
+        console.log(error);
+        console.log("Error eliminando el grupo de ese ususario");
+      }
+    );
   }
 
 }

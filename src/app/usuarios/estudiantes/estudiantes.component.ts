@@ -19,6 +19,7 @@ export class EstudiantesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.estudiantes.splice(0,this.estudiantes.length);
     this.usuarioService.getEstudiantes().subscribe( //me pierdo
       result=>{
         console.log(result);
@@ -34,7 +35,7 @@ export class EstudiantesComponent implements OnInit {
   }
 
   onSubmit(){
-    window.sessionStorage.setItem('tipo','3');
+    window.sessionStorage.setItem('tipousuario','3');
     this.router.navigate(['/registro']);
   }
 
@@ -68,4 +69,16 @@ export class EstudiantesComponent implements OnInit {
   }
 
 
+  eliminar(estudiante) {
+    this.usuarioService.eliminar(estudiante).subscribe(
+      result=>{
+        console.log(result);
+        console.log("Eliminado el grupo de ese usuario correctamente");
+        this.ngOnInit();
+      } , error=>{
+        console.log(error);
+        console.log("Error eliminando el grupo de ese ususario");
+      }
+    );
+  }
 }

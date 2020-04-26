@@ -22,11 +22,11 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tipo=window.sessionStorage.getItem('tipo');
+    this.tipo=window.sessionStorage.getItem('tipousuario');
   }
 
   registrar(){
-    this.usuario.tipo=window.sessionStorage.getItem('tipo');
+    this.usuario.tipo=window.sessionStorage.getItem('tipousuario');
     this.usuario.contrasena=this.usuario.nombre;
     this.usuarioServicio.registrar(this.usuario).subscribe(
       result=>{

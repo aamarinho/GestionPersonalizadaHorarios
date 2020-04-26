@@ -47,4 +47,7 @@ export class UsuarioService {
     return this.http.post(this.url+"/registro/",parametros,{headers, responseType: 'json'});
   }
 
+  eliminar(email: string): Observable<any>{
+    return this.http.delete(this.url+"/eliminar/"+email,{responseType:'text'});
+  }
 }
