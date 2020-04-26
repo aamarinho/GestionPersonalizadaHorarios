@@ -19,6 +19,7 @@ import {SelectTodosUsuariosComponent} from './usuarios/select-todos-usuarios/sel
 import {ActividadesDocentesComponent} from './actividades-docentes/actividades-docentes.component';
 import {RegistroActividadDocenteComponent} from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
 import {SelectEstudiantesComponent} from './usuarios/select-estudiantes/select-estudiantes.component';
+import {EditarUsuarioComponent} from './usuarios/editar-usuario/editar-usuario.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'actividadesdocentes', component:ActividadesDocentesComponent},
   {path: 'registroactividaddocente', component:RegistroActividadDocenteComponent},
   {path: 'seleccionarestudiante', component:SelectEstudiantesComponent},
+  {path: 'editarusuario', component:EditarUsuarioComponent}
 
 ];
 

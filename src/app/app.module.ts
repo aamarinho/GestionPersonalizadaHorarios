@@ -39,6 +39,7 @@ import { ActividadesDocentesComponent } from './actividades-docentes/actividades
 import { RegistroActividadDocenteComponent } from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
 import { SelectGruposComponent } from './grupos-reducidos/select-grupos/select-grupos.component';
 import { SelectEstudiantesComponent } from './usuarios/select-estudiantes/select-estudiantes.component';
+import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { SelectEstudiantesComponent } from './usuarios/select-estudiantes/select
     RegistroActividadDocenteComponent,
     SelectGruposComponent,
     SelectEstudiantesComponent,
+    EditarUsuarioComponent,
   ],
   imports: [
     BrowserModule,

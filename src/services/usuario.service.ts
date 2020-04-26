@@ -47,7 +47,18 @@ export class UsuarioService {
     return this.http.post(this.url+"/registro/",parametros,{headers, responseType: 'json'});
   }
 
+  editar(usuario: Usuario): Observable<any>{
+    let parametros = 'usuario='+JSON.stringify(usuario);
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/editar/",parametros,{headers, responseType: 'json'});
+  }
+
   eliminar(email: string): Observable<any>{
     return this.http.delete(this.url+"/eliminar/"+email,{responseType:'text'});
+  }
+
+  getUsuario(email: string) {
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+    return this.http.get(this.url+"/getusuarios/"+email, {headers,responseType:'json'});
   }
 }

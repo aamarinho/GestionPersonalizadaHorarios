@@ -2,9 +2,18 @@
 <div class="container registro">
   <div class="vl">
     <form #formRegistroEstudiante="ngForm" (ngSubmit)="registrar()" class="form-registro-estudiante" >
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==3">EDITAR A UN ESTUDIANTE</h4>
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==2">EDITAR A UN PROFESOR</h4>
 
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==3">REGISTRAR A UN ESTUDIANTE</h4>
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==2">REGISTRAR A UN PROFESOR</h4>
+      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <label for="email" class="labels ml-2">Email</label>
+      <br/>
+      <input type="email" name="email" class="col inputs especial" #email="ngModel" readonly [(ngModel)]="usuario.email" required />
+      <span class="validaciones" *ngIf="email.touched && !email.valid">
+      El email no es válido
+    </span>
+
+      <br/>
       <fa-icon [icon]="iconoUsuario"></fa-icon>
       <label for="nombre" class="labels ml-2">Nombre</label>
       <br/>
@@ -25,17 +34,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoEmail"></fa-icon>
-      <label for="email" class="labels ml-2">Email</label>
-      <br/>
-      <input type="email" name="email" class="col inputs" #email="ngModel" [(ngModel)]="usuario.email" required />
-      <span class="validaciones" *ngIf="email.touched && !email.valid">
-      El email no es válido
-    </span>
-
-      <br/>
-
-      <input type="submit" value="REGISTRAR" class="btn botonregistro" [disabled]="!formRegistroEstudiante.form.valid" />
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroEstudiante.form.valid" />
 
     </form>
   </div>

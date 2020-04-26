@@ -81,4 +81,10 @@ export class EstudiantesComponent implements OnInit {
       }
     );
   }
+
+  editar(estudiante:Usuario){
+    window.sessionStorage.setItem('tipousuario',estudiante.tipo);
+    window.sessionStorage.setItem('editar',estudiante.email);
+    this.router.navigate(['/editarusuario']);
+  }
 }

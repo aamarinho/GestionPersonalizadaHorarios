@@ -82,4 +82,10 @@ export class ProfesoresComponent implements OnInit {
     );
   }
 
+  editar(profesor:Usuario){
+    window.sessionStorage.setItem('tipousuario',profesor.tipo);
+    window.sessionStorage.setItem('editar',profesor.email);
+    this.router.navigate(['/editarusuario']);
+  }
+
 }
