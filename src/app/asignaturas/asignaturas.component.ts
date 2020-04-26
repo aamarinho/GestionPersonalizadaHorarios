@@ -56,4 +56,16 @@ export class AsignaturasComponent implements OnInit {
     }
   }
 
+  eliminar(id) {
+    this.asignaturaService.eliminar(id).subscribe(
+      result=>{
+        console.log(result);
+        console.log("Eliminado el grupo de ese usuario correctamente");
+        this.ngOnInit();
+      } , error=>{
+        console.log(error);
+        console.log("Error eliminando el grupo de ese ususario");
+      }
+    );
+  }
 }
