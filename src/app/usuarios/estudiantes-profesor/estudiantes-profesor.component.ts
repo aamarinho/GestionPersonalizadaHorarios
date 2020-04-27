@@ -12,20 +12,26 @@ import {Router} from '@angular/router';
 export class EstudiantesProfesorComponent implements OnInit {
 
   public estudiantes : Usuario[];
+  public idsestudiantes : String[];
   iconolupa = faSearch;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {
     this.estudiantes = new Array<Usuario>();
+    this.idsestudiantes=new Array<String>();
   }
 
   ngOnInit() {
     this.estudiantes.splice(0,this.estudiantes.length);
+    this.idsestudiantes.splice(0,this.idsestudiantes.length);
     this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('email')).subscribe( //me pierdo
       result=>{
         console.log(result);
         console.log("ENTRO PARA OBTENER LOS ESTUDIANTES")
         for( let e of result){
-          this.estudiantes.push(e);
+          if(!this.idsestudiantes.includes(e.email)){
+            this.estudiantes.push(e);
+            this.idsestudiantes.push(e.email);
+          }
         }
       },
       error=>{
