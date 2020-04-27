@@ -1,0 +1,36 @@
+.select{
+  width:100%;
+}
+
+.label{
+  font-size: 1.2em;
+  text-decoration: underline;
+  text-decoration-color: mediumpurple;
+}
+
+.contenido{
+  width: 80%;
+}
+
+.resultado{
+  font-size: 1.2em;
+}
+
+.boton{
+  border-radius: 30px;
+  border:none;
+  color:white;
+  font-size:1.4em;
+  padding-right: 3%;
+  padding-left: 3%;
+  background: linear-gradient(to right, mediumpurple, skyblue);
+}
+ul {list-style: none}
+
+li::before {
+  content: "•";
+  font-size: 1.3em;
+  color: mediumpurple;
+  display: inline-block;
+  width: 1em;
+}

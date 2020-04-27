@@ -20,6 +20,8 @@ import {ActividadesDocentesComponent} from './actividades-docentes/actividades-d
 import {RegistroActividadDocenteComponent} from './actividades-docentes/registro-actividad-docente/registro-actividad-docente.component';
 import {SelectEstudiantesComponent} from './usuarios/select-estudiantes/select-estudiantes.component';
 import {EditarUsuarioComponent} from './usuarios/editar-usuario/editar-usuario.component';
+import {EstudiantesProfesorComponent} from './usuarios/estudiantes-profesor/estudiantes-profesor.component';
+import {MultiSelectGruposProfesorComponent} from './grupos-reducidos/multi-select-grupos-profesor/multi-select-grupos-profesor.component';
 
 
 const routes: Routes = [
@@ -42,7 +44,9 @@ const routes: Routes = [
   {path: 'actividadesdocentes', component:ActividadesDocentesComponent},
   {path: 'registroactividaddocente', component:RegistroActividadDocenteComponent},
   {path: 'seleccionarestudiante', component:SelectEstudiantesComponent},
-  {path: 'editarusuario', component:EditarUsuarioComponent}
+  {path: 'editarusuario', component:EditarUsuarioComponent},
+  {path: 'estudiantesprofesor', component:EstudiantesProfesorComponent},
+  {path: 'modificargrupoestudiante', component:MultiSelectGruposProfesorComponent}
 
 ];
 

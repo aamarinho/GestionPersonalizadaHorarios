@@ -40,4 +40,8 @@ export class CabeceraComponent implements OnInit {
     this.router.navigate(['/menucalendario']);
   }
 
+  irAEstudiantes(){
+    this.router.navigate(['/estudiantesprofesor']);
+  }
+
 }

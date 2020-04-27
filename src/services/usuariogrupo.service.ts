@@ -18,6 +18,16 @@ export class UsuariogrupoService {
     return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
   }
 
+  getUsuariosGruposEstudiante(email: string,email2:string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/getgrupos/"+email+'/'+email2,{headers, responseType: 'json'});
+  }
+
+  getUsuariosGruposProfesor(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/getgrupos/profesor/"+email+'/',{headers, responseType: 'json'});
+  }
+
   registrar(grupos: GrupoReducido[],email:string): Observable<any>{
     let param = new HttpParams().set('email',JSON.stringify(email)).set('grupos',JSON.stringify(grupos));
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');

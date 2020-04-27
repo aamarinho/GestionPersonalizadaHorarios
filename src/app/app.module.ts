@@ -40,6 +40,8 @@ import { RegistroActividadDocenteComponent } from './actividades-docentes/regist
 import { SelectGruposComponent } from './grupos-reducidos/select-grupos/select-grupos.component';
 import { SelectEstudiantesComponent } from './usuarios/select-estudiantes/select-estudiantes.component';
 import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
+import { EstudiantesProfesorComponent } from './usuarios/estudiantes-profesor/estudiantes-profesor.component';
+import { MultiSelectGruposProfesorComponent } from './grupos-reducidos/multi-select-grupos-profesor/multi-select-grupos-profesor.component';
 
 
 @NgModule({
@@ -69,6 +71,8 @@ import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario
     SelectGruposComponent,
     SelectEstudiantesComponent,
     EditarUsuarioComponent,
+    EstudiantesProfesorComponent,
+    MultiSelectGruposProfesorComponent,
   ],
   imports: [
     BrowserModule,
