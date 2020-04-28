@@ -1,6 +1,6 @@
 <div class="container tabla-usuarios">
-  <h4 class="mt-3 titulo">ESTUDIANTES</h4>
-  <input class="btn btn-lg botonregistro" type="submit" value="REGISTRAR" (click)="onSubmit()">
+  <h4 class="mt-3 titulo">ESTUDIANTES EN {{asignatura}}</h4>
+  <input class="btn btn-lg botonregistro" type="submit" value="AÑADIR ESTUDIANTE" (click)="onSubmit()">
 
   <fa-icon [icon]="iconolupa"></fa-icon>
   <input type="text" id="myInput" (keyup)="myFunction()" class="input-buscar ml-2" placeholder="Buscar" title="Type in a name">
@@ -11,12 +11,14 @@
       <td>Nombre</td>
       <td>Apellidos</td>
       <td>Grupos</td>
+      <td>Eliminar</td>
     </tr>
     <tr *ngFor="let estudiante of this.estudiantes">
       <td>{{estudiante.email}}</td>
       <td>{{estudiante.nombre}}</td>
       <td>{{estudiante.apellidos}}</td>
       <td><input class="ml-2" type="image" src="../../assets/group.svg" alt="Detalles" width="30" height="30" (click)="registrarGrupos(estudiante)"></td>
+      <td><input class="ml-2" type="image" src="../../assets/delete.svg" alt="Detalles" width="25" height="25" (click)="eliminar(estudiante)"></td>
     </tr>
   </table>
 </div>

@@ -42,6 +42,8 @@ import { SelectEstudiantesComponent } from './usuarios/select-estudiantes/select
 import { EditarUsuarioComponent } from './usuarios/editar-usuario/editar-usuario.component';
 import { EstudiantesProfesorComponent } from './usuarios/estudiantes-profesor/estudiantes-profesor.component';
 import { MultiSelectGruposProfesorComponent } from './grupos-reducidos/multi-select-grupos-profesor/multi-select-grupos-profesor.component';
+import { AsignaturasProfesorComponent } from './asignaturas/asignaturas-profesor/asignaturas-profesor.component';
+import { SelectMatriculaEstudianteComponent } from './usuarios/select-matricula-estudiante/select-matricula-estudiante.component';
 
 
 @NgModule({
@@ -73,6 +75,8 @@ import { MultiSelectGruposProfesorComponent } from './grupos-reducidos/multi-sel
     EditarUsuarioComponent,
     EstudiantesProfesorComponent,
     MultiSelectGruposProfesorComponent,
+    AsignaturasProfesorComponent,
+    SelectMatriculaEstudianteComponent,
   ],
   imports: [
     BrowserModule,

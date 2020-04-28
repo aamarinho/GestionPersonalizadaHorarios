@@ -1,0 +1,14 @@
+<div class="container mt-5">
+  <fa-icon [icon]="icono"></fa-icon>
+  <label for="email" class="label ml-2">Selecciona al estudiante que quieres matricular en {{asignatura}}</label>
+  <mat-form-field class="select">
+    <mat-select class="opciones" [formControl]="asignaturaCtrl" #singleSelect>
+      <mat-option>
+        <ngx-mat-select-search placeholderLabel="Selecciona el estudiante" noEntriesFoundLabel="No se encuentra el estudiante" [formControl]="AsignaturaFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option class="opciones" *ngFor="let estudiante of filteredAsignaturas | async" [value]="estudiante" (click)="submit(estudiante.email)">
+        {{estudiante.nombre}} {{estudiante.apellidos}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

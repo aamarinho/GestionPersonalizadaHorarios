@@ -3,6 +3,8 @@ import {Usuario} from '../../../models/Usuario';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {UsuarioService} from '../../../services/usuario.service';
 import {Router} from '@angular/router';
+import {win32} from 'path';
+import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.service';
 
 @Component({
   selector: 'app-estudiantes-profesor',
@@ -14,8 +16,9 @@ export class EstudiantesProfesorComponent implements OnInit {
   public estudiantes : Usuario[];
   public idsestudiantes : String[];
   iconolupa = faSearch;
+  public asignatura=window.sessionStorage.getItem('gestionestudiantes');
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(private usuarioService: UsuarioService, private router: Router,private usuarioAsignaturaService : UsuarioasignaturaService) {
     this.estudiantes = new Array<Usuario>();
     this.idsestudiantes=new Array<String>();
   }
@@ -23,7 +26,7 @@ export class EstudiantesProfesorComponent implements OnInit {
   ngOnInit() {
     this.estudiantes.splice(0,this.estudiantes.length);
     this.idsestudiantes.splice(0,this.idsestudiantes.length);
-    this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('email')).subscribe( //me pierdo
+    this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
       result=>{
         console.log(result);
         console.log("ENTRO PARA OBTENER LOS ESTUDIANTES")
@@ -41,8 +44,7 @@ export class EstudiantesProfesorComponent implements OnInit {
   }
 
   onSubmit(){
-    window.sessionStorage.setItem('tipousuario','3');
-    this.router.navigate(['/registro']);
+    this.router.navigate(['/seleccionarmatricula']);
   }
 
   registrarGrupos(value){
@@ -71,7 +73,7 @@ export class EstudiantesProfesorComponent implements OnInit {
 
 
   eliminar(estudiante) {
-    this.usuarioService.eliminar(estudiante).subscribe(
+    this.usuarioAsignaturaService.eliminar(estudiante,window.sessionStorage.getItem('gestionestudiantes')).subscribe(
       result=>{
         console.log(result);
         console.log("Eliminado el grupo de ese usuario correctamente");

@@ -20,6 +20,10 @@ export class AsignaturaService {
     return this.http.get(this.url+"/asignaturas",{headers, responseType: 'json'}); //devuelve un observable (es lo que conecta con el map de UsuarioRest)
   }
 
+  getAsignaturasProfesor(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
+  }
 
   registrar(asignatura: Asignatura): Observable<any>{
     let parametros = 'asignatura='+JSON.stringify(asignatura);

@@ -50,7 +50,7 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
     this.idsgrupos.splice(0,this.idsgrupos.length);
     this.grupos.splice(0,this.grupos.length);
     this.gruposMultiCtrl.reset();
-    this.usuarioGrupoService.getUsuariosGruposEstudiante(window.sessionStorage.getItem('email'),window.sessionStorage.getItem('gestiongrupos')).subscribe(
+    this.usuarioGrupoService.getUsuariosGruposEstudiante(window.sessionStorage.getItem('gestionestudiantes'),window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         console.log(result);
         for(let a of result){
@@ -64,7 +64,7 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
         console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
-    this.usuarioGrupoService.getUsuariosGruposProfesor(window.sessionStorage.getItem('email')).subscribe(
+    this.usuarioGrupoService.getUsuariosGruposProfesor(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
         console.log(this.idsgrupos);

@@ -1,14 +1,4 @@
-.botonregistro{
-  margin-left: 87%;
-  transform: translateX(-87%);
-  padding: 5px;
-  border-radius: 20px;
-  font-size:1.4em;
-  color:white;
-  background-color: #b6d858;
-}
-
-.tabla-usuarios{
+.tabla-asignaturas{
   font-family: "Century Gothic";
 }
 
@@ -16,6 +6,16 @@
   font-size: 1.7em;
   text-decoration: underline;
   text-decoration-color: mediumpurple;
+}
+
+.botonregistro{
+  margin-left: 90%;
+  transform: translateX(-90%);
+  padding: 5px;
+  border-radius: 20px;
+  font-size:1.4em;
+  color:white;
+  background-color: #b6d858;
 }
 
 .input-buscar{
