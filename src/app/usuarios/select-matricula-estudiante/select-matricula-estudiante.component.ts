@@ -111,9 +111,11 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
       result=>{
         console.log("registro sin errores");
       } , error=>{
+        console.log(error);
         console.log("error registrando al usuario");
       }
     );
+    this.router.navigate(['/estudiantesprofesor']);
   }
 
   protected filterAsignaturas() {

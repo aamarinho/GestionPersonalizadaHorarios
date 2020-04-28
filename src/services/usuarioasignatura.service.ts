@@ -26,7 +26,7 @@ export class UsuarioasignaturaService {
   registrarUsuarioAsignatura(asignatura:string,email:string): Observable<any>{
     let param = new HttpParams().set('email',JSON.stringify(email)).set('asignatura',JSON.stringify(asignatura));
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
+    return this.http.post(this.url+"/registrar/individual",param,{headers, responseType: 'json'});
   }
 
   getUsuariosAsignaturas(email: string): Observable<any> {

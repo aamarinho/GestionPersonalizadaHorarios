@@ -72,8 +72,8 @@ export class EstudiantesProfesorComponent implements OnInit {
   }
 
 
-  eliminar(estudiante) {
-    this.usuarioAsignaturaService.eliminar(estudiante,window.sessionStorage.getItem('gestionestudiantes')).subscribe(
+  eliminar(email) {
+    this.usuarioAsignaturaService.eliminar(window.sessionStorage.getItem('gestionestudiantes'),email).subscribe(
       result=>{
         console.log(result);
         console.log("Eliminado el grupo de ese usuario correctamente");
@@ -81,6 +81,7 @@ export class EstudiantesProfesorComponent implements OnInit {
       } , error=>{
         console.log(error);
         console.log("Error eliminando el grupo de ese ususario");
+        this.ngOnInit();
       }
     );
   }
