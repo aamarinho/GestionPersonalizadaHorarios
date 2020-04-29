@@ -50,6 +50,17 @@ export class RegistroGrupoComponent implements OnInit {
     this.grupo.id_asignatura=window.sessionStorage.getItem('asignatura');
     this.grupo.tipo=this.seleccionTipo;
     this.grupo.dia=this.seleccionDia;
+    if(this.grupo.dia=="Lunes"){
+      this.grupo.dia="Monday";
+    } else if(this.grupo.dia=="Martes"){
+      this.grupo.dia="Tuesday";
+    } else if(this.grupo.dia=="Miercoles"){
+      this.grupo.dia="Wednesday";
+    } else if(this.grupo.dia=="Jueves"){
+      this.grupo.dia="Thursday";
+    } else{
+      this.grupo.dia="Friday";
+    }
     this.grupoService.registrar(this.grupo).subscribe(
       result=>{
         console.log(result);

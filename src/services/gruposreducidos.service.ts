@@ -20,10 +20,21 @@ export class GruposreducidosService {
     return this.http.get(this.url+"/grupos",{headers, responseType: 'json'}); //devuelve un observable (es lo que conecta con el map de UsuarioRest)
   }
 
+  getGrupo(id: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/getgrupo/"+id,{headers, responseType: 'json'});
+  }
+
   registrar(gruporeducido: GrupoReducido): Observable<any>{
     let parametros = 'grupo='+JSON.stringify(gruporeducido);
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(this.url+"/registro",parametros,{headers, responseType: 'json'});
+  }
+
+  editar(grupo: GrupoReducido): Observable<any>{
+    let parametros = 'grupo='+JSON.stringify(grupo);
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/editar/",parametros,{headers, responseType: 'json'});
   }
 
   eliminar(id: string): Observable<any>{

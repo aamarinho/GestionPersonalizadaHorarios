@@ -70,4 +70,8 @@ export class GruposReducidosComponent implements OnInit {
     );
   }
 
+  editar(id) {
+    window.sessionStorage.setItem('editar',id);
+    this.router.navigate(['/editargrupo']);
+  }
 }

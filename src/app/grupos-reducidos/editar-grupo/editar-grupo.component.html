@@ -1,2 +1,74 @@
-<p>editar-grupo works!</p>
-<p>hola</p>
+
+<div class="container registro">
+  <div class="vl">
+    <form #formRegistroGrupo="ngForm" (ngSubmit)="editarGrupo()" class="form-registro" >
+
+      <h4 class="mt-4 mb-4 titulo">AÑADIR UN GRUPO REDUCIDO</h4>
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="nombre" class="labels ml-2">Nombre</label>
+      <br/>
+      <input type="text" name="nombre" class="col inputs especial" #nombre="ngModel" [(ngModel)]="grupo.id" required readonly />
+      <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
+      El nombre no es válido
+    </span>
+
+      <br/>
+      <app-select-asignaturas></app-select-asignaturas>
+      <p>{{grupo.id_asignatura}}-{{nombreasig}}</p>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="email" class="labels ml-2">Tipo</label>
+      <mat-form-field class="select">
+        <mat-select class="opciones" name="seleccionTipo" [(ngModel)]="seleccionTipo">
+          <mat-option class="opciones" *ngFor="let t of tipos" [value]="t.name">{{t.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br/>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="email" class="labels ml-2">Día</label>
+      <mat-form-field class="select">
+        <mat-select class="opciones" name="seleccionDia" [(ngModel)]="seleccionDia">
+          <mat-option class="opciones" *ngFor="let d of dias" [value]="d.name">{{d.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br/>
+
+
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <label for="horainicio" class="labels ml-2">Hora inicio</label>
+      <br/>
+      <input type="time" name="horainicio" class="col inputs" #horainicio="ngModel" [(ngModel)]="grupo.hora_inicio" required />
+      <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
+      La hora de inicio no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <label for="horafin" class="labels ml-2">Hora fin</label>
+      <br/>
+      <input type="time" name="horafin" class="col inputs" #horafin="ngModel" [(ngModel)]="grupo.hora_fin" required />
+      <span class="validaciones" *ngIf="horafin.touched && !horafin.valid">
+      La hora de fin no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="nombre" class="labels ml-2">Aula</label>
+      <br/>
+      <input type="text" name="aula" class="col inputs" #aula="ngModel" [(ngModel)]="grupo.aula" required />
+      <span class="validaciones" *ngIf="aula.touched && !aula.valid">
+      El aula no es válida
+    </span>
+
+      <br/>
+
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroGrupo.form.valid" />
+
+    </form>
+  </div>
+</div>
