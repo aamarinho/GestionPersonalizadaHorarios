@@ -38,7 +38,7 @@ export class EditarUsuarioComponent implements OnInit {
     );
   }
 
-  registrar(){
+  editarUsuario(){
     this.usuario.tipo=window.sessionStorage.getItem('tipousuario');
     this.usuario.contrasena=this.usuario.nombre;
     this.usuarioServicio.editar(this.usuario).subscribe(

@@ -69,4 +69,9 @@ export class AsignaturasComponent implements OnInit {
       }
     );
   }
+
+  editar(id) {
+    window.sessionStorage.setItem('editar',id);
+    this.router.navigate(['/editarasignatura']);
+  }
 }

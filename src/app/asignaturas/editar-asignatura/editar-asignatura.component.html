@@ -1,0 +1,54 @@
+
+<div class="container registro">
+  <div class="vl">
+    <form name="formRegistroAsignatura" #formRegistroAsignatura="ngForm" (ngSubmit)="editarAsignatura()" class="form-registro" >
+
+      <h4 class="mt-4 mb-4 titulo">EDITAR {{idasignatura}}</h4>
+      <fa-icon [icon]="iconoUsuario"></fa-icon>
+      <label for="abreviatura" class="labels ml-2">Abreviatura</label>
+      <br/>
+      <input type="text" name="abreviatura" class="col inputs especial" #abreviatura="ngModel" [(ngModel)]="asignatura.id" required readonly />
+      <span class="validaciones" *ngIf="abreviatura.touched && !abreviatura.valid">
+      La abreviatura no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="nombre" class="labels ml-2">Nombre</label>
+      <br/>
+      <input type="text" name="nombre" class="col inputs" #nombre="ngModel" [(ngModel)]="asignatura.nombre" required />
+      <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
+      El nombre no es válido
+    </span>
+
+      <br/>
+
+      <app-select-usuarios></app-select-usuarios>
+      <p>{{nombreu}}, {{apellidos}}</p>
+
+      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <label for="curso" class="labels ml-2">Curso</label>
+      <br/>
+      <input type="text" name="curso" class="col inputs" #curso="ngModel" [(ngModel)]="asignatura.curso" required />
+      <span class="validaciones" *ngIf="curso.touched && !curso.valid">
+      El curso no es válido
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <label for="cuatrimestre" class="labels ml-2">Cuatrimestre</label>
+      <br/>
+      <input type="text" name="cuatrimestre" class="col inputs" #cuatrimestre="ngModel" [(ngModel)]="asignatura.cuatrimestre" required />
+      <span class="validaciones" *ngIf="cuatrimestre.touched && !cuatrimestre.valid">
+      El cuatrimestre no es válido
+    </span>
+
+      <br/>
+
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroAsignatura.form.valid" />
+
+    </form>
+  </div>
+</div>
