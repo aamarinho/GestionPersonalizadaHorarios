@@ -27,22 +27,26 @@
 
     <div class="collapse navbar-collapse"
          [ngClass]="{ 'show': navbarOpen }">
-      <ul class="navbar-nav mr-auto">
         <div *ngIf="tipo==1">
-          <input *ngIf="tipo==1" type="button" class="ml-4 boton" value="USUARIOS" (click)="router.navigate(['/usuarios'])">
-          <input *ngIf="tipo==1" type="button" class="ml-4 boton" value="ASIGNATURAS" (click)="router.navigate(['/asignaturas'])">
-          <input *ngIf="tipo==1" type="button" class="ml-4 boton" value="GRUPOS REDUCIDOS" (click)="router.navigate(['/gruposreducidos'])">
-          <input *ngIf="tipo==1" type="button" class="ml-4 boton" value="CALENDARIO" (click)="router.navigate(['/menucalendario'])">
+          <ul class="navbar-nav mr-auto">
+            <li *ngIf="tipo==1" type="button" class="ml-4 boton" (click)="router.navigate(['/usuarios'])">USUARIOS</li>
+            <li *ngIf="tipo==1" type="button" class="ml-4 boton" (click)="router.navigate(['/asignaturas'])">ASIGNATURAS</li>
+            <li *ngIf="tipo==1" type="button" class="ml-4 boton" (click)="router.navigate(['/gruposreducidos'])">GRUPOS REDUCIDOS</li>
+            <li *ngIf="tipo==1" type="button" class="ml-4 boton" (click)="router.navigate(['/menucalendario'])">CALENDARIO</li>
+          </ul>
         </div>
         <div *ngIf="tipo==2">
-          <input *ngIf="tipo==2" type="button" class="ml-4 boton" value="CALENDARIO" (click)="irACalendarioProfesor()">
-          <input *ngIf="tipo==2" type="button" class="ml-4 boton" value="ASIGNATURAS" (click)="irAAsignaturas()">
-          <input *ngIf="tipo==2" type="button" class="ml-4 boton" value="ACTIVIDADES DOCENTES" (click)="router.navigate(['/actividadesdocentes'])">
+          <ul class="navbar-nav mr-auto">
+            <li *ngIf="tipo==2" type="button" class="ml-4 boton" (click)="irACalendarioProfesor()">CALENDARIO</li>
+            <li *ngIf="tipo==2" type="button" class="ml-4 boton" (click)="irAAsignaturas()">ASIGNATURAS</li>
+            <li *ngIf="tipo==2" type="button" class="ml-4 boton" (click)="router.navigate(['/actividadesdocentes'])">ACTIVIDADES DOCENTES</li>
+          </ul>
         </div>
         <div *ngIf="tipo==3">
-          <input *ngIf="tipo==3" type="button" class="ml-4 boton" value="CALENDARIO" (click)="irACalendarioEstudiante()">
+          <ul class="navbar-nav mr-auto">
+            <li *ngIf="tipo==3" type="button" class="ml-4 boton" (click)="irACalendarioEstudiante()">CALENDARIO</li>
+          </ul>
         </div>
-      </ul>
     </div>
   </nav>
 </div>

@@ -1,5 +1,5 @@
 <div class="container tabla-grupos">
-  <h4 class="mt-3 titulo">EVENTOS DE {{usuario}}</h4>
+  <h4 class="mt-3 titulo">MIS EVENTOS</h4>
   <input class="btn btn-lg botonregistro" type="submit" value="REGISTRAR" (click)="onSubmit()" >
 
   <fa-icon [icon]="iconolupa"></fa-icon>
@@ -13,7 +13,6 @@
       <td>Fecha</td>
       <td>Hora inicio</td>
       <td>Hora fin</td>
-      <td>Responsable</td>
       <td>Aula</td>
       <td>Acciones</td>
     </tr>
@@ -24,12 +23,10 @@
       <td>{{evento.fecha}}</td>
       <td>{{evento.hora_inicio}}</td>
       <td>{{evento.hora_fin}}</td>
-      <td>{{evento.responsable}}</td>
       <td>{{evento.aula}}</td>
       <td>
         <input type="image" src="../../assets/edit.svg" alt="Editar" width="20" height="20">
         <input class="ml-2" type="image" src="../../assets/delete.svg" alt="Eliminar" width="20" height="20">
-        <input class="ml-2" type="image" src="../../assets/detail.svg" alt="Detalles" width="20" height="20">
       </td>
     </tr>
   </table>

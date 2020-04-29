@@ -7,15 +7,15 @@
     <tr>
       <td>Nombre</td>
       <td>Responsable</td>
-      <td>Cuatrimestre</td>
-      <td>Curso</td>
+      <td class="centrado">Cuatrimestre</td>
+      <td class="centrado">Curso</td>
       <td>Estudiantes</td>
     </tr>
     <tr *ngFor="let asignatura of this.asignaturas">
       <td>{{asignatura.nombre}}</td>
       <td>{{asignatura.email}}</td>
-      <td>{{asignatura.cuatrimestre}}</td>
-      <td>{{asignatura.curso}}</td>
+      <td class="centrado">{{asignatura.cuatrimestre}}</td>
+      <td class="centrado">{{asignatura.curso}}</td>
       <td>
         <input class="ml-2" type="image" src="../../assets/students.svg" alt="Eliminar" width="20" height="20" (click)="gestionarEstudiantes(asignatura)">
       </td>

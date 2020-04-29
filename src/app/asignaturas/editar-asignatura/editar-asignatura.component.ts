@@ -35,6 +35,7 @@ export class EditarAsignaturaComponent implements OnInit {
         this.asignatura.id=result['id'];
         this.asignatura.nombre=result['nombrea'];
         this.asignatura.email=result['email'];
+        window.sessionStorage.setItem('usuario',this.asignatura.email);
         this.asignatura.curso=result['curso'];
         this.asignatura.cuatrimestre=result['cuatrimestre'];
         this.nombreu=result['nombreu'];
