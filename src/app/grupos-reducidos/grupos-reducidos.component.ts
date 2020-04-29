@@ -25,6 +25,17 @@ export class GruposReducidosComponent implements OnInit {
         console.log(result);
         console.log("ENTRO PARA OBTENER LOS GRUPOS")
         for( let g of result){
+          if(g.dia=="Monday"){
+            g.dia="Lunes";
+          } else if(g.dia=="Tuesday"){
+            g.dia="Martes";
+          } else if(g.dia=="Wednesday"){
+            g.dia="Miércoles";
+          } else if(g.dia=="Thursday"){
+            g.dia="Jueves";
+          } else{
+            g.dia="Viernes";
+          }
           this.grupos_reducidos.push(g);
         }
       },
