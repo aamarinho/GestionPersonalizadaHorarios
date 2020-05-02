@@ -34,6 +34,12 @@ export class UsuariogrupoService {
     return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
   }
 
+  registrarImportacion(grupos: String[],email:string): Observable<any>{
+    let param = new HttpParams().set('email',JSON.stringify(email)).set('grupos',JSON.stringify(grupos));
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/registrar/importacion",param,{headers, responseType: 'json'});
+  }
+
   eliminar(id: string, email: string): Observable<any>{
     return this.http.delete(this.url+"/eliminar/"+email+'/'+id,{responseType:'text'});
   }

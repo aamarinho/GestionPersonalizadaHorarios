@@ -65,7 +65,7 @@ export class RegistroGrupoComponent implements OnInit {
       result=>{
         console.log(result);
         console.log(this.grupo);
-        this.router.navigate(['/gruposreducidos']);
+        //this.router.navigate(['/gruposreducidos']);
       } , error=>{
         console.log("error registrando el grupo");
       }
