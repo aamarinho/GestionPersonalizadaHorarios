@@ -1,11 +1,14 @@
 .botonregistro{
-  margin-left: 90%;
-  transform: translateX(-90%);
-  padding: 5px;
+  padding: 7px;
   border-radius: 20px;
   font-size:1.4em;
   color:white;
   background-color: #b6d858;
+}
+
+.botones{
+  margin-left: 95%;
+  transform: translateX(-95%);
 }
 
 .tabla-usuarios{

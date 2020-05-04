@@ -25,6 +25,11 @@ export class GruposreducidosService {
     return this.http.get(this.url+"/getgrupo/"+id,{headers, responseType: 'json'});
   }
 
+  countGrupos(idasignatura: String): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/countgrupos/"+idasignatura,{headers, responseType: 'json'});
+  }
+
   registrar(gruporeducido: GrupoReducido): Observable<any>{
     let parametros = 'grupo='+JSON.stringify(gruporeducido);
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');

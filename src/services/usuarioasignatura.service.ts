@@ -23,6 +23,12 @@ export class UsuarioasignaturaService {
     return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
   }
 
+  registrarAsignaturas(asignaturas: String[],email:string): Observable<any>{
+    let param = new HttpParams().set('email',JSON.stringify(email)).set('asignaturas',JSON.stringify(asignaturas));
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/registrar/importacion",param,{headers, responseType: 'json'});
+  }
+
   registrarUsuarioAsignatura(asignatura:string,email:string): Observable<any>{
     let param = new HttpParams().set('email',JSON.stringify(email)).set('asignatura',JSON.stringify(asignatura));
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
