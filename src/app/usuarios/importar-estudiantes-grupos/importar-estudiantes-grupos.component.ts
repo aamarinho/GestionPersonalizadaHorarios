@@ -16,59 +16,38 @@ import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.serv
 })
 export class ImportarEstudiantesGruposComponent implements OnInit {
 
-  willDownload = false;
   asignaturas:String[];
   asignaturasAsignadas:String[];
   grupos: String[];
-  seleccionCurso : string;
-  curso:string;
-  public cursos = [{ name: '1' }, { name: '2' },{ name: '3' },{ name: '4' }];
-  seleccionCuatrimestre : string;
-  cuatrimestre:string;
-  public cuatrimestres = [{ name: '1' }, { name: '2' }];
   gruposasignatura1:number;
   gruposasignatura2:number;
   gruposasignatura3:number;
   gruposasignatura4:number;
   gruposasignatura5:number;
+  gruposasignatura6:number;
+  gruposasignatura7:number;
+  gruposasignatura8:number;
+  gruposasignatura9:number;
+  gruposasignatura10:number;
   iconoApellidos=faIdCard;
 
   constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService) {
     this.asignaturas=new Array<String>();
     this.asignaturasAsignadas=new Array<String>();
-    this.seleccionCurso=this.cursos[0].name;
-    this.seleccionCuatrimestre=this.cuatrimestres[0].name;
     this.gruposasignatura1=0;
     this.gruposasignatura2=0;
     this.gruposasignatura3=0;
     this.gruposasignatura4=0;
     this.gruposasignatura5=0;
+    this.gruposasignatura6=0;
+    this.gruposasignatura7=0;
+    this.gruposasignatura8=0;
+    this.gruposasignatura9=0;
+    this.gruposasignatura10=0;
     this.grupos=new Array<String>();
   }
 
-  cambioCurso(){
-    this.curso=this.seleccionCurso;
-    console.log(this.curso);
-  }
-
-  cambioCuatrimestre(){
-    this.cuatrimestre=this.seleccionCuatrimestre;
-    console.log(this.cuatrimestre);
-  }
-
   onFileChange(ev) {
-    /*this.grupoReducidoService.getGrupos(this.curso,this.cuatrimestre).subscribe(
-      result=>{
-        console.log(result);
-        for( let e of result){
-          this.estudiantes.push(e);
-        }
-      },
-      error=>{
-        console.log(this.estudiantes);
-        console.log("DIO ERROR AL OBTENER LOS ESTUDIANTES");
-      });*/
-
 
     let workBook = null;
     let jsonData = null;
@@ -155,13 +134,13 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                         var actual = new Usuario(email,usuarionombre,usuarioapellidos,3,usuarionombre);
                                         //console.log(actual);
                                         //registrar a los alumnos
-                                        this.usuarioService.registrar(actual).subscribe(
+                                        /*this.usuarioService.registrar(actual).subscribe(
                                           result=>{
                                             console.log("bien");
                                           } , error=>{
                                             console.log(error);
                                           }
-                                        );
+                                        );*/
                                       }
                                     }
                                   }
@@ -181,7 +160,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                         email=email+'@esei.uvigo.es';
                                         this.grupos.splice(0,this.grupos.length);
                                         this.asignaturasAsignadas.splice(0,this.asignaturasAsignadas.length);
-                                        this.comprobarGrupo(e2,email);//ademas registra la asignatura
+                                        this.comprobarAsignaturasYGrupos(e2,email);
                                       }
                                     }
                                   }
@@ -220,7 +199,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     reader.readAsBinaryString(file);
   }
 
-  comprobarGrupo(value,email){//y registra la asignatura
+  comprobarAsignaturasYGrupos(value,email){
     let asignatura=this.asignaturas[0];
     let grupo='';
     let a=1;
@@ -287,7 +266,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       b++;
       a++;
     }
-    console.log(email);
+    /*console.log(email);
     console.log(this.grupos);
     console.log(this.asignaturasAsignadas);
 
@@ -305,19 +284,12 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       } , error=>{
         console.log(error);
       }
-    );
+    );*/
 
+    document.getElementById('output').innerHTML = "DATOS IMPORTADOS"
     console.log("-----------------------------------------------------------");
   }
 
-  /*setDownload(data) {
-    this.willDownload = true;
-    setTimeout(() => {
-      const el = document.querySelector("#download");
-      el.setAttribute("href", `data:text/json;charset=utf-8,${encodeURIComponent(data)}`);
-      el.setAttribute("download", 'xlsxtojson.json');
-    }, 1000)
-  }*/
 
   ngOnInit(): void {
   }

@@ -1,9 +1,16 @@
-
-.opciones{
-  font-family: "Century Gothic";
-}
-.labels{
+.titulo{
   font-size: 1.2em;
-  padding: 2px;
+  text-decoration: underline;
+  text-decoration-color: mediumpurple;
 }
 
+.salida{
+  text-align: center;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  color:black;
+  font-size: 1.4em;
+  background-color: mediumpurple;
+  opacity: 0.6;
+  border-radius: 30px;
+}

@@ -38,7 +38,7 @@ export class SelectEstudiantesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('email')).subscribe(
+    this.usuarioService.getEstudiantesProfesorByEmail(window.sessionStorage.getItem('email')).subscribe(
       result=>{
         console.log(result);
         for( let p of result){

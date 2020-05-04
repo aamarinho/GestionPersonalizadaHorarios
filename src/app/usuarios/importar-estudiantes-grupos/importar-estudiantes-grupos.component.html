@@ -1,15 +1,12 @@
 <div class="container">
 
-<p>
+<p class="titulo mt-5">
   Selecciona el archivo excel para importar
 </p>
 
-<input type="file" (change)="onFileChange($event)" />
+<input class="mt-4" type="file" (change)="onFileChange($event)" />
 
-<div id="output"></div>
-<br>
+<br/>
+<div id="output" class="salida mt-5"></div>
 
-<div *ngIf="willDownload">
-  <a id="download"> Download JSON File </a>
-</div>
 </div>
