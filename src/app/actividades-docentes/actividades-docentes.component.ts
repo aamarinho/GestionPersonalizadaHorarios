@@ -20,6 +20,7 @@ export class ActividadesDocentesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.eventos.splice(0,this.eventos.length);
     this.calendarioService.getEventosCalendario().subscribe(
       result=>{
         console.log(result);
@@ -57,6 +58,23 @@ export class ActividadesDocentesComponent implements OnInit {
         }
       }
     }
+  }
+
+  editar(id){
+    window.sessionStorage.setItem('editar',id);
+    this.router.navigate(['/editaractividaddocente']);
+  }
+
+  eliminar(id){
+    console.log(id);
+    this.calendarioService.eliminar(id).subscribe(
+      result=>{
+        console.log(result);
+        this.ngOnInit();
+      } , error=>{
+        console.log(error);
+      }
+    );
   }
 
 }

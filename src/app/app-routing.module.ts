@@ -27,6 +27,7 @@ import {SelectMatriculaEstudianteComponent} from './usuarios/select-matricula-es
 import {EditarAsignaturaComponent} from './asignaturas/editar-asignatura/editar-asignatura.component';
 import {EditarGrupoComponent} from './grupos-reducidos/editar-grupo/editar-grupo.component';
 import {ImportarEstudiantesGruposComponent} from './usuarios/importar-estudiantes-grupos/importar-estudiantes-grupos.component';
+import {EditarActividadDocenteComponent} from './actividades-docentes/editar-actividad-docente/editar-actividad-docente.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'editarusuario', component:EditarUsuarioComponent},
   {path: 'editarasignatura', component:EditarAsignaturaComponent},
   {path: 'editargrupo', component:EditarGrupoComponent},
+  {path: 'editaractividaddocente', component:EditarActividadDocenteComponent},
   {path: 'estudiantesprofesor', component:EstudiantesProfesorComponent},
   {path: 'modificargrupoestudiante', component:MultiSelectGruposProfesorComponent},
   {path: 'asignaturasprofesor', component:AsignaturasProfesorComponent},

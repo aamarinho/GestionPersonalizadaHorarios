@@ -25,8 +25,8 @@
       <td>{{evento.hora_fin}}</td>
       <td>{{evento.aula}}</td>
       <td>
-        <input type="image" src="../../assets/edit.svg" alt="Editar" width="20" height="20">
-        <input class="ml-2" type="image" src="../../assets/delete.svg" alt="Eliminar" width="20" height="20">
+        <input type="image" src="../../assets/edit.svg" alt="Editar" width="20" height="20" (click)="editar(evento.id)">
+        <input class="ml-2" type="image" src="../../assets/delete.svg" alt="Eliminar" width="20" height="20" (click)="eliminar(evento.id)">
       </td>
     </tr>
   </table>

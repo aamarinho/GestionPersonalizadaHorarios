@@ -1,0 +1,61 @@
+
+<div class="container registro">
+  <div class="vl">
+    <form #formRegistroGrupo="ngForm" (ngSubmit)="registrar()" class="form-registro" >
+
+      <h4 class="mt-4 mb-4 titulo">EDITAR UNA ACTIVIDAD DOCENTE</h4>
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="nombre" class="labels ml-2">Nombre</label>
+      <br/>
+      <input type="text" name="nombre" class="col inputs" #nombre="ngModel" [(ngModel)]="calendario.nombre" required />
+      <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
+      El nombre no es válido
+    </span>
+      <app-select-grupos></app-select-grupos>
+      <br/>
+
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <label for="horainicio" class="labels ml-2">Fecha</label>
+      <br/>
+      <input type="date" name="fecha" class="col inputs" #horainicio="ngModel" [(ngModel)]="calendario.fecha" required />
+      <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
+      La fecha no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <label for="horainicio" class="labels ml-2">Hora inicio</label>
+      <br/>
+      <input type="time" name="horainicio" class="col inputs" #horainicio="ngModel" [(ngModel)]="calendario.hora_inicio" required />
+      <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
+      La hora de inicio no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <label for="horafin" class="labels ml-2">Hora fin</label>
+      <br/>
+      <input type="time" name="horafin" class="col inputs" #horafin="ngModel" [(ngModel)]="calendario.hora_fin" required />
+      <span class="validaciones" *ngIf="horafin.touched && !horafin.valid">
+      La hora de fin no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="nombre" class="labels ml-2">Aula</label>
+      <br/>
+      <input type="text" name="aula" class="col inputs" #aula="ngModel" [(ngModel)]="calendario.aula" required />
+      <span class="validaciones" *ngIf="aula.touched && !aula.valid">
+      El aula no es válida
+    </span>
+
+      <br/>
+
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroGrupo.form.valid" />
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+.inputs{
+  border-bottom: 1px solid #4b4b4b;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent!important;
+}
+
+.vl {
+  border-left: 6px solid mediumpurple;
+  height: 100%
+}
+
+.labels{
+  font-size: 1.1em;
+  padding: 2px;
+}
+
+.validaciones{
+  color: #990000;
+}
+
+.titulo{
+  font-size: 1.6em;
+  text-decoration: underline;
+  text-decoration-color: mediumpurple!important;
+}
+
+.registro{
+  color: #4b4b4b !important;
+  font-family: "Century Gothic";
+  width: 75%;
+}
+
+.botonregistro{
+  margin-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  border-radius: 20px;
+  border:none;
+  color:white;
+  font-size:1.4em;
+  background: linear-gradient(to right, mediumpurple, skyblue);
+}
+
+.form-registro{
+  padding: 2%;
+}
+
+.select{
+  margin:0;
+  width: 100%;
+  padding: 0;
+}
+
+.opciones{
+  font-family: "Century Gothic";
+}

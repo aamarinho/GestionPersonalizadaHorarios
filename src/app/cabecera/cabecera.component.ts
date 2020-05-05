@@ -22,8 +22,15 @@ export class CabeceraComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(window.sessionStorage.getItem('email')==null){//para que no pueda ir a cualquier ruta
+      this.router.navigate(['']);
+    }
+    if(window.sessionStorage.getItem('tipo')=='1'){
+      this.router.navigate(['/usuarios']);
+    } else{
+      this.router.navigate(['/calendario']);
+    }
       this.nombreUsuario=window.sessionStorage.getItem('nombre');
-      console.log(this.nombreUsuario);
   }
 
   toggleNavbar() {
@@ -42,5 +49,10 @@ export class CabeceraComponent implements OnInit {
 
   irAAsignaturas() {
     this.router.navigate(['/asignaturasprofesor']);
+  }
+
+  logout(){
+    window.sessionStorage.clear();
+    this.router.navigate(['/']);
   }
 }

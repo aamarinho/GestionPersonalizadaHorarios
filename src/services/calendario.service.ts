@@ -37,5 +37,14 @@ export class CalendarioService {
     return this.http.get(this.url+"/getall",{headers, responseType: 'json'});
   }
 
+  eliminar(id: string): Observable<any>{
+    return this.http.delete(this.url+"/eliminar/"+id,{responseType:'text'});
+  }
+
+  getActividadDocente(id: string) {
+    let headers = new HttpHeaders().append('Content-Type','application/json');
+    return this.http.get(this.url+"/get/actividaddocente/"+id, {headers,responseType:'json'});
+  }
+
 
 }

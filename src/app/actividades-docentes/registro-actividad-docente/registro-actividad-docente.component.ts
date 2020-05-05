@@ -34,6 +34,7 @@ export class RegistroActividadDocenteComponent implements OnInit {
     this.calendarioService.registrarActividadDocente(this.calendario).subscribe(
       result=>{
         console.log("Registrada la actividad docente con exito");
+        this.router.navigate(['/actividadesdocentes']);
       } , error=>{
         console.log("Error registrando la actividad docente");
       }
