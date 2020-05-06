@@ -21,7 +21,6 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
   public asignaturas : Asignatura[];
   public resultado : Asignatura[];
   public asignaturasAsignadas : UsuarioAsignatura[];
-  public idsasignatura : String[];
   public a : UsuarioAsignatura;
   iconoLibro = faBook;
 
@@ -44,13 +43,11 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     this.asignaturas=new Array<Asignatura>();
     this.resultado=new Array<Asignatura>();
     this.asignaturasAsignadas=new Array<UsuarioAsignatura>();
-    this.idsasignatura=new Array<String>();
     this.a=new UsuarioAsignatura('','');
   }
 
   ngOnInit() {
     this.asignaturasAsignadas.splice(0,this.asignaturasAsignadas.length);
-    this.idsasignatura.splice(0,this.idsasignatura.length);
     this.asignaturas.splice(0,this.asignaturas.length);
     this.asignaturasMultiCtrl.reset();
     this.usuarioAsignaturaService.getUsuariosAsignaturas(window.sessionStorage.getItem('gestionasignaturas')).subscribe(
@@ -58,7 +55,6 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
         console.log(result);
         for( let a of result){
           this.asignaturasAsignadas.push(a);
-          this.idsasignatura.push(a.id);
         }
       },
       error=>{
@@ -66,13 +62,11 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
         console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
-    this.asignaturaService.getAsignaturas().subscribe(
+    this.usuarioAsignaturaService.getUsuariosAsignaturasSinAsignadas(window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
         for( let a of result){
-          if(!this.idsasignatura.includes(a.id)){
             this.asignaturas.push(a);
-          }
         }
       },
       error=>{

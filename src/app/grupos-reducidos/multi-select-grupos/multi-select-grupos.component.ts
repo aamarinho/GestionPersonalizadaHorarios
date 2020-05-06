@@ -21,7 +21,7 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
   public grupos : GrupoReducido[];
   public resultado : GrupoReducido[];
   public gruposAsignados : UsuarioGrupo[];
-  public idsgrupos : String[];
+  public mensaje:string;
   iconoLibro = faBook;
 
   /** control for the selected bank for multi-selection */
@@ -43,12 +43,11 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     this.grupos=new Array<GrupoReducido>();
     this.resultado=new Array<GrupoReducido>();
     this.gruposAsignados=new Array<UsuarioGrupo>();
-    this.idsgrupos=new Array<String>();
+    this.mensaje='';
   }
 
   ngOnInit() {
     this.gruposAsignados.splice(0,this.gruposAsignados.length);
-    this.idsgrupos.splice(0,this.idsgrupos.length);
     this.grupos.splice(0,this.grupos.length);
     this.gruposMultiCtrl.reset();
     this.usuarioGrupoService.getUsuariosGrupos(window.sessionStorage.getItem('gestiongrupos')).subscribe(
@@ -56,7 +55,6 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         console.log(result);
         for(let a of result){
           this.gruposAsignados.push(a);
-          this.idsgrupos.push(a.id);
         }
         console.log(this.gruposAsignados);
       },
@@ -65,15 +63,15 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
-    this.gruposReducidosService.getGrupos().subscribe(
+    this.usuarioGrupoService.getUsuariosGruposSinAsignados(window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
         console.log("array de ids grupos---->");
-        console.log(this.idsgrupos);
         for(let a of result){
-          if(!this.idsgrupos.includes(a.id)){
             this.grupos.push(a);
-          }
+        }
+        if(this.grupos.length==0){
+          this.mensaje="No hay grupos para seleccionar";
         }
       },
       error=>{

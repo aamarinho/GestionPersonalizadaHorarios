@@ -202,16 +202,21 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
   comprobarAsignaturasYGrupos(value,email){
     let asignatura=this.asignaturas[0];
     let grupo='';
+    let grupogrande='';
     let a=1;
     if(value['__EMPTY']=='X'){
       grupo=asignatura+'_1';
+      grupogrande=asignatura+'_GG';
       this.grupos.push(grupo);
+      this.grupos.push(grupogrande);
       this.asignaturasAsignadas.push(asignatura);
     } else{
       while(a<this.gruposasignatura1){
         if(value['__EMPTY_'+a]=='X'){
           grupo=asignatura+'_'+(a+1);
+          grupogrande=asignatura+'_GG';
           this.grupos.push(grupo);
+          this.grupos.push(grupogrande);
           this.asignaturasAsignadas.push(asignatura);
         }
         a++;
@@ -224,7 +229,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       if(value['__EMPTY_'+a]=='X'){
         asignatura=this.asignaturas[1];
         grupo=asignatura+'_'+b;
+        grupogrande=asignatura+'_GG';
         this.grupos.push(grupo);
+        this.grupos.push(grupogrande);
         this.asignaturasAsignadas.push(asignatura);
       }
       b++;
@@ -236,7 +243,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       if(value['__EMPTY_'+a]=='X'){
         asignatura=this.asignaturas[2];
         grupo=asignatura+'_'+b;
+        grupogrande=asignatura+'_GG';
         this.grupos.push(grupo);
+        this.grupos.push(grupogrande);
         this.asignaturasAsignadas.push(asignatura);
       }
       a++;
@@ -248,7 +257,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       if(value['__EMPTY_'+a]=='X'){
         asignatura=this.asignaturas[3];
         grupo=asignatura+'_'+b;
+        grupogrande=asignatura+'_GG';
         this.grupos.push(grupo);
+        this.grupos.push(grupogrande);
         this.asignaturasAsignadas.push(asignatura);
       }
       b++;
@@ -260,15 +271,17 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       if(value['__EMPTY_'+a]=='X'){
         asignatura=this.asignaturas[4];
         grupo=asignatura+'_'+b;
+        grupogrande=asignatura+'_GG';
         this.grupos.push(grupo);
+        this.grupos.push(grupogrande);
         this.asignaturasAsignadas.push(asignatura);
       }
       b++;
       a++;
     }
-    /*console.log(email);
+    console.log(email);
     console.log(this.grupos);
-    console.log(this.asignaturasAsignadas);
+    /*console.log(this.asignaturasAsignadas);
 
     this.usuarioAsignaturaService.registrarAsignaturas(this.asignaturasAsignadas,email).subscribe(
       result=>{

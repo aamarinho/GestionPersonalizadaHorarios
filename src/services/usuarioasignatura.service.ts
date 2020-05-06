@@ -40,6 +40,11 @@ export class UsuarioasignaturaService {
     return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
   }
 
+  getUsuariosAsignaturasSinAsignadas(email: string): Observable<any> {
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/sinasignadas/"+email,{headers, responseType: 'json'});
+  }
+
   eliminar(id: string, email: string): Observable<any>{
     return this.http.delete(this.url+"/eliminar/"+email+'/'+id,{responseType:'text'});
   }

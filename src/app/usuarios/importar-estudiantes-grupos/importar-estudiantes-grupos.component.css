@@ -5,12 +5,14 @@
 }
 
 .salida{
+  padding-left: 10%;
+  padding-right: 10%;
   text-align: center;
   margin-left: 50%;
   transform: translateX(-50%);
   color:black;
   font-size: 1.4em;
-  background-color: mediumpurple;
+  background-color: #008000;
   opacity: 0.6;
-  border-radius: 30px;
+  border-radius: 5px;
 }

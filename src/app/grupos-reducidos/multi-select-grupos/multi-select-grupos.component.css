@@ -34,3 +34,7 @@ li::before {
   display: inline-block;
   width: 1em;
 }
+
+.excepcion{
+  color: #990000;
+}
