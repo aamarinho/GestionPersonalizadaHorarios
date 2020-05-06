@@ -1,0 +1,51 @@
+
+<div class="container registro">
+  <div class="vl">
+    <form #formRegistroEstudiante="ngForm" (ngSubmit)="editarPerfil()" class="form-registro-estudiante" >
+      <h4 class="mt-4 mb-4 titulo">EDITAR CONFIGURACIÓN</h4>
+
+      <fa-icon [icon]="iconoFecha"></fa-icon>
+      <label for="f_inicio_uno" class="labels ml-2">Fecha inicio primer cuatrimestre</label>
+      <br/>
+      <input type="date" name="f_inicio_uno" class="col inputs" #f_inicio_uno="ngModel" [(ngModel)]="this.configuracion.f_inicio_uno" required />
+      <span class="validaciones" *ngIf="f_inicio_uno.touched && !f_inicio_uno.valid">
+      La fecha no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoFecha"></fa-icon>
+      <label for="f_fin_uno" class="labels ml-2">Fecha fin primer cuatrimestre</label>
+      <br/>
+      <input type="date" name="f_fin_uno" class="col inputs" #f_fin_uno="ngModel" [(ngModel)]="this.configuracion.f_fin_uno" required />
+      <span class="validaciones" *ngIf="f_fin_uno.touched && !f_fin_uno.valid">
+      La fecha no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoFecha"></fa-icon>
+      <label for="f_inicio_dos" class="labels ml-2">Fecha inicio segundo cuatrimestre</label>
+      <br/>
+      <input type="date" name="f_inicio_dos" class="col inputs" #f_inicio_dos="ngModel" [(ngModel)]="this.configuracion.f_inicio_dos" required />
+      <span class="validaciones" *ngIf="f_inicio_dos.touched && !f_inicio_dos.valid">
+      La fecha no es válida
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoFecha"></fa-icon>
+      <label for="f_fin_dos" class="labels ml-2">Fecha fin segundo cuatrimestre</label>
+      <br/>
+      <input type="date" name="f_fin_dos" class="col inputs" #f_fin_dos="ngModel" [(ngModel)]="this.configuracion.f_fin_dos" required />
+      <span class="validaciones" *ngIf="f_fin_dos.touched && !f_fin_dos.valid">
+      La fecha no es válida
+    </span>
+
+      <br/>
+
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroEstudiante.form.valid" />
+
+    </form>
+  </div>
+</div>

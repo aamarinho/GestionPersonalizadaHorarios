@@ -29,6 +29,7 @@ import {EditarGrupoComponent} from './grupos-reducidos/editar-grupo/editar-grupo
 import {ImportarEstudiantesGruposComponent} from './usuarios/importar-estudiantes-grupos/importar-estudiantes-grupos.component';
 import {EditarActividadDocenteComponent} from './actividades-docentes/editar-actividad-docente/editar-actividad-docente.component';
 import {MiPerfilComponent} from './usuarios/mi-perfil/mi-perfil.component';
+import {ConfiguracionComponent} from './configuracion/configuracion.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'seleccionarmatricula', component:SelectMatriculaEstudianteComponent},
   {path: 'importar', component:ImportarEstudiantesGruposComponent},
   {path: 'miperfil', component:MiPerfilComponent},
+  {path: 'configuracion', component:ConfiguracionComponent},
 
 ];
 
