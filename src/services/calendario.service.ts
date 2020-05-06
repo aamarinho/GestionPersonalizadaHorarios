@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GrupoReducido} from '../models/GrupoReducido';
 import {Calendario} from '../models/Calendario';
+import {Usuario} from '../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,10 @@ export class CalendarioService {
     return this.http.get(this.url+"/get/actividaddocente/"+id, {headers,responseType:'json'});
   }
 
+  editarActividadDocente(calendario: Calendario): Observable<any>{
+    let parametros = 'calendario='+JSON.stringify(calendario);
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/editar/actividaddocente",parametros,{headers, responseType: 'json'});
+  }
 
 }

@@ -25,6 +25,7 @@ export class EditarActividadDocenteComponent implements OnInit {
         this.calendario.id=result['id'];
         this.calendario.nombre=result['nombre'];
         this.calendario.id_grupo=result['id_grupo'];
+        window.sessionStorage.setItem('grupo',result['id_grupo']);
         this.calendario.id_asignatura=result['id_asignatura'];
         this.calendario.fecha=result['fecha'];
         this.calendario.hora_inicio=result['hora_inicio'];
@@ -35,6 +36,20 @@ export class EditarActividadDocenteComponent implements OnInit {
       } , error=>{
         console.log(error);
         console.log("error obteniendo al usuario");
+      }
+    );
+  }
+
+  editar(){
+    this.calendario.id_asignatura=null;
+    this.calendario.id_grupo=window.sessionStorage.getItem('grupo');
+    this.calendario.responsable=window.sessionStorage.getItem('email');
+    this.calendarioService.editarActividadDocente(this.calendario).subscribe(
+      result=>{
+        console.log(result);
+        this.router.navigate(['/actividadesdocentes']);
+      } , error=>{
+        console.log(error);
       }
     );
   }

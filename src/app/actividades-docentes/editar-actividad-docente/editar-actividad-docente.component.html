@@ -1,7 +1,7 @@
 
 <div class="container registro">
   <div class="vl">
-    <form #formRegistroGrupo="ngForm" (ngSubmit)="registrar()" class="form-registro" >
+    <form #formRegistroGrupo="ngForm" (ngSubmit)="editar()" class="form-registro" >
 
       <h4 class="mt-4 mb-4 titulo">EDITAR UNA ACTIVIDAD DOCENTE</h4>
       <fa-icon [icon]="iconoApellidos"></fa-icon>
@@ -12,7 +12,7 @@
       El nombre no es válido
     </span>
       <app-select-grupos></app-select-grupos>
-      <br/>
+      <p>{{this.calendario.id_grupo}}</p>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
       <label for="horainicio" class="labels ml-2">Fecha</label>
