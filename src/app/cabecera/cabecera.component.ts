@@ -30,7 +30,8 @@ export class CabeceraComponent implements OnInit {
     } else{
       this.router.navigate(['/calendario']);
     }
-      this.nombreUsuario=window.sessionStorage.getItem('nombre');
+    let temp=window.sessionStorage.getItem('nombre').split(' ');
+    this.nombreUsuario=temp[0];
   }
 
   toggleNavbar() {

@@ -48,6 +48,7 @@ import { EditarAsignaturaComponent } from './asignaturas/editar-asignatura/edita
 import { EditarGrupoComponent } from './grupos-reducidos/editar-grupo/editar-grupo.component';
 import { ImportarEstudiantesGruposComponent } from './usuarios/importar-estudiantes-grupos/importar-estudiantes-grupos.component';
 import { EditarActividadDocenteComponent } from './actividades-docentes/editar-actividad-docente/editar-actividad-docente.component';
+import { MiPerfilComponent } from './usuarios/mi-perfil/mi-perfil.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { EditarActividadDocenteComponent } from './actividades-docentes/editar-a
     EditarGrupoComponent,
     ImportarEstudiantesGruposComponent,
     EditarActividadDocenteComponent,
+    MiPerfilComponent,
   ],
   imports: [
     BrowserModule,

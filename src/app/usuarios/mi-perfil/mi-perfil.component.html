@@ -1,0 +1,50 @@
+
+<div class="container registro">
+  <div class="vl">
+    <form #formRegistroEstudiante="ngForm" (ngSubmit)="editarPerfil()" class="form-registro-estudiante" >
+      <h4 class="mt-4 mb-4 titulo">EDITAR MI PERFIL</h4>
+
+      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <label for="email" class="labels ml-2">Email</label>
+      <br/>
+      <input type="email" name="email" class="col inputs especial" #email="ngModel" readonly [(ngModel)]="usuario.email" required />
+      <span class="validaciones" *ngIf="email.touched && !email.valid">
+      El email no es válido
+    </span>
+
+      <br/>
+      <fa-icon [icon]="iconoUsuario"></fa-icon>
+      <label for="nombre" class="labels ml-2">Nombre</label>
+      <br/>
+      <input type="text" name="nombre" class="col inputs especial" #nombre="ngModel" readonly [(ngModel)]="usuario.nombre" required />
+      <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
+      El nombre no es válido
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <label for="apellidos" class="labels ml-2">Apellidos</label>
+      <br/>
+      <input type="text" name="apellidos" class="col inputs especial" #apellidos="ngModel" readonly [(ngModel)]="usuario.apellidos" required />
+      <span class="validaciones" *ngIf="apellidos.touched && !apellidos.valid">
+      Los apellidos no son válidos
+    </span>
+
+      <br/>
+
+      <fa-icon [icon]="iconoCandado"></fa-icon>
+      <label for="contrasena" class="labels ml-2">Contraseña</label>
+      <br/>
+      <input type="text" name="contrasena" class="col inputs" #contrasena="ngModel" [(ngModel)]="usuario.contrasena" required />
+      <span class="validaciones" *ngIf="contrasena.touched && !contrasena.valid">
+      Los apellidos no son válidos
+    </span>
+
+      <br/>
+
+      <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroEstudiante.form.valid" />
+
+    </form>
+  </div>
+</div>
