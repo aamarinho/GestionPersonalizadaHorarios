@@ -23,15 +23,24 @@ export class RegistroGrupoComponent implements OnInit {
   public tipos = [{ name: 'Practica' }, { name: 'Teorica' }];
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   constructor(private grupoService : GruposreducidosService, private router:Router, private asignaturaService : AsignaturaService) {
     this.grupo = new GrupoReducido('','','','','','','');
     this.asignaturas=new Array<Asignatura>();
     this.seleccionDia=this.dias[0].name;
     this.seleccionTipo=this.tipos[0].name;
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.asignaturaService.getAsignaturas().subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
@@ -63,13 +72,25 @@ export class RegistroGrupoComponent implements OnInit {
     }
     this.grupoService.registrar(this.grupo).subscribe(
       result=>{
-        console.log(result);
-        console.log(this.grupo);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Registrado el grupo reducido correctamente";
         //this.router.navigate(['/gruposreducidos']);
       } , error=>{
-        console.log("error registrando el grupo");
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error registrando el grupo reducido";
+        console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

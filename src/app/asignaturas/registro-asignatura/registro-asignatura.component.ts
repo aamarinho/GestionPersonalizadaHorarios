@@ -17,16 +17,24 @@ export class RegistroAsignaturaComponent implements OnInit {
   public profesores : Usuario[];
   seleccionada:string;
   iconoUsuario = faUser;
-  iconoCalendario = faCalendarDay;
   iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
+  mostrarbien:boolean;
+  mostrarmal:boolean;
+  mensaje:string;
 
   constructor(private asignaturaService : AsignaturaService, private router:Router, private usuarioService : UsuarioService) {
     this.asignatura = new Asignatura('','','',null,null,);
     this.profesores=new Array<Usuario>();
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.usuarioService.getProfesores().subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER EL EMAIL DE LOS PROFESORES");
@@ -47,13 +55,26 @@ export class RegistroAsignaturaComponent implements OnInit {
     console.log(this.asignatura);
     this.asignaturaService.registrar(this.asignatura).subscribe(
       result=>{
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Registrada la asignatura correctamente";
         console.log(result);
-        console.log(this.asignatura);
         this.router.navigate(['/asignaturas']);
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error registrando la asignatura";
         console.log("error registrando la asignatura");
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

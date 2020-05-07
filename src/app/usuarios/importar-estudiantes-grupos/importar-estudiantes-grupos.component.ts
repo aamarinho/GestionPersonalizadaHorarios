@@ -30,6 +30,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
   gruposasignatura9:number;
   gruposasignatura10:number;
   iconoApellidos=faIdCard;
+  mensaje:string;
+  mostrarbien:boolean;
+  mostrarmal:boolean;
 
   constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService) {
     this.asignaturas=new Array<String>();
@@ -45,6 +48,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     this.gruposasignatura9=0;
     this.gruposasignatura10=0;
     this.grupos=new Array<String>();
+    this.mensaje='';
+    this.mostrarbien=false;
+    this.mostrarmal=false;
   }
 
   onFileChange(ev) {
@@ -138,6 +144,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                           result=>{
                                             console.log("bien");
                                           } , error=>{
+                                            this.mostrarbien=false;
+                                            this.mostrarmal=true;
+                                            this.mensaje="Ocurrió un error registrando los usuarios";
                                             console.log(error);
                                           }
                                         );*/
@@ -287,6 +296,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       result=>{
         console.log("BIEEN ASIGNATURAS");
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error registrando las asignaturas";
         console.log(error);
       }
     );
@@ -295,16 +307,32 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       result=>{
         console.log("BIEEN GRUPOS");
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error registrando los grupos";
         console.log(error);
       }
     );*/
 
-    document.getElementById('output').innerHTML = "DATOS IMPORTADOS"
+   // document.getElementById('output').innerHTML = "DATOS IMPORTADOS";
+    this.mostrarbien=true;
+    this.mensaje="Importados todos los datos correctamente";
     console.log("-----------------------------------------------------------");
   }
 
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.mensaje='';
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

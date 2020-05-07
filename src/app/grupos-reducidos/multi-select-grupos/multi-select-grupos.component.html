@@ -11,6 +11,10 @@
     </mat-select>
   </mat-form-field>
   <p class="excepcion">{{mensaje}}</p>
+  <div *ngIf="mostrarmal==true" class="alert alert-danger alert-dismissable mt-3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarmal()"><span aria-hidden="true">&times;</span></button>
+    {{mensajeerror}}
+  </div>
   <input type="submit" value="CONFIRMAR" class="btn boton mt-2" (click)="registrar()">
   <div class="row">
     <div class="col-6">

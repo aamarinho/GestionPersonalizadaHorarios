@@ -25,6 +25,9 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   public eventosGenerados : Calendario[];
   public idseventos : String[];
   iconoLibro = faBook;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   /** control for the selected bank for multi-selection */
   public gruposMultiCtrl: FormControl = new FormControl();
@@ -46,9 +49,15 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     this.resultado=new Array<GrupoReducido>();
     this.eventosGenerados=new Array<Calendario>();
     this.idseventos=new Array<String>();
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.eventosGenerados.splice(0,this.eventosGenerados.length);
     this.idseventos.splice(0,this.idseventos.length);
     this.grupos.splice(0,this.grupos.length);
@@ -151,12 +160,26 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   registrar(){
     this.calendarioService.registrar(this.resultado).subscribe(
       result=>{
-        this.ngOnInit();
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Generado el calendario para ese/s grupo/s correctamente";
+        //this.ngOnInit();
         console.log("gestionados los grupos correctamente");
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error generando el calendario para ese/s grupos";
         console.log("error gestionando los grupos");
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

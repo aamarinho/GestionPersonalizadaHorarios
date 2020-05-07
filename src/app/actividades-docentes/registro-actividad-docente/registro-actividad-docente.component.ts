@@ -18,13 +18,21 @@ export class RegistroActividadDocenteComponent implements OnInit {
   public calendario: Calendario;
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  mostrarbien:boolean;
+  mostrarmal:boolean;
+  mensaje:string;
 
   constructor(private calendarioService : CalendarioService, private router:Router) {
     this.calendario=new Calendario('','','','','','','','','');
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
-
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   registrar(){
@@ -33,12 +41,26 @@ export class RegistroActividadDocenteComponent implements OnInit {
     this.calendario.responsable=window.sessionStorage.getItem('email');
     this.calendarioService.registrarActividadDocente(this.calendario).subscribe(
       result=>{
-        console.log("Registrada la actividad docente con exito");
-        this.router.navigate(['/actividadesdocentes']);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Registrada la actividad docente correctamente";
+        console.log(result);
+        //this.router.navigate(['/actividadesdocentes']);
       } , error=>{
-        console.log("Error registrando la actividad docente");
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error registrando la actividad docente";
+        console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

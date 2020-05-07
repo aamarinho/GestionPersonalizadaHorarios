@@ -23,15 +23,24 @@ export class EditarGrupoComponent implements OnInit {
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
   public nombreasig : string;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   constructor(private grupoService : GruposreducidosService, private router:Router, private asignaturaService : AsignaturaService) {
     this.grupo = new GrupoReducido('','','','','','','');
     this.asignaturas=new Array<Asignatura>();
     this.seleccionDia=this.dias[0].name;
     this.seleccionTipo=this.tipos[0].name;
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.asignaturaService.getAsignaturas().subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
@@ -84,13 +93,24 @@ export class EditarGrupoComponent implements OnInit {
     this.grupo.dia=this.seleccionDia;
     this.grupoService.editar(this.grupo).subscribe(
       result=>{
-        console.log(result);
-        console.log(this.grupo);
-        this.router.navigate(['/gruposreducidos']);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Editado el grupo reducido correctamente";
+        //this.router.navigate(['/gruposreducidos']);
       }, error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error editando el grupo reducido";
         console.log(error);
-        console.log("error registrando el grupo");
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 }

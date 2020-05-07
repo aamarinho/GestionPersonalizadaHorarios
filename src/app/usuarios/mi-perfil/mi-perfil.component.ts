@@ -16,12 +16,21 @@ export class MiPerfilComponent implements OnInit {
   iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
   iconoCandado = faLock;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   constructor(private usuarioServicio : UsuarioService, private router:Router) {
     this.usuario = new Usuario('','','',null,'');
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.usuarioServicio.getUsuario(window.sessionStorage.getItem('email')).subscribe(
       result=>{
         this.usuario.email=result['email'];
@@ -41,12 +50,25 @@ export class MiPerfilComponent implements OnInit {
     this.usuario.tipo=window.sessionStorage.getItem('tipo');
     this.usuarioServicio.editar(this.usuario).subscribe(
       result=>{
-        console.log("registro sin errores");
-        this.router.navigate(['/calendario']);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Editado mi perfil correctamente";
+        //this.router.navigate(['/calendario']);
       }, error=>{
-        console.log("error registrando al usuario");
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error editando mi perfil";
+        console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

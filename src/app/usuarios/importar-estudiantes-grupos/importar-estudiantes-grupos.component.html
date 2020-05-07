@@ -7,6 +7,14 @@
 <input class="mt-4" type="file" accept=".xls" (change)="onFileChange($event)" />
 
 <br/>
-<div id="output" class="salida mt-5"></div>
+  <div *ngIf="mostrarbien==true" class="alert alert-success alert-dismissable mt-3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarbien()"><span aria-hidden="true">&times;</span></button>
+    {{mensaje}}
+  </div>
+  <div *ngIf="mostrarmal==true" class="alert alert-danger alert-dismissable mt-3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarmal()"><span aria-hidden="true">&times;</span></button>
+    {{mensaje}}
+  </div>
+
 
 </div>

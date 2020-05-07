@@ -14,12 +14,22 @@ export class EditarActividadDocenteComponent implements OnInit {
   public calendario: Calendario;
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  mostrarbien:boolean;
+  mostrarmal:boolean;
+  mensaje:string;
+
 
   constructor(private calendarioService : CalendarioService, private router:Router) {
     this.calendario=new Calendario('','','','','','','','','');
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.calendarioService.getActividadDocente(window.sessionStorage.getItem('editar')).subscribe(
       result=>{
         this.calendario.id=result['id'];
@@ -47,11 +57,25 @@ export class EditarActividadDocenteComponent implements OnInit {
     this.calendarioService.editarActividadDocente(this.calendario).subscribe(
       result=>{
         console.log(result);
-        this.router.navigate(['/actividadesdocentes']);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Editada la actividad docente correctamente";
+        //this.router.navigate(['/actividadesdocentes']);
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error editando la actividad docente";
         console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

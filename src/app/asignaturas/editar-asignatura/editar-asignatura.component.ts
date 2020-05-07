@@ -16,20 +16,27 @@ export class EditarAsignaturaComponent implements OnInit {
   public idasignatura=window.sessionStorage.getItem('editar');
   public asignatura: Asignatura;
   public profesores : Usuario[];
-  seleccionada:string;
   iconoUsuario = faUser;
-  iconoCalendario = faCalendarDay;
   iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
   public nombreu : string;
   public apellidos : string;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   constructor(private asignaturaService : AsignaturaService, private router:Router, private usuarioService : UsuarioService) {
     this.asignatura = new Asignatura('','','',null,null,);
     this.profesores=new Array<Usuario>();
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.asignaturaService.getAsignatura(window.sessionStorage.getItem('editar')).subscribe(
       result=>{
         this.asignatura.id=result['id'];
@@ -51,11 +58,24 @@ export class EditarAsignaturaComponent implements OnInit {
     this.asignatura.email=window.sessionStorage.getItem('usuario');
     this.asignaturaService.editar(this.asignatura).subscribe(
       result=>{
-        console.log("registro sin errores");
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Editada la asignatura correctamente";
         this.router.navigate(['/asignaturas']);
       } , error=>{
-        console.log("error registrando al usuario");
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error editando la asignatura";
+        console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 }

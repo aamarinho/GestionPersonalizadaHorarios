@@ -23,6 +23,8 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
   public gruposAsignados : UsuarioGrupo[];
   public mensaje:string;
   iconoLibro = faBook;
+  public mostrarmal:boolean;
+  public mensajeerror:string;
 
   /** control for the selected bank for multi-selection */
   public gruposMultiCtrl: FormControl = new FormControl();
@@ -44,9 +46,13 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     this.resultado=new Array<GrupoReducido>();
     this.gruposAsignados=new Array<UsuarioGrupo>();
     this.mensaje='';
+    this.mostrarmal=false;
+    this.mensajeerror='';
   }
 
   ngOnInit() {
+    this.mostrarmal=false;
+    this.mensajeerror='';
     this.gruposAsignados.splice(0,this.gruposAsignados.length);
     this.grupos.splice(0,this.grupos.length);
     this.gruposMultiCtrl.reset();
@@ -166,9 +172,15 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         this.ngOnInit();
         console.log("gestionados los grupos correctamente");
       } , error=>{
+        this.mostrarmal=true;
+        this.mensajeerror="Error añadiendo el/los grupo/s reducido/s";
         console.log("error gestionando los grupos");
       }
     );
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

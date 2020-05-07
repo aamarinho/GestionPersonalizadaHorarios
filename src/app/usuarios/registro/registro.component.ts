@@ -16,12 +16,21 @@ export class RegistroComponent implements OnInit {
   iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
   public tipo :string;
+  public mostrarbien:boolean;
+  public mostrarmal:boolean;
+  public mensaje:string;
 
   constructor(private usuarioServicio : UsuarioService, private router:Router) {
     this.usuario = new Usuario('','','',null,'');
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mensaje='';
+    this.mostrarbien=false;
+    this.mostrarmal=false;
     this.tipo=window.sessionStorage.getItem('tipousuario');
   }
 
@@ -31,16 +40,30 @@ export class RegistroComponent implements OnInit {
     this.usuarioServicio.registrar(this.usuario).subscribe(
       result=>{
         console.log("registro sin errores");
-        if(this.usuario.tipo==2){
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Usuario registrado correctamente";
+        /*if(this.usuario.tipo==2){
           this.router.navigate(['/profesores']);
         } else if(this.usuario.tipo==3){
           this.router.navigate(['/estudiantes']);
         } else{
           this.router.navigate(['/usuarios']);
-        }
+        }*/
       } , error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Error registrando al usuario";
         console.log("error registrando al usuario");
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 }

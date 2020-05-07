@@ -43,6 +43,15 @@
 
       <br/>
 
+      <div *ngIf="mostrarbien==true" class="alert alert-success alert-dismissable mt-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarbien()"><span aria-hidden="true">&times;</span></button>
+        {{mensaje}}
+      </div>
+      <div *ngIf="mostrarmal==true" class="alert alert-danger alert-dismissable mt-3" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarmal()"><span aria-hidden="true">&times;</span></button>
+        {{mensaje}}
+      </div>
+
       <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroEstudiante.form.valid" />
 
     </form>

@@ -13,12 +13,21 @@ export class ConfiguracionComponent implements OnInit {
 
   public configuracion: Configuracion;
   iconoFecha=faCalendarDay;
+  mostrarbien:boolean;
+  mostrarmal:boolean;
+  mensaje:string;
 
   constructor(private configuracionService : ConfiguracionService, private router:Router) {
     this.configuracion = new Configuracion('','','','','');
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   ngOnInit() {
+    this.mostrarbien=false;
+    this.mostrarmal=false;
+    this.mensaje='';
     this.configuracionService.getConfiguracion().subscribe(
       result=>{
         this.configuracion.id=result['id'];
@@ -37,11 +46,25 @@ export class ConfiguracionComponent implements OnInit {
     console.log(this.configuracion);
     this.configuracionService.editar(this.configuracion).subscribe(
       result=>{
-        this.router.navigate(['/calendario']);
+        this.mostrarmal=false;
+        this.mostrarbien=true;
+        this.mensaje="Editada la configuración de los cuatrimestres correctamente";
+        //this.router.navigate(['/calendario']);
       }, error=>{
+        this.mostrarbien=false;
+        this.mostrarmal=true;
+        this.mensaje="Ocurrió un error editando la configuración de los cuatrimestres";
         console.log(error);
       }
     );
+  }
+
+  cambiarbien(){
+    this.mostrarbien=false;
+  }
+
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }
