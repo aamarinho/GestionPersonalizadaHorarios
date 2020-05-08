@@ -65,16 +65,17 @@ export class ActividadesDocentesComponent implements OnInit {
     this.router.navigate(['/editaractividaddocente']);
   }
 
-  eliminar(id){
-    console.log(id);
-    this.calendarioService.eliminar(id).subscribe(
-      result=>{
-        console.log(result);
-        this.ngOnInit();
-      } , error=>{
-        console.log(error);
-      }
-    );
+  eliminar(evento){
+    if(confirm("¿Estás seguro de querer eliminar "+evento.nombre+" de "+evento.id_grupo+"?")) {
+      this.calendarioService.eliminar(evento.id).subscribe(
+        result => {
+          console.log(result);
+          this.ngOnInit();
+        }, error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
 }

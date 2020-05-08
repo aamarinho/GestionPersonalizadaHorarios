@@ -6,7 +6,7 @@ import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 import {GrupoReducido} from '../../../models/GrupoReducido';
 import{faIdCard} from '@fortawesome/free-solid-svg-icons';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
-import {Routes} from '@angular/router';
+import {Router, Routes} from '@angular/router';
 import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
   mostrarbien:boolean;
   mostrarmal:boolean;
 
-  constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService) {
+  constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService,private router:Router) {
     this.asignaturas=new Array<String>();
     this.asignaturasAsignadas=new Array<String>();
     this.gruposasignatura1=0;

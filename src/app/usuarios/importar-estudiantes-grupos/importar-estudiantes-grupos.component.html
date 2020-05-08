@@ -4,7 +4,8 @@
   Selecciona el archivo excel para importar
 </p>
 
-<input class="mt-4" type="file" accept=".xls" (change)="onFileChange($event)" />
+  <input class="mt-4" type="file" value="SUBIR" accept=".xls" (change)="onFileChange($event)" />
+  <input class="mt-4 ml-2 botonvolver" type="button" value="VOLVER" (click)="this.router.navigate(['/estudiantes'])" />
 
 <br/>
   <div *ngIf="mostrarbien==true" class="alert alert-success alert-dismissable mt-3" role="alert">

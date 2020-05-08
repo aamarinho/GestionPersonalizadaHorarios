@@ -77,6 +77,8 @@
       </div>
 
       <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroGrupo.form.valid" />
+      <input type="button" value="VOLVER" class="btn botonvolver ml-2" (click)="this.router.navigate(['/gruposreducidos'])" />
+
 
     </form>
   </div>

@@ -11,6 +11,7 @@
       <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
       El nombre no es válido
     </span>
+      <br/>
       <app-select-grupos></app-select-grupos>
       <br/>
 
@@ -47,7 +48,7 @@
       <fa-icon [icon]="iconoApellidos"></fa-icon>
       <label for="nombre" class="labels ml-2">Aula</label>
       <br/>
-      <input type="text" name="nombre" class="col inputs" #aula="ngModel" [(ngModel)]="calendario.aula" required />
+      <input type="text" name="aula" class="col inputs" #aula="ngModel" [(ngModel)]="calendario.aula" required />
       <span class="validaciones" *ngIf="aula.touched && !aula.valid">
       El aula no es válida
     </span>
@@ -64,6 +65,8 @@
       </div>
 
       <input type="submit" value="AÑADIR" class="btn botonregistro" [disabled]="!formRegistroGrupo.form.valid" />
+      <input type="button" value="VOLVER" class="btn botonvolver ml-2" (click)="this.router.navigate(['/actividadesdocentes'])" />
+
 
     </form>
   </div>

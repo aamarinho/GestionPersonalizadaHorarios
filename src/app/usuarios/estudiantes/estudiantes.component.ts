@@ -68,18 +68,19 @@ export class EstudiantesComponent implements OnInit {
     }
   }
 
-
   eliminar(estudiante) {
-    this.usuarioService.eliminar(estudiante).subscribe(
-      result=>{
-        console.log(result);
-        console.log("Eliminado el grupo de ese usuario correctamente");
-        this.ngOnInit();
-      } , error=>{
-        console.log(error);
-        console.log("Error eliminando el grupo de ese ususario");
-      }
-    );
+    if(confirm("¿Estás seguro de querer eliminar a "+estudiante.nombre+"?")) {
+      this.usuarioService.eliminar(estudiante.email).subscribe(
+        result=>{
+          console.log(result);
+          console.log("Eliminado el grupo de ese usuario correctamente");
+          this.ngOnInit();
+        } , error=>{
+          console.log(error);
+          console.log("Error eliminando el grupo de ese ususario");
+        }
+      );
+    }
   }
 
   editar(estudiante:Usuario){

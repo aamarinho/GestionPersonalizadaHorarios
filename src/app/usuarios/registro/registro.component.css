@@ -33,15 +33,33 @@
 
 .botonregistro{
   margin-top: 2%;
-  padding-left: 5%;
-  padding-right: 5%;
-  margin-left: 50%;
-  transform: translateX(-50%);
   border-radius: 20px;
-  border:none;
-  color:white;
-  font-size:1.4em;
-  background: linear-gradient(to right, mediumpurple, skyblue);
+  color:black;
+  font-size:1.2em;
+  background-color: skyblue;
+  opacity: 0.65;
+}
+
+.botonregistro:hover{
+  background-color: #68bfeb;
+  border:1px solid #68bfeb;
+  opacity: 0.65;
+}
+
+.botonvolver{
+  margin-top: 2%;
+  border-radius: 20px;
+  font-size:1.2em;
+  background-color: white;
+  color:skyblue;
+  border:1px solid skyblue;
+  opacity: 0.65;
+}
+
+.botonvolver:hover{
+  color:black;
+  background-color: skyblue;
+  opacity: 0.65;
 }
 
 .form-registro-estudiante{

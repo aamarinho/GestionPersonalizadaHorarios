@@ -66,4 +66,14 @@ export class RegistroComponent implements OnInit {
   cambiarmal(){
     this.mostrarmal=false;
   }
+
+  volver(){
+    if(this.usuario.tipo==2){
+      this.router.navigate(['/profesores']);
+    } else if(this.usuario.tipo==3){
+      this.router.navigate(['/estudiantes']);
+    } else{
+      this.router.navigate(['/usuarios']);
+    }
+  }
 }

@@ -57,6 +57,8 @@
       </div>
 
       <input type="submit" value="EDITAR" class="btn botonregistro" [disabled]="!formRegistroAsignatura.form.valid" />
+      <input type="button" value="VOLVER" class="btn botonvolver ml-2" (click)="this.router.navigate(['/asignaturas'])" />
+
 
     </form>
   </div>
