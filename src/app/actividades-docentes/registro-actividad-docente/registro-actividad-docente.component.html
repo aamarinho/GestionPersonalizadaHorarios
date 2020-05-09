@@ -16,17 +16,14 @@
       <br/>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
-      <label for="horainicio" class="labels ml-2">Fecha</label>
-      <br/>
-      <input type="date" name="horainicio" class="col inputs" #horainicio="ngModel" [(ngModel)]="calendario.fecha" required />
-      <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
-      La hora de inicio no es válida
-    </span>
+      <label for="fecha" class="labels ml-2">Fecha</label>
+      <input class="col inputs" name="fecha" (click)="d.toggle()" readonly [(ngModel)]="calendario.fecha" ngbDatepicker #d="ngbDatepicker"/>
+
 
       <br/>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
-      <label for="horafin" class="labels ml-2">Hora inicio</label>
+      <label for="horainicio" class="labels ml-2">Hora inicio</label>
       <ngb-timepicker name="horainicio" #horainicio="ngModel" [(ngModel)]="calendario.hora_inicio" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
       La hora de inicio no es válida

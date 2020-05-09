@@ -27,7 +27,7 @@ import { MultiSelectAsignaturasComponent } from './asignaturas/multi-select-asig
 import { MultiSelectGruposComponent } from './grupos-reducidos/multi-select-grupos/multi-select-grupos.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import {NgbModalModule, NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerModule, NgbModalModule, NgbTimepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,8 +50,9 @@ import { ImportarEstudiantesGruposComponent } from './usuarios/importar-estudian
 import { EditarActividadDocenteComponent } from './actividades-docentes/editar-actividad-docente/editar-actividad-docente.component';
 import { MiPerfilComponent } from './usuarios/mi-perfil/mi-perfil.component';
 import { ConfiguracionComponent } from './configuracion/configuracion.component';
-import{NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatDatepickerModule} from '@angular/material';
+import {MatNativeDateModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,10 @@ import{NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     FlatpickrModule.forRoot(),
     CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory}),
     NgbTimepickerModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgbDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

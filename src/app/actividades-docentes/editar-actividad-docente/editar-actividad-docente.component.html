@@ -16,12 +16,9 @@
       <p>{{this.calendario.id_grupo}}</p>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
-      <label for="horainicio" class="labels ml-2">Fecha</label>
-      <br/>
-      <input type="date" name="fecha" class="col inputs" #horainicio="ngModel" [(ngModel)]="calendario.fecha" required />
-      <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
-      La fecha no es válida
-    </span>
+      <label for="fecha" class="labels ml-2">Fecha</label>
+      <input class="col inputs" name="fecha" (click)="d.toggle()" readonly required [(ngModel)]="calendario.fecha" ngbDatepicker #d="ngbDatepicker"/>
+
 
       <br/>
 

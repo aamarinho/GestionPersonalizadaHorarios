@@ -31,18 +31,27 @@ export class ConfiguracionComponent implements OnInit {
     this.configuracionService.getConfiguracion().subscribe(
       result=>{
         this.configuracion.id=result['id'];
-        this.configuracion.f_inicio_uno=result['f_inicio_uno'];
-        this.configuracion.f_fin_uno=result['f_fin_uno'];
-        this.configuracion.f_inicio_dos=result['f_inicio_dos'];
-        this.configuracion.f_fin_dos=result['f_fin_dos'];
+
+        let temp = result['f_inicio_uno'].split('-');
+        this.configuracion.f_inicio_uno={year:parseInt(temp[0],10),month:parseInt(temp[1],10),day:parseInt(temp[2],10)};
+        temp = result['f_fin_uno'].split('-');
+        this.configuracion.f_fin_uno={year:parseInt(temp[0],10),month:parseInt(temp[1],10),day:parseInt(temp[2],10)};
+        temp = result['f_inicio_dos'].split('-');
+        this.configuracion.f_inicio_dos={year:parseInt(temp[0],10),month:parseInt(temp[1],10),day:parseInt(temp[2],10)};
+        temp = result['f_fin_dos'].split('-');
+        this.configuracion.f_fin_dos={year:parseInt(temp[0],10),month:parseInt(temp[1],10),day:parseInt(temp[2],10)};
       } , error=>{
         console.log(error);
-        console.log("error obteniendo al usuario");
       }
     );
   }
 
   editarPerfil(){
+    this.configuracion.f_inicio_uno=this.configuracion.f_inicio_uno['year']+'/'+this.configuracion.f_inicio_uno['month']+'/'+this.configuracion.f_inicio_uno['day'];
+    this.configuracion.f_fin_uno=this.configuracion.f_fin_uno['year']+'/'+this.configuracion.f_fin_uno['month']+'/'+this.configuracion.f_fin_uno['day'];
+    this.configuracion.f_inicio_dos=this.configuracion.f_inicio_dos['year']+'/'+this.configuracion.f_inicio_dos['month']+'/'+this.configuracion.f_inicio_dos['day'];
+    this.configuracion.f_fin_dos=this.configuracion.f_fin_dos['year']+'/'+this.configuracion.f_fin_dos['month']+'/'+this.configuracion.f_fin_dos['day'];
+
     console.log(this.configuracion);
     this.configuracionService.editar(this.configuracion).subscribe(
       result=>{

@@ -38,6 +38,7 @@ export class RegistroActividadDocenteComponent implements OnInit {
   }
 
   registrar(){
+    this.calendario.fecha=this.calendario.fecha['year']+'/'+this.calendario.fecha['month']+'/'+this.calendario.fecha['day'];
     this.calendario.hora_inicio=this.calendario.hora_inicio['hour']+':'+this.calendario.hora_inicio['minute']+':'+this.calendario.hora_inicio['second'];
     this.calendario.hora_fin=this.calendario.hora_fin['hour']+':'+this.calendario.hora_fin['minute']+':'+this.calendario.hora_fin['second'];
     this.calendario.id_asignatura=null;
