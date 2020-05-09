@@ -15,6 +15,7 @@ import {FormControl} from '@angular/forms';
 })
 export class RegistroGrupoComponent implements OnInit {
 
+
   public grupo: GrupoReducido;
   public asignaturas : Asignatura[];
   seleccionTipo : string;
@@ -35,6 +36,8 @@ export class RegistroGrupoComponent implements OnInit {
     this.mostrarbien=false;
     this.mostrarmal=false;
     this.mensaje='';
+    this.grupo.hora_inicio={hour:9,minute:0};
+    this.grupo.hora_fin={hour:9,minute:0};
   }
 
   ngOnInit() {
@@ -56,6 +59,8 @@ export class RegistroGrupoComponent implements OnInit {
   }
 
   registrar(){
+    this.grupo.hora_inicio=this.grupo.hora_inicio['hour']+':'+this.grupo.hora_inicio['minute']+':'+this.grupo.hora_inicio['second'];
+    this.grupo.hora_fin=this.grupo.hora_fin['hour']+':'+this.grupo.hora_fin['minute']+':'+this.grupo.hora_fin['second'];
     this.grupo.id_asignatura=window.sessionStorage.getItem('asignatura');
     this.grupo.tipo=this.seleccionTipo;
     this.grupo.dia=this.seleccionDia;

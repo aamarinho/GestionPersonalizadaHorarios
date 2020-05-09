@@ -26,22 +26,20 @@
       <br/>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
-      <label for="horainicio" class="labels ml-2">Hora inicio</label>
-      <br/>
-      <input type="time" name="horainicio" class="col inputs" #horainicio="ngModel" [(ngModel)]="calendario.hora_inicio" required />
+      <label for="horafin" class="labels ml-2">Hora inicio</label>
+      <ngb-timepicker name="horainicio" #horainicio="ngModel" [(ngModel)]="calendario.hora_inicio" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
       La hora de inicio no es válida
-    </span>
+      </span>
 
-      <br/>
 
       <fa-icon [icon]="iconoCalendario"></fa-icon>
       <label for="horafin" class="labels ml-2">Hora fin</label>
-      <br/>
-      <input type="time" name="horafin" class="col inputs" #horafin="ngModel" [(ngModel)]="calendario.hora_fin" required />
+      <ngb-timepicker name="horafin" #horafin="ngModel" [(ngModel)]="calendario.hora_fin" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horafin.touched && !horafin.valid">
       La hora de fin no es válida
-    </span>
+      </span>
+
 
       <br/>
 

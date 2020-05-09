@@ -46,7 +46,6 @@ export class EditarGrupoComponent implements OnInit {
         console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
         for( let a of result){
           this.asignaturas.push(a);
-          console.log(a.id);
         }
       },
       error=>{
@@ -75,8 +74,14 @@ export class EditarGrupoComponent implements OnInit {
         } else if(this.grupo.dia=="Friday"){
           this.seleccionDia=this.dias[4].name;
         }
+
         this.grupo.hora_inicio=result['hora_inicio'];
+        let temp = this.grupo.hora_inicio.split(':');
+        this.grupo.hora_inicio={hour:parseInt(temp[0],10),minute:parseInt(temp[1],10)};
         this.grupo.hora_fin=result['hora_fin'];
+        temp = this.grupo.hora_fin.split(':');
+        this.grupo.hora_fin={hour:parseInt(temp[0],10),minute:parseInt(temp[1],10)};
+
         this.grupo.aula=result['aula'];
         this.nombreasig=result['nombre'];
         console.log(this.grupo);
@@ -88,6 +93,8 @@ export class EditarGrupoComponent implements OnInit {
   }
 
   editarGrupo(){
+    this.grupo.hora_inicio=this.grupo.hora_inicio['hour']+':'+this.grupo.hora_inicio['minute']+':'+this.grupo.hora_inicio['second'];
+    this.grupo.hora_fin=this.grupo.hora_fin['hour']+':'+this.grupo.hora_fin['minute']+':'+this.grupo.hora_fin['second'];
     this.grupo.id_asignatura=window.sessionStorage.getItem('asignatura');
     this.grupo.tipo=this.seleccionTipo;
     this.grupo.dia=this.seleccionDia;

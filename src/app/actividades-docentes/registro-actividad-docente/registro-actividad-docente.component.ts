@@ -27,6 +27,8 @@ export class RegistroActividadDocenteComponent implements OnInit {
     this.mostrarbien=false;
     this.mostrarmal=false;
     this.mensaje='';
+    this.calendario.hora_inicio={hour:9,minute:0};
+    this.calendario.hora_fin={hour:9,minute:0};
   }
 
   ngOnInit() {
@@ -36,6 +38,8 @@ export class RegistroActividadDocenteComponent implements OnInit {
   }
 
   registrar(){
+    this.calendario.hora_inicio=this.calendario.hora_inicio['hour']+':'+this.calendario.hora_inicio['minute']+':'+this.calendario.hora_inicio['second'];
+    this.calendario.hora_fin=this.calendario.hora_fin['hour']+':'+this.calendario.hora_fin['minute']+':'+this.calendario.hora_fin['second'];
     this.calendario.id_asignatura=null;
     this.calendario.id_grupo=window.sessionStorage.getItem('grupo');
     this.calendario.responsable=window.sessionStorage.getItem('email');

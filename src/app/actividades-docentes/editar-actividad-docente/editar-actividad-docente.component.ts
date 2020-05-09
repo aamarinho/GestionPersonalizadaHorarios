@@ -38,8 +38,14 @@ export class EditarActividadDocenteComponent implements OnInit {
         window.sessionStorage.setItem('grupo',result['id_grupo']);
         this.calendario.id_asignatura=result['id_asignatura'];
         this.calendario.fecha=result['fecha'];
+
         this.calendario.hora_inicio=result['hora_inicio'];
+        let temp = this.calendario.hora_inicio.split(':');
+        this.calendario.hora_inicio={hour:parseInt(temp[0],10),minute:parseInt(temp[1],10)};
         this.calendario.hora_fin=result['hora_fin'];
+        temp = this.calendario.hora_fin.split(':');
+        this.calendario.hora_fin={hour:parseInt(temp[0],10),minute:parseInt(temp[1],10)};
+
         this.calendario.responsable=result['responsable'];
         this.calendario.aula=result['aula'];
         console.log(this.calendario);
@@ -51,6 +57,8 @@ export class EditarActividadDocenteComponent implements OnInit {
   }
 
   editar(){
+    this.calendario.hora_inicio=this.calendario.hora_inicio['hour']+':'+this.calendario.hora_inicio['minute']+':'+this.calendario.hora_inicio['second'];
+    this.calendario.hora_fin=this.calendario.hora_fin['hour']+':'+this.calendario.hora_fin['minute']+':'+this.calendario.hora_fin['second'];
     this.calendario.id_asignatura=null;
     this.calendario.id_grupo=window.sessionStorage.getItem('grupo');
     this.calendario.responsable=window.sessionStorage.getItem('email');
