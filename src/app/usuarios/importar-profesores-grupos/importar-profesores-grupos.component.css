@@ -1,0 +1,38 @@
+.titulo{
+  font-size: 1.2em;
+  text-decoration: underline;
+  text-decoration-color: mediumpurple;
+}
+
+input[type="file"]{
+  margin-top: 2%;
+  border-radius: 20px;
+  color:black;
+  font-size:1.2em;
+  background-color: skyblue;
+  opacity: 0.65;
+}
+
+input[type="file"]:hover{
+  background-color: #36b4eb;
+  border:1px solid skyblue;
+  opacity: 0.65;
+}
+
+.botonvolver{
+  margin-top: 2%;
+  border-radius: 20px;
+  font-size:1.2em;
+  background-color: white;
+  color:skyblue;
+  border:1px solid skyblue;
+  opacity: 0.65;
+}
+
+.botonvolver:hover{
+  color:black;
+  background-color: skyblue;
+  opacity: 0.65;
+}
+
+

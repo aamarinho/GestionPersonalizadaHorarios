@@ -1,0 +1,21 @@
+<div class="container">
+
+  <p class="titulo mt-5">
+    Selecciona el archivo excel para importar
+  </p>
+
+  <input class="mt-4" type="file" value="SUBIR" accept=".xls" (change)="onFileChange($event)" />
+  <input class="mt-4 ml-2 botonvolver" type="button" value="VOLVER" (click)="this.router.navigate(['/profesores'])" />
+
+  <br/>
+  <div *ngIf="mostrarbien==true" class="alert alert-success alert-dismissable mt-3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarbien()"><span aria-hidden="true">&times;</span></button>
+    {{mensaje}}
+  </div>
+  <div *ngIf="mostrarmal==true" class="alert alert-danger alert-dismissable mt-3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarmal()"><span aria-hidden="true">&times;</span></button>
+    {{mensaje}}
+  </div>
+
+
+</div>

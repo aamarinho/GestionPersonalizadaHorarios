@@ -80,6 +80,8 @@ export class RegistroGrupoComponent implements OnInit {
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Registrado el grupo reducido correctamente";
+        this.grupo.hora_inicio={hour:9,minute:0};
+        this.grupo.hora_fin={hour:9,minute:0};
         //this.router.navigate(['/gruposreducidos']);
       } , error=>{
         this.mostrarbien=false;

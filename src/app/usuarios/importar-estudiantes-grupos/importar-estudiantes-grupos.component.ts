@@ -146,7 +146,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                           } , error=>{
                                             this.mostrarbien=false;
                                             this.mostrarmal=true;
-                                            this.mensaje="Ocurrió un error registrando los usuarios";
+                                            this.mensaje="Ocurrió un error registrando los estudiantes";
                                             console.log(error);
                                           }
                                         );*/

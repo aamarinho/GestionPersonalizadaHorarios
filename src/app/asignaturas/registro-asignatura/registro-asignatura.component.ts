@@ -40,12 +40,11 @@ export class RegistroAsignaturaComponent implements OnInit {
         console.log("ENTRO PARA OBTENER EL EMAIL DE LOS PROFESORES");
         for( let u of result){
           this.profesores.push(u);
-          console.log(u.email);
+          //console.log(u.email);
         }
         this.seleccionada= this.profesores[0].email;
       },
       error=>{
-        console.log(this.profesores);
         console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
       });
   }
@@ -58,8 +57,8 @@ export class RegistroAsignaturaComponent implements OnInit {
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Registrada la asignatura correctamente";
-        console.log(result);
-        this.router.navigate(['/asignaturas']);
+        //console.log(result);
+        //this.router.navigate(['/asignaturas']);
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;

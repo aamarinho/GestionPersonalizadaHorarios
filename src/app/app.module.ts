@@ -53,6 +53,7 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material';
 import {MatNativeDateModule} from '@angular/material';
+import { ImportarProfesoresGruposComponent } from './usuarios/importar-profesores-grupos/importar-profesores-grupos.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import {MatNativeDateModule} from '@angular/material';
     EditarActividadDocenteComponent,
     MiPerfilComponent,
     ConfiguracionComponent,
+    ImportarProfesoresGruposComponent,
   ],
   imports: [
     BrowserModule,
