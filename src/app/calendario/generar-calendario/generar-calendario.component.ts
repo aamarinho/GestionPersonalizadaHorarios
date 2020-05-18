@@ -62,30 +62,14 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     this.idseventos.splice(0,this.idseventos.length);
     this.grupos.splice(0,this.grupos.length);
     this.gruposMultiCtrl.reset();
-    this.calendarioService.getEventosCalendario().subscribe(
+    this.calendarioService.getGruposSinGenerar().subscribe(
       result=>{
-        console.log(result);
         for(let a of result){
-          this.eventosGenerados.push(a);
-          if(!this.idseventos.includes(a.id_grupo)){
-            this.idseventos.push(a.id_grupo);
-          }
+          this.grupos.push(a);
         }
       },
       error=>{
         console.log(error);
-      });
-
-    this.gruposReducidosService.getGrupos().subscribe(
-      result=>{
-        for(let a of result){
-          if(!this.idseventos.includes(a.id)){
-            this.grupos.push(a);
-          }
-        }
-      },
-      error=>{
-        console.log("DIO ERROR AL OBTENER EVENTOS");
       });
 
 

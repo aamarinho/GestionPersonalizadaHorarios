@@ -97,9 +97,6 @@ export class ImportarProfesoresGruposComponent implements OnInit {
         }
       }
 
-      /*const dataString = JSON.stringify(jsonData);
-      document.getElementById('output').innerHTML = dataString;
-      this.setDownload(dataString);*/
     };
     reader.readAsBinaryString(file);
   }
@@ -114,7 +111,6 @@ export class ImportarProfesoresGruposComponent implements OnInit {
     console.log(this.asignaturasAsignadas);
 
     //en este servicio se va a editar el responsable de todas esas asignaturas, añadir a la tabla usuarioasignatura cada asignatura de cada profesor, y en la tabla usuarioGrupo los grupos de cada profesor
-
     this.usuarioAsignaturaService.registrarAsignaturasProfesor(this.asignaturasAsignadas,email).subscribe(
       result=>{
         console.log("BIEEN ASIGNATURAS GRUPOS Y EDICION RESPONSABLE ASIGNATURAS");

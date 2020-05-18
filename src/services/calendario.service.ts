@@ -38,6 +38,11 @@ export class CalendarioService {
     return this.http.get(this.url+"/getall",{headers, responseType: 'json'});
   }
 
+  getGruposSinGenerar(): Observable<any>{
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get(this.url+"/get/grupos/singenerar",{headers, responseType: 'json'});
+  }
+
   eliminar(id: string): Observable<any>{
     return this.http.delete(this.url+"/eliminar/"+id,{responseType:'text'});
   }
