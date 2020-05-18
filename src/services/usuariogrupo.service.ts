@@ -28,9 +28,9 @@ export class UsuariogrupoService {
     return this.http.get(this.url+"/getgrupos/"+asignatura+'/'+email2,{headers, responseType: 'json'});
   }
 
-  getUsuariosGruposProfesor(asignatura: string): Observable<any> {
+  getUsuariosGruposProfesor(asignatura: string,email:string): Observable<any> {
     let headers = new HttpHeaders().append('Content-Type', 'application/json');
-    return this.http.get(this.url+"/getgrupos/profesor/"+asignatura+'/',{headers, responseType: 'json'});
+    return this.http.get(this.url+"/getgrupos/profesor/"+asignatura+'/'+email,{headers, responseType: 'json'});
   }
 
   registrar(grupos: GrupoReducido[],email:string): Observable<any>{

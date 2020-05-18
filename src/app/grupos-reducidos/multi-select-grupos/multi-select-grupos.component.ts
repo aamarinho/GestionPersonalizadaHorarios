@@ -166,6 +166,10 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     );
   }
 
+  cambiarmal(){
+    this.mostrarmal=false;
+  }
+
   registrar(){
     this.usuarioGrupoService.registrar(this.resultado,window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
@@ -179,8 +183,14 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     );
   }
 
-  cambiarmal(){
-    this.mostrarmal=false;
+  volver(){
+    if(window.sessionStorage.getItem('tipousuario')=='3'){
+      this.router.navigate(['/estudiantes']);
+    } else if(window.sessionStorage.getItem('tipousuario')=='2'){
+      this.router.navigate(['/profesores']);
+    } else{
+      this.router.navigate(['/usuarios']);
+    }
   }
 
 }

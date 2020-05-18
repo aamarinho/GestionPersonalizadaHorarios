@@ -55,7 +55,6 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
         console.log(result);
         for(let a of result){
           this.gruposAsignados.push(a);
-          this.idsgrupos.push(a.id);
         }
         console.log(this.gruposAsignados);
       },
@@ -64,16 +63,14 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
         console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
-    this.usuarioGrupoService.getUsuariosGruposProfesor(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
+    this.usuarioGrupoService.getUsuariosGruposProfesor(window.sessionStorage.getItem('gestionestudiantes'),window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
         console.log(this.idsgrupos);
-        let temp=0;
+        //let temp=0;
         for(let a of result){
-          if(!this.idsgrupos.includes(a.id)){
             this.grupos.push(a);
-          }
-          temp++;
+          //temp++;
         }
       },
       error=>{
@@ -172,4 +169,9 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
       }
     );
   }
+
+  volver(){
+    this.router.navigate(['/estudiantesprofesor']);
+  }
+
 }

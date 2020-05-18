@@ -16,4 +16,12 @@ export class UsuariosComponent implements OnInit {
   ngOnInit() {
   }
 
+  irAEstudiantes(){
+    window.sessionStorage.setItem('tipousuario','3');
+    this.router.navigate(['/estudiantes'])
+  }
+  irAProfesores(){
+    window.sessionStorage.setItem('tipousuario','2');
+    this.router.navigate(['/profesores'])
+  }
 }
