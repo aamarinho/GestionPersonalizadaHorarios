@@ -37,7 +37,7 @@ export class RegistroComponent implements OnInit {
   registrar(){
     this.usuario.tipo=window.sessionStorage.getItem('tipousuario');
     this.usuario.contrasena=this.usuario.nombre;
-    this.usuarioServicio.registrar(this.usuario).subscribe(
+    this.usuarioServicio.registrarIndividial(this.usuario).subscribe(
       result=>{
         console.log("registro sin errores");
         this.mostrarmal=false;
@@ -51,6 +51,7 @@ export class RegistroComponent implements OnInit {
           this.router.navigate(['/usuarios']);
         }*/
       } , error=>{
+        console.log(error);
         this.mostrarbien=false;
         this.mostrarmal=true;
         this.mensaje="Error registrando al usuario";

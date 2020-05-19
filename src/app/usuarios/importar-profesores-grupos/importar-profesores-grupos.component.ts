@@ -19,6 +19,7 @@ export class ImportarProfesoresGruposComponent implements OnInit {
   mensaje:string;
   mostrarbien:boolean;
   mostrarmal:boolean;
+  mostrarinfo:boolean;
 
   constructor(private router : Router, private usuarioAsignaturaService: UsuarioasignaturaService, private asignaturaService:AsignaturaService,private usuarioService:UsuarioService) {
     this.asignaturasAsignadas=new Array<String>();
@@ -26,6 +27,7 @@ export class ImportarProfesoresGruposComponent implements OnInit {
     this.mensaje='';
     this.mostrarbien=false;
     this.mostrarmal=false;
+    this.mostrarinfo=true;
   }
 
   onFileChange(ev) {
@@ -142,6 +144,10 @@ export class ImportarProfesoresGruposComponent implements OnInit {
 
   cambiarmal(){
     this.mostrarmal=false;
+  }
+
+  cambiarinfo(){
+    this.mostrarinfo=false;
   }
 
 }

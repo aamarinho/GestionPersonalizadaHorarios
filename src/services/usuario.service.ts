@@ -52,6 +52,12 @@ export class UsuarioService {
     return this.http.post(this.url+"/registro/",parametros,{headers, responseType: 'json'});
   }
 
+  registrarIndividial(usuario: Usuario): Observable<any>{
+    let parametros = 'usuario='+JSON.stringify(usuario);
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post(this.url+"/registro/individual/",parametros,{headers, responseType: 'json'});
+  }
+
   editar(usuario: Usuario): Observable<any>{
     let parametros = 'usuario='+JSON.stringify(usuario);
     let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
