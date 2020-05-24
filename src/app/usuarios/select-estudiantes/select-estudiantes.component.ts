@@ -82,7 +82,7 @@ export class SelectEstudiantesComponent implements OnInit {
     });
   }
 
-  submit(value){
+  verCalendario(value){ //VER AQUI
     window.sessionStorage.setItem('calendariousuario',value);
     this.router.navigate(['/calendario']);
   }

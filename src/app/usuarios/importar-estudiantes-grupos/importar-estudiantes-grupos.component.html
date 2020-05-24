@@ -8,7 +8,7 @@
     Antes de realizar la importación, asegúrate de tener introducidas las asignaturas y los grupos reducidos sobre los que vas a realizar esa importación.
   </div>
 
-  <input class="mt-4" type="file" value="SUBIR" accept=".xlsx,.xls" (change)="onFileChange($event)" />
+  <input class="mt-4" type="file" value="SUBIR" accept=".xlsx,.xls" (change)="subirFichero($event)" />
   <input class="mt-4 ml-2 botonvolver" type="button" value="VOLVER" (click)="this.router.navigate(['/estudiantes'])" />
 
 <br/>

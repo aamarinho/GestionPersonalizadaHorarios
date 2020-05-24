@@ -78,6 +78,8 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         }
         if(this.grupos.length==0){
           this.mensaje="No hay grupos para seleccionar";
+        } else if(this.grupos.length!=0){
+          this.mensaje="";
         }
       },
       error=>{

@@ -57,7 +57,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     this.mostrarinfo=true;
   }
 
-  onFileChange(ev) {
+  subirFichero(ev) {
 
     let workBook = null;
     let jsonData = null;

@@ -46,7 +46,7 @@ export class ConfiguracionComponent implements OnInit {
     );
   }
 
-  editarPerfil(){
+  editarConfiguracion(){
     this.configuracion.f_inicio_uno=this.configuracion.f_inicio_uno['year']+'/'+this.configuracion.f_inicio_uno['month']+'/'+this.configuracion.f_inicio_uno['day'];
     this.configuracion.f_fin_uno=this.configuracion.f_fin_uno['year']+'/'+this.configuracion.f_fin_uno['month']+'/'+this.configuracion.f_fin_uno['day'];
     this.configuracion.f_inicio_dos=this.configuracion.f_inicio_dos['year']+'/'+this.configuracion.f_inicio_dos['month']+'/'+this.configuracion.f_inicio_dos['day'];

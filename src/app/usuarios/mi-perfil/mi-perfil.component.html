@@ -16,7 +16,7 @@
       <fa-icon [icon]="iconoUsuario"></fa-icon>
       <label for="nombre" class="labels ml-2">Nombre</label>
       <br/>
-      <input type="text" name="nombre" class="col inputs especial" #nombre="ngModel" readonly [(ngModel)]="usuario.nombre" required />
+      <input type="text" name="nombre" class="col inputs" #nombre="ngModel" [(ngModel)]="usuario.nombre" required />
       <span class="validaciones" *ngIf="nombre.touched && !nombre.valid">
       El nombre no es válido
     </span>
@@ -26,7 +26,7 @@
       <fa-icon [icon]="iconoApellidos"></fa-icon>
       <label for="apellidos" class="labels ml-2">Apellidos</label>
       <br/>
-      <input type="text" name="apellidos" class="col inputs especial" #apellidos="ngModel" readonly [(ngModel)]="usuario.apellidos" required />
+      <input type="text" name="apellidos" class="col inputs" #apellidos="ngModel" [(ngModel)]="usuario.apellidos" required />
       <span class="validaciones" *ngIf="apellidos.touched && !apellidos.valid">
       Los apellidos no son válidos
     </span>

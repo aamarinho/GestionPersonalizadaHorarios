@@ -123,7 +123,7 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     }
     // filter the banks
     this.filteredGruposMulti.next(
-      this.grupos.filter(grupo => (grupo.id+" "+grupo.tipo+" "+grupo.id_asignatura).toLowerCase().indexOf(search) > -1)
+      this.grupos.filter(grupo => (grupo.id+" "+grupo.tipo).toLowerCase().indexOf(search) > -1)
     );
   }
 
@@ -152,7 +152,7 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
-        this.mensaje="Ocurrió un error generando el calendario para ese/s grupos";
+        this.mensaje="Ocurrió un error generando el calendario para ese/s grupo/s";
         console.log("error gestionando los grupos");
       }
     );

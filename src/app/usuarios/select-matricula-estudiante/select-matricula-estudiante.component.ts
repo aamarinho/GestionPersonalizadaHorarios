@@ -106,7 +106,7 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
     });
   }
 
-  submit(value){
+  darDeAlta(value){
     this.usuarioAsignaturaService.registrarUsuarioAsignatura(window.sessionStorage.getItem('gestionestudiantes'),value).subscribe(
       result=>{
         console.log("registro sin errores");

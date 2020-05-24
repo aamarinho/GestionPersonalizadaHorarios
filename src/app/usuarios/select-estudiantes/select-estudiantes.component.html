@@ -6,7 +6,7 @@
       <mat-option>
         <ngx-mat-select-search placeholderLabel="Selecciona el estudiante" noEntriesFoundLabel="No se encuentra el estudiante" [formControl]="AsignaturaFilterCtrl"></ngx-mat-select-search>
       </mat-option>
-      <mat-option class="opciones" *ngFor="let estudiante of filteredAsignaturas | async" [value]="estudiante" (click)="submit(estudiante.email)">
+      <mat-option class="opciones" *ngFor="let estudiante of filteredAsignaturas | async" [value]="estudiante" (click)="verCalendario(estudiante.email)">
         {{estudiante.nombre}} {{estudiante.apellidos}}
       </mat-option>
     </mat-select>
