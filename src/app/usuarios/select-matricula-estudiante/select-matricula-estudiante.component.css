@@ -9,3 +9,13 @@
 .opciones{
   font-family: "Century Gothic";
 }
+
+.botonvolver{
+  border-radius: 30px;
+  font-size:1.4em;
+  border:none;
+  color:white;
+  padding-right: 3%;
+  padding-left: 3%;
+  background: linear-gradient(to left, mediumpurple, skyblue);
+}

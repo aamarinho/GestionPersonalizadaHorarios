@@ -40,7 +40,7 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
   }
 
   ngOnInit() {
-    this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
+    /*this.usuarioService.getEstudiantesProfesor(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
       result=>{
         console.log(result);
         for( let p of result){
@@ -52,17 +52,13 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
       error=>{
         console.log(error);
         console.log("DIO ERROR AL OBTENER LOS USUARIOS TODOS");
-      });
+      });*/
 
-    this.usuarioService.getEstudiantes().subscribe(
+    this.usuarioService.getEstudiantesParaMatricular(window.sessionStorage.getItem('gestionestudiantes')).subscribe(
       result=>{
         console.log(result);
         for( let p of result){
-          if(!this.idsUsuarios.includes(p.email)){
-            if(!this.usuariosRegistrados.includes(p)){
-              this.usuarios.push(p);
-            }
-          }
+          this.usuarios.push(p);
         }
       },
       error=>{
@@ -117,6 +113,10 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
     this.filteredEstudiantes.next(
       this.usuarios.filter(usuario => (usuario.nombre+" "+usuario.apellidos).toLowerCase().indexOf(search) > -1)
     );
+  }
+
+  volver(){
+    this.router.navigate(['/estudiantesprofesor']);
   }
 
 

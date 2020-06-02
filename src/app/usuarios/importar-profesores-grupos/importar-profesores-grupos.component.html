@@ -6,8 +6,10 @@
 
   <div *ngIf="mostrarinfo==true" class="alert alert-warning alert-dismissable mt-3" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarinfo()"><span aria-hidden="true">&times;</span></button>
-    Antes de realizar la importación, asegúrate de tener introducidas las asignaturas y los grupos reducidos sobre los que vas a realizar esa importación.
+    Antes de realizar la importación, asegúrate de tener introducidas las asignaturas y los grupos reducidos sobre los que vas a realizar esa importación. Fíjate bien en la siguiente imagen, pues el fichero a subir debe seguir este formato.
   </div>
+  <img src="../assets/formatoprofes.PNG" alt="formato del excel" height="343" width="356.5" />
+  <br/>
   <label for="subirarchivo">SUBIR ARCHIVO</label>
   <input class="mt-4" type="file" value="SUBIR" id="subirarchivo" accept=".xlsx,.xls" (change)="subirFichero($event)" />
   <input class="mt-4 ml-2 botonvolver" type="button" value="VOLVER" (click)="this.router.navigate(['/profesores'])" />

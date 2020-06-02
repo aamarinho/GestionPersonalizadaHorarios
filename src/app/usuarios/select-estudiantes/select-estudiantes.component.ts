@@ -88,5 +88,9 @@ export class SelectEstudiantesComponent implements OnInit {
     );
   }
 
+  volver(){
+    this.router.navigate(['/menucalendario']);
+  }
+
 
 }
