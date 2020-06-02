@@ -2,11 +2,11 @@
 <fa-icon [icon]="icono"></fa-icon>
 <label for="email" class="label ml-2">Grupo reducido</label>
 <mat-form-field class="select">
-  <mat-select class="opciones" [formControl]="asignaturaCtrl" #singleSelect>
+  <mat-select class="opciones" [formControl]="grupoCtrl" #singleSelect>
     <mat-option>
-      <ngx-mat-select-search placeholderLabel="Selecciona el grupo" noEntriesFoundLabel="No se encuentra el grupo" [formControl]="AsignaturaFilterCtrl"></ngx-mat-select-search>
+      <ngx-mat-select-search placeholderLabel="Selecciona el grupo" noEntriesFoundLabel="No se encuentra el grupo" [formControl]="grupoFilterCtrl"></ngx-mat-select-search>
     </mat-option>
-    <mat-option class="opciones" *ngFor="let grupo of filteredAsignaturas | async" [value]="grupo" (click)="submit(grupo.id)">
+    <mat-option class="opciones" *ngFor="let grupo of filteredGrupos | async" [value]="grupo" (click)="submit(grupo.id)">
       {{grupo.id}}
     </mat-option>
   </mat-select>

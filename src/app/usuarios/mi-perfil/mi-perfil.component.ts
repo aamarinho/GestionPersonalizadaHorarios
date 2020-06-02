@@ -48,6 +48,7 @@ export class MiPerfilComponent implements OnInit {
 
   editarPerfil(){
     this.usuario.tipo=window.sessionStorage.getItem('tipo');
+    window.sessionStorage.setItem('nombre',this.usuario.nombre);
     this.usuarioServicio.editar(this.usuario).subscribe(
       result=>{
         this.mostrarmal=false;

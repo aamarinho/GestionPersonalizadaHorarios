@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Asignatura} from '../../../models/Asignatura';
 import {Usuario} from '../../../models/Usuario';
-import {faCalendarDay, faEnvelope, faIdCard, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarDay, faEnvelope, faIdCard, faList, faPaperclip, faUser} from '@fortawesome/free-solid-svg-icons';
 import {AsignaturaService} from '../../../services/asignatura.service';
 import {Router} from '@angular/router';
 import {UsuarioService} from '../../../services/usuario.service';
@@ -19,6 +19,8 @@ export class EditarAsignaturaComponent implements OnInit {
   iconoUsuario = faUser;
   iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
+  iconolista=faList;
+  iconoClip=faPaperclip;
   public nombreu : string;
   public apellidos : string;
   public mostrarbien:boolean;

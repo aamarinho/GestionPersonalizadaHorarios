@@ -1,11 +1,11 @@
 <fa-icon [icon]="icono"></fa-icon>
 <label for="email" class="label ml-2">Responsable</label>
 <mat-form-field class="select">
-  <mat-select class="opciones" [formControl]="asignaturaCtrl" #singleSelect>
+  <mat-select class="opciones" [formControl]="usuariosCtrl" #singleSelect>
     <mat-option>
-      <ngx-mat-select-search placeholderLabel="Selecciona el profesor" noEntriesFoundLabel="No se encuentra el profesor" [formControl]="AsignaturaFilterCtrl"></ngx-mat-select-search>
+      <ngx-mat-select-search placeholderLabel="Selecciona el profesor" noEntriesFoundLabel="No se encuentra el profesor" [formControl]="usuarioFilterCtrl"></ngx-mat-select-search>
     </mat-option>
-    <mat-option class="opciones" *ngFor="let profesor of filteredAsignaturas | async" [value]="profesor" (click)="submit(profesor.email)">
+    <mat-option class="opciones" *ngFor="let profesor of filteredUsuarios | async" [value]="profesor" (click)="submit(profesor.email)">
       {{profesor.nombre}} {{profesor.apellidos}}
     </mat-option>
   </mat-select>

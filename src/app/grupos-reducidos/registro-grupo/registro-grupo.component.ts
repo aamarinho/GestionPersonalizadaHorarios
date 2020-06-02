@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Asignatura} from '../../../models/Asignatura';
-import {faCalendarDay, faEnvelope, faIdCard, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarDay, faIdCard,faLaptop,faClock,faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {AsignaturaService} from '../../../services/asignatura.service';
 import {Router} from '@angular/router';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
@@ -24,6 +24,9 @@ export class RegistroGrupoComponent implements OnInit {
   public tipos = [{ name: 'Practica' }, { name: 'Teorica' }];
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  iconoOrdenador = faLaptop;
+  iconoReloj=faClock;
+  iconoSitio=faMapMarkerAlt;
   public mostrarbien:boolean;
   public mostrarmal:boolean;
   public mensaje:string;

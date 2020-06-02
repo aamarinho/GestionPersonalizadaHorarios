@@ -15,7 +15,7 @@
       <br/>
       <app-select-asignaturas></app-select-asignaturas>
 
-      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <fa-icon [icon]="iconoOrdenador"></fa-icon>
       <label for="email" class="labels ml-2">Tipo</label>
       <mat-form-field class="select">
         <mat-select class="opciones" name="seleccionTipo" [(ngModel)]="seleccionTipo">
@@ -25,7 +25,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <fa-icon [icon]="iconoCalendario"></fa-icon>
       <label for="email" class="labels ml-2">Día</label>
       <mat-form-field class="select">
         <mat-select class="opciones" name="seleccionDia" [(ngModel)]="seleccionDia">
@@ -36,14 +36,14 @@
       <br/>
 
 
-      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <fa-icon [icon]="iconoReloj"></fa-icon>
       <label for="horafin" class="labels ml-2">Hora inicio</label>
       <ngb-timepicker name="horainicio" #horainicio="ngModel" [(ngModel)]="grupo.hora_inicio" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
       La hora de inicio no es válida
       </span>
 
-      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <fa-icon [icon]="iconoReloj"></fa-icon>
       <label for="horafin" class="labels ml-2">Hora fin</label>
       <ngb-timepicker name="horafin" #horafin="ngModel" [(ngModel)]="grupo.hora_fin" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horafin.touched && !horafin.valid">
@@ -53,7 +53,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <fa-icon [icon]="iconoSitio"></fa-icon>
       <label for="nombre" class="labels ml-2">Aula</label>
       <br/>
       <input type="text" name="nombre" class="col inputs" #aula="ngModel" [(ngModel)]="grupo.aula" required />

@@ -24,18 +24,14 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
   public a : UsuarioAsignatura;
   iconoLibro = faBook;
 
-  /** control for the selected bank for multi-selection */
   public asignaturasMultiCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword multi-selection */
   public asignaturasMultiFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
   public filteredAsignaturasMulti: ReplaySubject<Asignatura[]> = new ReplaySubject<Asignatura[]>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -76,12 +72,11 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
 
     this.filteredAsignaturasMulti.next(this.asignaturas);
 
-    //this.bankMultiCtrl.setValue(this.asignaturas);
     // listen for search field value changes
     this.asignaturasMultiFilterCtrl.valueChanges
       .pipe()
       .subscribe(() => {
-        this.filterBanksMulti();
+        this.filterAsignaturasMulti();
       });
   }
 
@@ -94,23 +89,15 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
     this.filteredAsignaturasMulti
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
         this.multiSelect.compareWith = (a: Asignatura, b: Asignatura) => a && b && a.id === b.id;
       });
   }
 
-  protected filterBanksMulti() {
+  protected filterAsignaturasMulti() {
     if (!this.asignaturas) {
       return;
     }
@@ -122,7 +109,6 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
     this.filteredAsignaturasMulti.next(
       this.asignaturas.filter(asignatura => (asignatura.id+" "+asignatura.nombre+" "+asignatura.curso).toLowerCase().indexOf(search) > -1)
     );

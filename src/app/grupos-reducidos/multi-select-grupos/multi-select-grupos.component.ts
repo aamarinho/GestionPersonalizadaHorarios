@@ -26,18 +26,14 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
   public mostrarmal:boolean;
   public mensajeerror:string;
 
-  /** control for the selected bank for multi-selection */
   public gruposMultiCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword multi-selection */
   public gruposMultiFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
   public filteredGruposMulti: ReplaySubject<GrupoReducido[]> = new ReplaySubject<GrupoReducido[]>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -89,12 +85,11 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
 
     this.filteredGruposMulti.next(this.grupos);
 
-    //this.bankMultiCtrl.setValue(this.asignaturas);
     // listen for search field value changes
     this.gruposMultiFilterCtrl.valueChanges
       .pipe()
       .subscribe(() => {
-        this.filterBanksMulti();
+        this.filterGruposMulti();
       });
   }
 
@@ -107,23 +102,15 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
     this.filteredGruposMulti
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
         this.multiSelect.compareWith = (a: GrupoReducido, b: GrupoReducido) => a && b && a.id === b.id;
       });
   }
 
-  protected filterBanksMulti() {
+  protected filterGruposMulti() {
     if (!this.grupos) {
       return;
     }
@@ -135,7 +122,6 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
     this.filteredGruposMulti.next(
     this.grupos.filter(grupo => (grupo.id+" "+grupo.tipo+" "+grupo.id_asignatura).toLowerCase().indexOf(search) > -1)
     );

@@ -4,7 +4,7 @@
     <form name="formRegistroAsignatura" #formRegistroAsignatura="ngForm" (ngSubmit)="editarAsignatura()" class="form-registro" >
 
       <h4 class="mt-4 mb-4 titulo">EDITAR {{idasignatura}}</h4>
-      <fa-icon [icon]="iconoUsuario"></fa-icon>
+      <fa-icon [icon]="iconolista"></fa-icon>
       <label for="abreviatura" class="labels ml-2">Abreviatura</label>
       <br/>
       <input type="text" name="abreviatura" class="col inputs especial" #abreviatura="ngModel" [(ngModel)]="asignatura.id" required readonly />
@@ -27,7 +27,7 @@
       <app-select-usuarios></app-select-usuarios>
       <p>{{nombreu}}, {{apellidos}}</p>
 
-      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <fa-icon [icon]="iconoClip"></fa-icon>
       <label for="curso" class="labels ml-2">Curso</label>
       <br/>
       <input type="text" name="curso" class="col inputs" #curso="ngModel" [(ngModel)]="asignatura.curso" required />
@@ -37,7 +37,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoEmail"></fa-icon>
+      <fa-icon [icon]="iconoClip"></fa-icon>
       <label for="cuatrimestre" class="labels ml-2">Cuatrimestre</label>
       <br/>
       <input type="text" name="cuatrimestre" class="col inputs" #cuatrimestre="ngModel" [(ngModel)]="asignatura.cuatrimestre" required />

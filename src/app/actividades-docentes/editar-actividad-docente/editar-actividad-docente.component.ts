@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Calendario} from '../../../models/Calendario';
-import {faCalendarDay, faIdCard} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarDay, faClock, faIdCard, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CalendarioService} from '../../../services/calendario.service';
 import {Router} from '@angular/router';
 
@@ -14,6 +14,8 @@ export class EditarActividadDocenteComponent implements OnInit {
   public calendario: Calendario;
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  iconoReloj = faClock;
+  iconoSitio = faMapMarkerAlt;
   mostrarbien:boolean;
   mostrarmal:boolean;
   mensaje:string;

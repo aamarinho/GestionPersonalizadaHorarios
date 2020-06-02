@@ -22,18 +22,14 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
   public usuariosRegistrados:Usuario[];
   public idsUsuarios:String[];
 
-  /** control for the selected asignatura */
-  public asignaturaCtrl: FormControl = new FormControl();
+  public estudiantesCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword */
-  public AsignaturaFilterCtrl: FormControl = new FormControl();
+  public estudianteFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
-  public filteredAsignaturas: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
+  public filteredEstudiantes: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -73,14 +69,10 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
         console.log(error);
         console.log("DIO ERROR AL OBTENER LOS USUARIOS TODOS");
       });
-    // set initial selection
-    //this.bankCtrl.setValue(this.asignaturas[10]);
-
-    // load the initial bank list
-    this.filteredAsignaturas.next(this.usuarios);
+    this.filteredEstudiantes.next(this.usuarios);
 
     // listen for search field value changes
-    this.AsignaturaFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterAsignaturas();});
+    this.estudianteFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterEstudiantes();});
   }
 
   ngAfterViewInit() {
@@ -92,16 +84,8 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
-    this.filteredAsignaturas.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
-      // setting the compareWith property to a comparison function
-      // triggers initializing the selection according to the initial value of
-      // the form control (i.e. _initializeSelection())
-      // this needs to be done after the filteredBanks are loaded initially
-      // and after the mat-option elements are available
+    this.filteredEstudiantes.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
       this.singleSelect.compareWith = (a: Usuario, b: Usuario) => a && b && a.email === b.email;
     });
   }
@@ -118,20 +102,19 @@ export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,
     this.router.navigate(['/estudiantesprofesor']);
   }
 
-  protected filterAsignaturas() {
+  protected filterEstudiantes() {
     if (!this.usuarios) {
       return;
     }
     // get the search keyword
-    let search = this.AsignaturaFilterCtrl.value;
+    let search = this.estudianteFilterCtrl.value;
     if (!search) {
-      this.filteredAsignaturas.next(this.usuarios.slice());
+      this.filteredEstudiantes.next(this.usuarios.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
-    this.filteredAsignaturas.next(
+    this.filteredEstudiantes.next(
       this.usuarios.filter(usuario => (usuario.nombre+" "+usuario.apellidos).toLowerCase().indexOf(search) > -1)
     );
   }

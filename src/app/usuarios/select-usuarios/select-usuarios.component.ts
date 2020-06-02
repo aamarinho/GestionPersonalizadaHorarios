@@ -19,18 +19,14 @@ export class SelectUsuariosComponent implements OnInit {
   public usuarios: Usuario[];
   icono = faUser;
 
-  /** control for the selected asignatura */
-  public asignaturaCtrl: FormControl = new FormControl();
+  public usuariosCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword */
-  public AsignaturaFilterCtrl: FormControl = new FormControl();
+  public usuarioFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
-  public filteredAsignaturas: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
+  public filteredUsuarios: ReplaySubject<Usuario[]> = new ReplaySubject<Usuario[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -52,14 +48,10 @@ export class SelectUsuariosComponent implements OnInit {
         console.log(this.usuarios);
         console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
       });
-    // set initial selection
-    //this.bankCtrl.setValue(this.asignaturas[10]);
-
-    // load the initial bank list
-    this.filteredAsignaturas.next(this.usuarios);
+    this.filteredUsuarios.next(this.usuarios);
 
     // listen for search field value changes
-    this.AsignaturaFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterAsignaturas();});
+    this.usuarioFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterUsuarios();});
   }
 
   ngAfterViewInit() {
@@ -71,16 +63,8 @@ export class SelectUsuariosComponent implements OnInit {
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
-    this.filteredAsignaturas.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
-      // setting the compareWith property to a comparison function
-      // triggers initializing the selection according to the initial value of
-      // the form control (i.e. _initializeSelection())
-      // this needs to be done after the filteredBanks are loaded initially
-      // and after the mat-option elements are available
+    this.filteredUsuarios.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
       this.singleSelect.compareWith = (a: Usuario, b: Usuario) => a && b && a.email === b.email;
     });
   }
@@ -89,20 +73,19 @@ export class SelectUsuariosComponent implements OnInit {
     window.sessionStorage.setItem('usuario',value);
   }
 
-  protected filterAsignaturas() {
+  protected filterUsuarios() {
     if (!this.usuarios) {
       return;
     }
     // get the search keyword
-    let search = this.AsignaturaFilterCtrl.value;
+    let search = this.usuarioFilterCtrl.value;
     if (!search) {
-      this.filteredAsignaturas.next(this.usuarios.slice());
+      this.filteredUsuarios.next(this.usuarios.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
-    this.filteredAsignaturas.next(
+    this.filteredUsuarios.next(
       this.usuarios.filter(usuario => (usuario.nombre+" "+usuario.apellidos).toLowerCase().indexOf(search) > -1)
     );
   }

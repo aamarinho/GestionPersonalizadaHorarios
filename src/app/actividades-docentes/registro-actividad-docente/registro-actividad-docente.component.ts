@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GrupoReducido} from '../../../models/GrupoReducido';
 import {Asignatura} from '../../../models/Asignatura';
-import {faCalendarDay, faIdCard} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarDay, faIdCard,faClock,faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
 import {Router} from '@angular/router';
 import {AsignaturaService} from '../../../services/asignatura.service';
@@ -18,6 +18,8 @@ export class RegistroActividadDocenteComponent implements OnInit {
   public calendario: Calendario;
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  iconoReloj = faClock;
+  iconoSitio = faMapMarkerAlt;
   mostrarbien:boolean;
   mostrarmal:boolean;
   mensaje:string;

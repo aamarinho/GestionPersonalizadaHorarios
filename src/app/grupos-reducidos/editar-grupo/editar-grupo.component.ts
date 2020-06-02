@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GrupoReducido} from '../../../models/GrupoReducido';
 import {Asignatura} from '../../../models/Asignatura';
-import {faCalendarDay, faIdCard} from '@fortawesome/free-solid-svg-icons';
+import {faCalendarDay, faClock, faIdCard, faLaptop, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
 import {Router} from '@angular/router';
 import {AsignaturaService} from '../../../services/asignatura.service';
@@ -22,6 +22,9 @@ export class EditarGrupoComponent implements OnInit {
   public tipos = [{ name: 'Practica' }, { name: 'Teorica' }];
   iconoCalendario = faCalendarDay;
   iconoApellidos = faIdCard;
+  iconoOrdenador = faLaptop;
+  iconoReloj=faClock;
+  iconoSitio=faMapMarkerAlt;
   public nombreasig : string;
   public mostrarbien:boolean;
   public mostrarmal:boolean;

@@ -22,7 +22,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <fa-icon [icon]="iconoReloj"></fa-icon>
       <label for="horafin" class="labels ml-2">Hora inicio</label>
       <ngb-timepicker name="horainicio" #horainicio="ngModel" [(ngModel)]="calendario.hora_inicio" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horainicio.touched && !horainicio.valid">
@@ -30,7 +30,7 @@
       </span>
 
 
-      <fa-icon [icon]="iconoCalendario"></fa-icon>
+      <fa-icon [icon]="iconoReloj"></fa-icon>
       <label for="horafin" class="labels ml-2">Hora fin</label>
       <ngb-timepicker name="horafin" #horafin="ngModel" [(ngModel)]="calendario.hora_fin" [minuteStep]="30"></ngb-timepicker>
       <span class="validaciones" *ngIf="horafin.touched && !horafin.valid">
@@ -40,7 +40,7 @@
 
       <br/>
 
-      <fa-icon [icon]="iconoApellidos"></fa-icon>
+      <fa-icon [icon]="iconoSitio"></fa-icon>
       <label for="nombre" class="labels ml-2">Aula</label>
       <br/>
       <input type="text" name="aula" class="col inputs" #aula="ngModel" [(ngModel)]="calendario.aula" required />

@@ -69,9 +69,9 @@ export class RegistroComponent implements OnInit {
   }
 
   volver(){
-    if(this.usuario.tipo==2){
+    if(window.sessionStorage.getItem('tipousuario')=='2'){
       this.router.navigate(['/profesores']);
-    } else if(this.usuario.tipo==3){
+    } else if(window.sessionStorage.getItem('tipousuario')=='3'){
       this.router.navigate(['/estudiantes']);
     } else{
       this.router.navigate(['/usuarios']);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faCalendarDay, faEnvelope, faIdCard, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faList, faEnvelope, faIdCard, faUser, faPaperclip} from '@fortawesome/free-solid-svg-icons';
 import {UsuarioService} from '../../../services/usuario.service';
 import {Router} from '@angular/router';
 import {Asignatura} from '../../../models/Asignatura';
@@ -17,8 +17,9 @@ export class RegistroAsignaturaComponent implements OnInit {
   public profesores : Usuario[];
   seleccionada:string;
   iconoUsuario = faUser;
-  iconoEmail = faEnvelope;
   iconoApellidos = faIdCard;
+  iconolista=faList;
+  iconoClip=faPaperclip;
   mostrarbien:boolean;
   mostrarmal:boolean;
   mensaje:string;

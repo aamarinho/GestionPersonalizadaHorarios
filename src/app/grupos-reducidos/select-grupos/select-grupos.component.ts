@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Asignatura} from '../../../models/Asignatura';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {faUsers} from '@fortawesome/free-solid-svg-icons';
 import {FormControl} from '@angular/forms';
 import {ReplaySubject, Subject} from 'rxjs';
 import {MatSelect} from '@angular/material';
@@ -18,20 +18,16 @@ import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 export class SelectGruposComponent implements OnInit {
 
   public grupos: UsuarioGrupo[];
-  icono = faUser;
+  icono = faUsers;
 
-  /** control for the selected asignatura */
-  public asignaturaCtrl: FormControl = new FormControl();
+  public grupoCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword */
-  public AsignaturaFilterCtrl: FormControl = new FormControl();
+  public grupoFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
-  public filteredAsignaturas: ReplaySubject<UsuarioGrupo[]> = new ReplaySubject<UsuarioGrupo[]>(1);
+  public filteredGrupos: ReplaySubject<UsuarioGrupo[]> = new ReplaySubject<UsuarioGrupo[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -52,14 +48,10 @@ export class SelectGruposComponent implements OnInit {
         console.log(error);
         console.log("DIO ERROR AL OBTENER LOS GRUPOS QUE EL TIENE");
       });
-    // set initial selection
-    //this.bankCtrl.setValue(this.asignaturas[10]);
-
-    // load the initial bank list
-    this.filteredAsignaturas.next(this.grupos);
+    this.filteredGrupos.next(this.grupos);
 
     // listen for search field value changes
-    this.AsignaturaFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterAsignaturas();});
+    this.grupoFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterGrupos();});
   }
 
   ngAfterViewInit() {
@@ -71,16 +63,8 @@ export class SelectGruposComponent implements OnInit {
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
-    this.filteredAsignaturas.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
-      // setting the compareWith property to a comparison function
-      // triggers initializing the selection according to the initial value of
-      // the form control (i.e. _initializeSelection())
-      // this needs to be done after the filteredBanks are loaded initially
-      // and after the mat-option elements are available
+    this.filteredGrupos.pipe(take(1), takeUntil(this._onDestroy)).subscribe(() => {
       this.singleSelect.compareWith = (a: UsuarioGrupo, b: UsuarioGrupo) => a && b && a.id === b.id;
     });
   }
@@ -89,20 +73,19 @@ export class SelectGruposComponent implements OnInit {
     window.sessionStorage.setItem('grupo',value);
   }
 
-  protected filterAsignaturas() {
+  protected filterGrupos() {
     if (!this.grupos) {
       return;
     }
     // get the search keyword
-    let search = this.AsignaturaFilterCtrl.value;
+    let search = this.grupoFilterCtrl.value;
     if (!search) {
-      this.filteredAsignaturas.next(this.grupos.slice());
+      this.filteredGrupos.next(this.grupos.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
-    this.filteredAsignaturas.next(
+    this.filteredGrupos.next(
       this.grupos.filter(grupo => grupo.id.toLowerCase().indexOf(search) > -1)
     );
   }

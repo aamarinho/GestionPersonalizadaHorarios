@@ -113,7 +113,7 @@ export class ImportarProfesoresGruposComponent implements OnInit {
     console.log(this.asignaturasAsignadas);
 
     //en este servicio se va a editar el responsable de todas esas asignaturas, añadir a la tabla usuarioasignatura cada asignatura de cada profesor, y en la tabla usuarioGrupo los grupos de cada profesor
-    this.usuarioAsignaturaService.registrarAsignaturasProfesor(this.asignaturasAsignadas,email).subscribe(
+    /*this.usuarioAsignaturaService.registrarAsignaturasProfesor(this.asignaturasAsignadas,email).subscribe(
       result=>{
         console.log("BIEEN ASIGNATURAS GRUPOS Y EDICION RESPONSABLE ASIGNATURAS");
       } , error=>{
@@ -122,7 +122,7 @@ export class ImportarProfesoresGruposComponent implements OnInit {
         this.mensaje="Ocurrió un error registrando las asignaturas y los grupos";
         console.log(error);
       }
-    );
+    );*/
 
 
 
