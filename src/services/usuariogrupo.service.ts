@@ -14,17 +14,20 @@ export class UsuariogrupoService {
   }
 
   getUsuariosGrupos(email: string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get/"+email,{headers, responseType: 'json'});
   }
 
   getUsuariosGruposSinAsignados(email: string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get/sinasignados/"+email,{headers, responseType: 'json'});
   }
 
   getUsuariosGruposEstudiante(asignatura: string,email2:string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/getgrupos/"+asignatura+'/'+email2,{headers, responseType: 'json'});
   }
 

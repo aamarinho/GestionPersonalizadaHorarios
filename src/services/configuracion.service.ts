@@ -16,13 +16,15 @@ export class ConfiguracionService {
   }
 
   getConfiguracion() {
-    let headers = new HttpHeaders().append('Content-Type','application/json');
+    let headers = new HttpHeaders().append('Content-Type','application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get", {headers,responseType:'json'});
   }
 
   editar(configuracion: Configuracion): Observable<any>{
     let parametros = 'configuracion='+JSON.stringify(configuracion);
-    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.post(this.url+"/editar",parametros,{headers, responseType: 'json'});
   }
 }

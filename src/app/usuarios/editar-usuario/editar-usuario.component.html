@@ -2,8 +2,8 @@
 <div class="container registro">
   <div class="vl">
     <form #formRegistroEstudiante="ngForm" (ngSubmit)="editarUsuario()" class="form-registro-estudiante" >
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==3">EDITAR A UN ESTUDIANTE</h4>
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==2">EDITAR A UN PROFESOR</h4>
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo=='3'">EDITAR A UN ESTUDIANTE</h4>
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo=='2'">EDITAR A UN PROFESOR</h4>
 
       <fa-icon [icon]="iconoEmail"></fa-icon>
       <label for="email" class="labels ml-2">Email</label>

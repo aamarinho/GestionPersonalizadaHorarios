@@ -22,44 +22,52 @@ export class UsuarioService {
   }
 
   getEstudiantes(): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');//añade a la peticion HTTP la cabecera 'Content-Type' junto con su contenido (que va a ser tipo json)
-    return this.http.get(this.url+"/estudiantes/",{headers, responseType: 'json'}); //devuelve un observable (es lo que conecta con el map de UsuarioRest)
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
+    return this.http.get(this.url+"/estudiantes/",{headers, responseType: 'json'});
   }
 
   getProfesores(): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/profesores/",{headers, responseType: 'json'});
   }
 
   getUsuarios(): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/usuarios/",{headers, responseType: 'json'});
   }
 
   getEstudiantesProfesor(asignatura:string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get/estudiantes/"+asignatura+'/',{headers, responseType: 'json'});
   }
 
   getEstudiantesProfesorByEmail(email:string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get/estudiantes/profesor/"+email+'/',{headers, responseType: 'json'});
   }
 
   getEstudiantesParaMatricular(asignatura:string): Observable<any>{
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/get/estudiantes/paramatricular/"+asignatura+'/',{headers, responseType: 'json'});
   }
 
   registrar(usuario: Usuario): Observable<any>{
     let parametros = 'usuario='+JSON.stringify(usuario);
-    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.post(this.url+"/registro/",parametros,{headers, responseType: 'json'});
   }
 
   registrarIndividial(usuario: Usuario): Observable<any>{
     let parametros = 'usuario='+JSON.stringify(usuario);
-    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.post(this.url+"/registro/individual/",parametros,{headers, responseType: 'json'});
   }
 
@@ -70,7 +78,8 @@ export class UsuarioService {
   }
 
   eliminar(email: string): Observable<any>{
-    return this.http.delete(this.url+"/eliminar/"+email,{responseType:'text'});
+    let headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
+    return this.http.delete(this.url+"/eliminar/"+email,{headers,responseType:'text'});
   }
 
   getUsuario(email: string) {
