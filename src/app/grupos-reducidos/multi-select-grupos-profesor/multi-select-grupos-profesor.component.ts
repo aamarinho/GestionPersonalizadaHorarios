@@ -17,6 +17,10 @@ import {take, takeUntil} from 'rxjs/operators';
 })
 export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  /**
+   * los métodos y variables usadas en este componente son exactamente iguales que los descritos
+   * en el multi select de asignaturas
+   */
   public grupos : GrupoReducido[];
   public resultado : GrupoReducido[];
   public gruposAsignados : UsuarioGrupo[];
@@ -25,7 +29,6 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
 
   public gruposMultiCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword multi-selection */
   public gruposMultiFilterCtrl: FormControl = new FormControl();
 
   public filteredGruposMulti: ReplaySubject<GrupoReducido[]> = new ReplaySubject<GrupoReducido[]>(1);
@@ -33,7 +36,6 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
   protected _onDestroy = new Subject<void>();
-
 
   constructor(private gruposReducidosService : GruposreducidosService, private usuarioGrupoService :UsuariogrupoService, private router: Router) {
     this.grupos=new Array<GrupoReducido>();
@@ -49,34 +51,25 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
     this.gruposMultiCtrl.reset();
     this.usuarioGrupoService.getUsuariosGruposEstudiante(window.sessionStorage.getItem('gestionestudiantes'),window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
-        console.log(result);
         for(let a of result){
           this.gruposAsignados.push(a);
         }
-        console.log(this.gruposAsignados);
       },
       error=>{
         console.log(error);
-        console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
     this.usuarioGrupoService.getUsuariosGruposProfesor(window.sessionStorage.getItem('gestionestudiantes'),window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
-        console.log(this.idsgrupos);
-        //let temp=0;
         for(let a of result){
             this.grupos.push(a);
-          //temp++;
         }
       },
       error=>{
-        console.log("DIO ERROR AL OBTENER LOS GRUPOS");
+        console.log(error);
       });
 
-
     this.filteredGruposMulti.next(this.grupos);
-
 
     this.gruposMultiFilterCtrl.valueChanges
       .pipe()
@@ -106,7 +99,6 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
     if (!this.grupos) {
       return;
     }
-    // get the search keyword
     let search = this.gruposMultiFilterCtrl.value;
     if (!search) {
       this.filteredGruposMulti.next(this.grupos.slice());
@@ -137,11 +129,8 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
     this.usuarioGrupoService.eliminar(value,window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log(result);
-        console.log("Eliminado el grupo de ese usuario correctamente");
       } , error=>{
         console.log(error);
-        console.log("Error eliminando el grupo de ese ususario");
       }
     );
   }
@@ -150,9 +139,8 @@ export class MultiSelectGruposProfesorComponent implements OnInit,AfterViewInit,
     this.usuarioGrupoService.registrar(this.resultado,window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log("gestionados los grupos correctamente");
       } , error=>{
-        console.log("error gestionando los grupos");
+        console.log(error);
       }
     );
   }

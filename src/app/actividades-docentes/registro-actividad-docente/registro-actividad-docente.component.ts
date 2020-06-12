@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {GrupoReducido} from '../../../models/GrupoReducido';
-import {Asignatura} from '../../../models/Asignatura';
 import {faCalendarDay, faIdCard,faClock,faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {GruposreducidosService} from '../../../services/gruposreducidos.service';
 import {Router} from '@angular/router';
-import {AsignaturaService} from '../../../services/asignatura.service';
 import {Calendario} from '../../../models/Calendario';
 import {CalendarioService} from '../../../services/calendario.service';
 
@@ -15,15 +11,45 @@ import {CalendarioService} from '../../../services/calendario.service';
 })
 export class RegistroActividadDocenteComponent implements OnInit {
 
+  /**
+   * objeto calendario que va a ser editado en la vista
+   */
   public calendario: Calendario;
+  /**
+   * icono del calendario para mostrar en el formulario
+   */
   iconoCalendario = faCalendarDay;
-  iconoApellidos = faIdCard;
+  /**
+   * icono idcard para mostrar en el formulario
+   */
+  iconoCard = faIdCard;
+  /**
+   * icono reloj para mostrar en el formulario
+   */
   iconoReloj = faClock;
+  /**
+   * icono localizador de un sitio para mostrar en el formulario
+   */
   iconoSitio = faMapMarkerAlt;
+  /**
+   * booleano usado para mostrar o no la caja verde de funcionamiento correcto
+   */
   mostrarbien:boolean;
+  /**
+   * booleano usado para mostrar o no la caja roja de funcionamiento incorrecto
+   */
   mostrarmal:boolean;
+  /**
+   * mensaje mostrado en las cajas de correcto funcionamiento o incorrecto funcionamiento
+   */
   mensaje:string;
 
+  /**
+   * constructor usado para instanciar objetos de esta clase pasándole un objeto de la clase CalendarioService y el router
+   * para redireccionar a otra vista
+   * @param calendarioService
+   * @param router
+   */
   constructor(private calendarioService : CalendarioService, private router:Router) {
     this.calendario=new Calendario('','','','','','','','','');
     this.mostrarbien=false;
@@ -33,12 +59,20 @@ export class RegistroActividadDocenteComponent implements OnInit {
     this.calendario.hora_fin={hour:9,minute:0};
   }
 
+  /**
+   * primer método que se ejecuta cuando se carga la vista, donde inicializamos los booleans de las cajas
+   * y el mensaje a vacío
+   */
   ngOnInit() {
     this.mostrarbien=false;
     this.mostrarmal=false;
     this.mensaje='';
   }
 
+  /**
+   * método que llama al servicio del calendario para registrar una actividad docente pasándole
+   * el objeto nuevo creado
+   */
   registrar(){
     this.calendario.fecha=this.calendario.fecha['year']+'/'+this.calendario.fecha['month']+'/'+this.calendario.fecha['day'];
     this.calendario.hora_inicio=this.calendario.hora_inicio['hour']+':'+this.calendario.hora_inicio['minute']+':'+this.calendario.hora_inicio['second'];
@@ -51,8 +85,6 @@ export class RegistroActividadDocenteComponent implements OnInit {
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Registrada la actividad docente correctamente";
-        console.log(result);
-        //this.router.navigate(['/actividadesdocentes']);
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
@@ -62,10 +94,16 @@ export class RegistroActividadDocenteComponent implements OnInit {
     );
   }
 
+  /**
+   * método usado para cerrar la caja verde del funcionamiento correcto al pulsar la x
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método usado para cerrar la caja roja del funcionamiento incorrecto al pulsar la x
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }

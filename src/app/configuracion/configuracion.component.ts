@@ -11,12 +11,33 @@ import {Configuracion} from '../../models/Configuracion';
 })
 export class ConfiguracionComponent implements OnInit {
 
+  /**
+   * objeto Configuracion que posteriormente va a ser editado
+   */
   public configuracion: Configuracion;
+  /**
+   * icono de fecha que va a ser mostrado en el formulario
+   */
   iconoFecha=faCalendarDay;
+  /**
+   * muestra o no la caja verde de funcionamiento correcto
+   */
   mostrarbien:boolean;
+  /**
+   * muestra o no la caja roja de funcionamiento incorrecto
+   */
   mostrarmal:boolean;
+  /**
+   * mensaje que va en alguna de las cajas
+   */
   mensaje:string;
 
+  /**
+   * constructor que sirve para instanciar los objetos de esta clase a partir de un objeto configuracionService
+   * y el router para redireccionar a otra vista
+   * @param configuracionService
+   * @param router
+   */
   constructor(private configuracionService : ConfiguracionService, private router:Router) {
     this.configuracion = new Configuracion('','','','','');
     this.mostrarbien=false;
@@ -24,6 +45,10 @@ export class ConfiguracionComponent implements OnInit {
     this.mensaje='';
   }
 
+  /**
+   * primer método que se ejecuta al cargar una vista donde vamos a recoger el objeto Configuracion
+   * que posteriormente va a ser editado
+   */
   ngOnInit() {
     this.mostrarbien=false;
     this.mostrarmal=false;
@@ -46,19 +71,20 @@ export class ConfiguracionComponent implements OnInit {
     );
   }
 
+  /**
+   * método que llama al servicio para editar los campos de este objeto Configuracion excepto su id
+   */
   editarConfiguracion(){
     this.configuracion.f_inicio_uno=this.configuracion.f_inicio_uno['year']+'/'+this.configuracion.f_inicio_uno['month']+'/'+this.configuracion.f_inicio_uno['day'];
     this.configuracion.f_fin_uno=this.configuracion.f_fin_uno['year']+'/'+this.configuracion.f_fin_uno['month']+'/'+this.configuracion.f_fin_uno['day'];
     this.configuracion.f_inicio_dos=this.configuracion.f_inicio_dos['year']+'/'+this.configuracion.f_inicio_dos['month']+'/'+this.configuracion.f_inicio_dos['day'];
     this.configuracion.f_fin_dos=this.configuracion.f_fin_dos['year']+'/'+this.configuracion.f_fin_dos['month']+'/'+this.configuracion.f_fin_dos['day'];
 
-    console.log(this.configuracion);
     this.configuracionService.editar(this.configuracion).subscribe(
       result=>{
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Editada la configuración de los cuatrimestres correctamente";
-        //this.router.navigate(['/calendario']);
       }, error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
@@ -68,10 +94,16 @@ export class ConfiguracionComponent implements OnInit {
     );
   }
 
+  /**
+   * método que cierra la caja verde de correcto funcionamiento al pulsar la x
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método que cierra la caja roja de incorrecto funcionamiento al pulsar la x
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }

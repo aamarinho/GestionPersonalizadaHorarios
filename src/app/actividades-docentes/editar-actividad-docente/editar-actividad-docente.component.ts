@@ -11,16 +11,45 @@ import {Router} from '@angular/router';
 })
 export class EditarActividadDocenteComponent implements OnInit {
 
+  /**
+   * objeto calendario que va a ser editado en la vista
+   */
   public calendario: Calendario;
+  /**
+   * icono del calendario para mostrar en el formulario
+   */
   iconoCalendario = faCalendarDay;
-  iconoApellidos = faIdCard;
+  /**
+   * icono idcard para mostrar en el formulario
+   */
+  iconoCard = faIdCard;
+  /**
+   * icono reloj para mostrar en el formulario
+   */
   iconoReloj = faClock;
+  /**
+   * icono localizador de un sitio para mostrar en el formulario
+   */
   iconoSitio = faMapMarkerAlt;
+  /**
+   * booleano usado para mostrar o no la caja verde de funcionamiento correcto
+   */
   mostrarbien:boolean;
+  /**
+   * booleano usado para mostrar o no la caja roja de funcionamiento incorrecto
+   */
   mostrarmal:boolean;
+  /**
+   * mensaje mostrado en las cajas de correcto funcionamiento o incorrecto funcionamiento
+   */
   mensaje:string;
 
-
+  /**
+   * constructor usado para instanciar objetos de esta clase pasándole un objeto calendarioService y el router
+   * para redireccionar a otra vista
+   * @param calendarioService
+   * @param router
+   */
   constructor(private calendarioService : CalendarioService, private router:Router) {
     this.calendario=new Calendario('','','','','','','','','');
     this.mostrarbien=false;
@@ -28,6 +57,10 @@ export class EditarActividadDocenteComponent implements OnInit {
     this.mensaje='';
   }
 
+  /**
+   * primer método que se ejecuta cuando se carga la vista, en él se va a obtener
+   * la actividad docente a partir de su id y se va cargar su contenido en el objeto Calendario
+   */
   ngOnInit() {
     this.mostrarbien=false;
     this.mostrarmal=false;
@@ -55,11 +88,13 @@ export class EditarActividadDocenteComponent implements OnInit {
         this.calendario.aula=result['aula'];
       } , error=>{
         console.log(error);
-        console.log("error obteniendo al usuario");
       }
     );
   }
 
+  /**
+   * método que llama al método editarActividadDocente del servicio mandándole el objeto de la clase Calendario
+   */
   editar(){
     this.calendario.fecha=this.calendario.fecha['year']+'/'+this.calendario.fecha['month']+'/'+this.calendario.fecha['day'];
     this.calendario.hora_inicio=this.calendario.hora_inicio['hour']+':'+this.calendario.hora_inicio['minute']+':'+this.calendario.hora_inicio['second'];
@@ -73,7 +108,6 @@ export class EditarActividadDocenteComponent implements OnInit {
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Editada la actividad docente correctamente";
-        //this.router.navigate(['/actividadesdocentes']);
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
@@ -83,10 +117,16 @@ export class EditarActividadDocenteComponent implements OnInit {
     );
   }
 
+  /**
+   * método usado para cerrar la caja verde del funcionamiento correcto al pulsar la x
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método usado para cerrar la caja roja del funcionamiento incorrecto al pulsar la x
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }

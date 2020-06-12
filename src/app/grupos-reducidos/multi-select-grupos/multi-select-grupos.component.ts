@@ -17,7 +17,10 @@ import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 })
 export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestroy {
 
-
+  /**
+   * todos los métodos y variables usadas en este componente son exactamente iguales que los
+   * descritos en el componente multi select de asignaturas
+   */
   public grupos : GrupoReducido[];
   public resultado : GrupoReducido[];
   public gruposAsignados : UsuarioGrupo[];
@@ -35,7 +38,6 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
   protected _onDestroy = new Subject<void>();
-
 
   constructor(private gruposReducidosService : GruposreducidosService, private usuarioGrupoService :UsuariogrupoService, private router: Router) {
     this.grupos=new Array<GrupoReducido>();
@@ -58,17 +60,13 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         for(let a of result){
           this.gruposAsignados.push(a);
         }
-        console.log(this.gruposAsignados);
       },
       error=>{
         console.log(error);
-        console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
     this.usuarioGrupoService.getUsuariosGruposSinAsignados(window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE GRUPO");
-        console.log("array de ids grupos---->");
         for(let a of result){
             this.grupos.push(a);
         }
@@ -79,13 +77,12 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
         }
       },
       error=>{
-        console.log("DIO ERROR AL OBTENER LOS GRUPOS");
+        console.log(error);
       });
 
 
     this.filteredGruposMulti.next(this.grupos);
 
-    // listen for search field value changes
     this.gruposMultiFilterCtrl.valueChanges
       .pipe()
       .subscribe(() => {
@@ -145,11 +142,8 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     this.usuarioGrupoService.eliminar(value,window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log(result);
-        console.log("Eliminado el grupo de ese usuario correctamente");
       } , error=>{
         console.log(error);
-        console.log("Error eliminando el grupo de ese ususario");
       }
     );
   }
@@ -162,11 +156,10 @@ export class MultiSelectGruposComponent implements OnInit,AfterViewInit, OnDestr
     this.usuarioGrupoService.registrar(this.resultado,window.sessionStorage.getItem('gestiongrupos')).subscribe(
       result=>{
         this.ngOnInit();
-        console.log("gestionados los grupos correctamente");
       } , error=>{
         this.mostrarmal=true;
         this.mensajeerror="Error añadiendo el/los grupo/s reducido/s";
-        console.log("error gestionando los grupos");
+        console.log(error);
       }
     );
   }

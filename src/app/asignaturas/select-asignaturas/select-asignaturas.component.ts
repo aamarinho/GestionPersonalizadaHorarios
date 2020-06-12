@@ -14,6 +14,9 @@ import {faBook} from '@fortawesome/free-solid-svg-icons';
 })
 export class SelectAsignaturasComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  /**
+   * todas las variables y métodos usados a continuación están definidos en el multiselect de asignaturas
+   */
   public asignaturas: Asignatura[];
   icono = faBook;
 

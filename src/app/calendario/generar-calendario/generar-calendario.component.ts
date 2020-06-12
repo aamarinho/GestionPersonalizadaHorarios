@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 import {take, takeUntil} from 'rxjs/operators';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
 import {GrupoReducido} from '../../../models/GrupoReducido';
-import {UsuarioGrupo} from '../../../models/UsuarioGrupo';
 import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 import {CalendarioService} from '../../../services/calendario.service';
 import {Calendario} from '../../../models/Calendario';
@@ -19,7 +18,9 @@ import {Calendario} from '../../../models/Calendario';
   styleUrls: ['./generar-calendario.component.css']
 })
 export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestroy {
-
+  /**
+   * todas las variables y métodos son los mismos que los definidos en el componente multi select de asignaturas
+   */
   public grupos : GrupoReducido[];
   public resultado : GrupoReducido[];
   public eventosGenerados : Calendario[];
@@ -29,18 +30,14 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
   public mostrarmal:boolean;
   public mensaje:string;
 
-  /** control for the selected bank for multi-selection */
   public gruposMultiCtrl: FormControl = new FormControl();
 
-  /** control for the MatSelect filter keyword multi-selection */
   public gruposMultiFilterCtrl: FormControl = new FormControl();
 
-  /** list of banks filtered by search keyword */
   public filteredGruposMulti: ReplaySubject<GrupoReducido[]> = new ReplaySubject<GrupoReducido[]>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
 
@@ -72,11 +69,8 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
         console.log(error);
       });
 
-
     this.filteredGruposMulti.next(this.grupos);
 
-    //this.bankMultiCtrl.setValue(this.asignaturas);
-    // listen for search field value changes
     this.gruposMultiFilterCtrl.valueChanges
       .pipe()
       .subscribe(() => {
@@ -93,18 +87,10 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     this._onDestroy.complete();
   }
 
-  /**
-   * Sets the initial value after the filteredBanks are loaded initially
-   */
   protected setInitialValue() {
     this.filteredGruposMulti
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
-        // setting the compareWith property to a comparison function
-        // triggers initializing the selection according to the initial value of
-        // the form control (i.e. _initializeSelection())
-        // this needs to be done after the filteredBanks are loaded initially
-        // and after the mat-option elements are available
         this.multiSelect.compareWith = (a: GrupoReducido, b: GrupoReducido) => a && b && a.id === b.id;
       });
   }
@@ -113,7 +99,6 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     if (!this.grupos) {
       return;
     }
-    // get the search keyword
     let search = this.gruposMultiFilterCtrl.value;
     if (!search) {
       this.filteredGruposMulti.next(this.grupos.slice());
@@ -121,7 +106,6 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
     } else {
       search = search.toLowerCase();
     }
-    // filter the banks
     this.filteredGruposMulti.next(
       this.grupos.filter(grupo => (grupo.id+" "+grupo.tipo).toLowerCase().indexOf(search) > -1)
     );
@@ -147,13 +131,11 @@ export class GenerarCalendarioComponent implements OnInit,AfterViewInit,OnDestro
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Generado el calendario para ese/s grupo/s correctamente";
-        //this.ngOnInit();
-        console.log("gestionados los grupos correctamente");
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
         this.mensaje="Ocurrió un error generando el calendario para ese/s grupo/s";
-        console.log("error gestionando los grupos");
+        console.log(error);
       }
     );
   }

@@ -11,19 +11,34 @@ import{faSearch} from '@fortawesome/free-solid-svg-icons';
 })
 export class GruposReducidosComponent implements OnInit {
 
+  /**
+   * array de grupos reducidos rellenado posteriormente con todos los grupos reducidos registrados
+   * en el sistema
+   */
   public grupos_reducidos : GrupoReducido[];
+  /**
+   * icono de lupa mostrado en la vista
+   */
   iconolupa = faSearch;
 
+  /**
+   * constructor utilizado para instanciar objetos de esta clase a partir de un objeto GrupoReducidoService
+   * y el router para redireccionar a otra vista
+   * @param grupoService
+   * @param router
+   */
   constructor(private grupoService: GruposreducidosService, private router: Router) {
     this.grupos_reducidos = new Array<GrupoReducido>();
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista, utilizado para rellenar el array
+   * de grupos reducidos con todos los registrados en el sistema
+   */
   ngOnInit() {
     this.grupos_reducidos.splice(0,this.grupos_reducidos.length);
     this.grupoService.getGrupos().subscribe(
       result=>{
-        console.log(result);
-        console.log("ENTRO PARA OBTENER LOS GRUPOS")
         for( let g of result){
           if(g.dia=="Monday"){
             g.dia="Lunes";
@@ -40,15 +55,20 @@ export class GruposReducidosComponent implements OnInit {
         }
       },
       error=>{
-        console.log(this.grupos_reducidos);
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
+        console.log(error);
       });
   }
 
+  /**
+   * método que redirecciona a la vista para registrar un grupo reducido
+   */
   onSubmit(){
     this.router.navigate(['/registrogrupo']);
   }
 
+  /**
+   * método que filtra la tabla de grupos reducidos según lo escrito en el campo de búsqueda
+   */
   search_table(){
     var input, filter, table, tr, td, i,j;
     input = document.getElementById("myInput");
@@ -73,21 +93,28 @@ export class GruposReducidosComponent implements OnInit {
     }
   }
 
+  /**
+   * método que llama al servicio para, una vez confirmado, eliminar el grupo reducido a partir
+   * de su id
+   * @param id
+   */
   eliminar(id){
     if(confirm("¿Estás seguro de querer eliminar el grupo "+id+"?")) {
       this.grupoService.eliminar(id).subscribe(
         result => {
-          console.log(result);
-          console.log("Eliminado el grupo de ese usuario correctamente");
           this.ngOnInit();
         }, error => {
           console.log(error);
-          console.log("Error eliminando el grupo de ese ususario");
         }
       );
     }
   }
 
+  /**
+   * método que redirecciona a la vista para editar un grupo reducido y almacena en el sessionStorage
+   * el id del grupo reducido a editar
+   * @param id
+   */
   editar(id) {
     window.sessionStorage.setItem('editar',id);
     this.router.navigate(['/editargrupo']);

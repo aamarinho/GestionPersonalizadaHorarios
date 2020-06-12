@@ -14,29 +14,52 @@ import {CabeceraComponent} from '../cabecera/cabecera.component';
 })
 export class InicioComponent implements OnInit {
 
+  /**
+   * variable utilizada para almacenar el contenido del usuario que inicia sesión
+   */
   public usuario: Usuario;
+  /**
+   * icono de usuario mostrado en la vista
+   */
   iconoUsuario = faUser;
+  /**
+   * icono de candado mostrado en la vista
+   */
   iconoCandado = faLock;
 
+  /**
+   * constructor usado para instanciar objetos de esta clase a partir de un objeto UsuarioService, el
+   * router para redireccionar a otra vista y el componente de cabecera
+   * @param usuarioService
+   * @param router
+   * @param comp
+   */
   constructor(private usuarioService: UsuarioService, private router: Router, private comp: CabeceraComponent) {
     this.usuario = new Usuario('','','',null,'');
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista, donde se va a eliminar la imagen de fondo
+   */
   ngOnInit() {
     document.body.classList.add('bg-img');
   }
 
+  /**
+   * método que se ejecuta al pulsar el botón para iniciar sesión que llama a login
+   */
   onSubmit() {
     this.login();
   }
 
+  /**
+   * método que llama al servicio para comprobar si ese usuario y contraseña están registrados
+   * en el sistema y pueden iniciar sesión
+   */
   login(){
-    console.log(this.usuario.email);
-    console.log(this.usuario.contrasena);
     this.usuarioService.login(this.usuario.email,this.usuario.contrasena).subscribe(
       result=>{
         if(result.status===200) {
-          console.log("OK");
           document.body.classList.remove('bg-img');
           window.sessionStorage.setItem("email",result.body.email);
           window.sessionStorage.setItem("contrasena",result.body.contrasena);

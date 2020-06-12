@@ -1,15 +1,11 @@
 import {
   Component,
-  ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef, OnInit, AfterViewInit, ElementRef,
+  TemplateRef, OnInit, ElementRef,
 } from '@angular/core';
 import {
   startOfDay,
-  endOfDay,
-  subDays,
   addDays,
-  endOfMonth,
   isSameDay,
   isSameMonth,
   addHours, addMinutes,
@@ -18,17 +14,15 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
-  CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
-  DAYS_OF_WEEK
 } from 'angular-calendar';
 import {CalendarioService} from '../../services/calendario.service';
-import {start} from 'repl';
-import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
 
-const colors: any = { //colores para los eventos del calendario
+/**
+ * array de colores para cada evento del calendario
+ */
+const colors: any = {
   0: {
     primary: '#FF637D',
     secondary: '#FF637D',
@@ -80,49 +74,53 @@ const colors: any = { //colores para los eventos del calendario
   templateUrl: './calendario.component.html',
 })
 export class CalendarioComponent implements OnInit{
+
+  /**
+   * constructor usado para instanciar objetos de esta clase a partir de un objeto NgbModal y un objeto CalendarioService
+   * @param modal
+   * @param calendarioService
+   */
   constructor(private modal: NgbModal, private calendarioService : CalendarioService) {}
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   @ViewChild('hoy',{ static:true }) hoy: ElementRef<HTMLElement>;
 
+  /**
+   * dias que se van a excluir en el calendario
+   */
   excludeDays: number[] = [0, 6];
-
+  /**
+   * objeto de la clase CalendarView en este caso referido al mes
+   */
   view: CalendarView = CalendarView.Month;
-
+  /**
+   * objeto de la clase CalendarView utilizado para acceder a todos los nombres de mes año o dia
+   */
   CalendarView = CalendarView;
-
+  /**
+   * objeto tipo Date usado para el formato de los dias
+   */
   viewDate: Date = new Date();
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
-
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
   refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
-  ];
-
+  /**
+   * array donde se van a almacenar todos los eventos recuperados
+   */
+  events: CalendarEvent[] = [];
+  /**
+   * booleano para mostrar debajo del día clickado una vista detallada del evento
+   */
   activeDayIsOpen: boolean = false;
 
+  /**
+   * método para abrir o cerrar la vista detallada debajo del día clickado
+   * @param date
+   * @param events
+   */
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
@@ -137,6 +135,12 @@ export class CalendarioComponent implements OnInit{
     }
   }
 
+  /**
+   * método usado cuando se desplaza un evento en el calendario
+   * @param event
+   * @param newStart
+   * @param newEnd
+   */
   eventTimesChanged({
                       event,
                       newStart,
@@ -155,23 +159,31 @@ export class CalendarioComponent implements OnInit{
     this.handleEvent('Dropped or resized', event);
   }
 
+  /**
+   * método usado para abrir el modal del evento que se clicka
+   * @param action
+   * @param event
+   */
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
+  /**
+   * método usado para cambiar el modo del calendario: mensual, semanal o diario
+   * @param view
+   */
   setView(view: CalendarView) {
     this.view = view;
   }
-
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista para rellenar el array de eventos de todos los eventos
+   * recuperados para un usuario del sistema almacenado en el sessionStorage
+   */
   ngOnInit() {
     this.calendarioService.getCalendario(window.sessionStorage.getItem('calendariousuario')).subscribe(
       result => {
@@ -181,7 +193,6 @@ export class CalendarioComponent implements OnInit{
         for (let e of result) {
           asignatura=e.id_asignatura;//asignatura actual
 
-          console.log(e.id_grupo);
           let diaFecha = e.fecha.substr(8,2);//restamos un dia a la fecha del calendario porque los dias van desde 0 no desde 1
           diaFecha=diaFecha-1;
           let mesFecha=e.fecha.substr(5,2);
@@ -204,7 +215,7 @@ export class CalendarioComponent implements OnInit{
           if (minutosf.charAt(0) == 0) {
             minutosf = minutosf.replace(/0/, '');
           }
-          if(asignatura!=asignatura2){
+          if(asignatura!=asignatura2){ //para cambiar el color de los eventos cuando se cambia de asignatura
             if(temp==10){
               temp=0;
             } else{
@@ -230,7 +241,6 @@ export class CalendarioComponent implements OnInit{
       },
       error => {
         console.log(error);
-        console.log("CALENDARIO ERROOOOOOOOOOOOOOOOOOOR");
       });
   }
 

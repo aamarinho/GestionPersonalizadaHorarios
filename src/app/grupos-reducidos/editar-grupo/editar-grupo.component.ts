@@ -13,23 +13,75 @@ import {AsignaturaService} from '../../../services/asignatura.service';
 })
 export class EditarGrupoComponent implements OnInit {
 
-
+  /**
+   * objeto de la clase GrupoReducido que va a almacenar el grupo reducido que se va a editar
+   */
   public grupo: GrupoReducido;
+  /**
+   * array de asignaturas que va a contener todas las del sistema para seleccionar
+   * a que asignatura pertenece el grupo reducido
+   */
   public asignaturas : Asignatura[];
+  /**
+   * variable usada para coger el valor del select del array de tipos
+   */
   seleccionTipo : string;
+  /**
+   * variable usada para coger el valor del select del array de dias
+   */
   seleccionDia : string;
+  /**
+   * array de dias para seleccionar el día que se imparte un grupo reducido
+   */
   public dias = [{ name: 'Lunes' }, { name: 'Martes' },{ name: 'Miercoles' },{ name: 'Jueves' },{ name: 'Viernes' }];
+  /**
+   * array para seleccionar si el grupo es teorico o practico
+   */
   public tipos = [{ name: 'Practica' }, { name: 'Teorica' }];
+  /**
+   * icono de calendario mostrado en el formulario
+   */
   iconoCalendario = faCalendarDay;
-  iconoApellidos = faIdCard;
+  /**
+   * icono idCard mostrado en el formulario
+   */
+  iconoCard = faIdCard;
+  /**
+   * icono de ordenador mostrado en el formulario
+   */
   iconoOrdenador = faLaptop;
+  /**
+   * icono de reloj mostrado en el formulario
+   */
   iconoReloj=faClock;
+  /**
+   * icono de localización mostrado en el formulario
+   */
   iconoSitio=faMapMarkerAlt;
+  /**
+   * variable usada para almacenar el nombre de la asignatura ya asignada al grupo reducido
+   */
   public nombreasig : string;
+  /**
+   * booleano para mostrar o no la caja verde de correcto funcionamiento
+   */
   public mostrarbien:boolean;
+  /**
+   * booleano para mostrar o no la caja roja de incorrecto funcionamiento
+   */
   public mostrarmal:boolean;
+  /**
+   * mensaje que va en alguna de las cajas
+   */
   public mensaje:string;
 
+  /**
+   * constructor para instanciar un objeto de esta clase a partir de un objeto grupoReducidoService,
+   * el router para redireccionar a otra vista y un objeto AsignaturaService
+   * @param grupoService
+   * @param router
+   * @param asignaturaService
+   */
   constructor(private grupoService : GruposreducidosService, private router:Router, private asignaturaService : AsignaturaService) {
     this.grupo = new GrupoReducido('','','','','','','');
     this.asignaturas=new Array<Asignatura>();
@@ -40,20 +92,23 @@ export class EditarGrupoComponent implements OnInit {
     this.mensaje='';
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista, utilizado para almacenar en el array
+   * de asignaturas todas las del sistema y para almacenar en la variable grupo los atributos
+   * que van a ser editados, excepto su id
+   */
   ngOnInit() {
     this.mostrarbien=false;
     this.mostrarmal=false;
     this.mensaje='';
     this.asignaturaService.getAsignaturas().subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
         for( let a of result){
           this.asignaturas.push(a);
         }
       },
       error=>{
-        console.log(this.asignaturas);
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
+        console.log(error);
       });
 
     this.grupoService.getGrupo(window.sessionStorage.getItem('editar')).subscribe(
@@ -87,14 +142,15 @@ export class EditarGrupoComponent implements OnInit {
 
         this.grupo.aula=result['aula'];
         this.nombreasig=result['nombre'];
-        console.log(this.grupo);
       },
       error=>{
         console.log(error);
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
       });
   }
 
+  /**
+   * método que va a llamar al servicio para editar los atributos de ese grupo reducido
+   */
   editarGrupo(){
     this.grupo.hora_inicio=this.grupo.hora_inicio['hour']+':'+this.grupo.hora_inicio['minute']+':'+this.grupo.hora_inicio['second'];
     this.grupo.hora_fin=this.grupo.hora_fin['hour']+':'+this.grupo.hora_fin['minute']+':'+this.grupo.hora_fin['second'];
@@ -106,7 +162,6 @@ export class EditarGrupoComponent implements OnInit {
         this.mostrarmal=false;
         this.mostrarbien=true;
         this.mensaje="Editado el grupo reducido correctamente";
-        //this.router.navigate(['/gruposreducidos']);
       }, error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
@@ -116,10 +171,16 @@ export class EditarGrupoComponent implements OnInit {
     );
   }
 
+  /**
+   * método usado para cerrar la caja verde de correcto funcionamiento
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método usado para cerrar la caja roja de incorrecto funcionamiento
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }

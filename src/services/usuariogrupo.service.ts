@@ -58,7 +58,8 @@ export class UsuariogrupoService {
    * @param email
    */
   getUsuariosGruposProfesor(asignatura: string,email:string): Observable<any> {
-    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    let headers = new HttpHeaders().append('Content-Type', 'application/json')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.get(this.url+"/getgrupos/profesor/"+asignatura+'/'+email,{headers, responseType: 'json'});
   }
 
@@ -69,7 +70,8 @@ export class UsuariogrupoService {
    */
   registrar(grupos: GrupoReducido[],email:string): Observable<any>{
     let param = new HttpParams().set('email',JSON.stringify(email)).set('grupos',JSON.stringify(grupos));
-    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.post(this.url+"/registrar",param,{headers, responseType: 'json'});
   }
 
@@ -80,7 +82,8 @@ export class UsuariogrupoService {
    */
   registrarImportacion(grupos: String[],email:string): Observable<any>{
     let param = new HttpParams().set('email',JSON.stringify(email)).set('grupos',JSON.stringify(grupos));
-    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
+    let headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded')
+      .append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
     return this.http.post(this.url+"/registrar/importacion",param,{headers, responseType: 'json'});
   }
 
@@ -90,7 +93,8 @@ export class UsuariogrupoService {
    * @param email
    */
   eliminar(id: string, email: string): Observable<any>{
-    return this.http.delete(this.url+"/eliminar/"+email+'/'+id,{responseType:'text'});
+    let headers = new HttpHeaders().append('Authorization', 'Basic ' + btoa(window.sessionStorage.getItem('email') + ':' +window.sessionStorage.getItem('contrasena')));
+    return this.http.delete(this.url+"/eliminar/"+email+'/'+id,{headers,responseType:'text'});
   }
 
 }

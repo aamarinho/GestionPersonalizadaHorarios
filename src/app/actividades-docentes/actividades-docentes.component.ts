@@ -12,19 +12,34 @@ import {UsuarioService} from '../../services/usuario.service';
 })
 export class ActividadesDocentesComponent implements OnInit {
 
+  /**
+   * array de objetos Calendario usado para rellenar de eventos del sistema
+   */
   public eventos : Calendario[];
+  /**
+   * icono de lupa usado para mostrar en el formulario
+   */
   iconolupa = faSearch;
 
+  /**
+   * constructor usado para instanciar objetos de esta clase a partir de un objeto CalendarioService, un objeto UsuarioService
+   * y el router para redireccionar a otra vista
+   * @param calendarioService
+   * @param usuarioService
+   * @param router
+   */
   constructor(private calendarioService: CalendarioService, private usuarioService : UsuarioService,private router: Router) {
     this.eventos = new Array<Calendario>();
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista donde vamos a recuperar todas las actividades docentes de un
+   * profesor con su email
+   */
   ngOnInit() {
     this.eventos.splice(0,this.eventos.length);
     this.calendarioService.getEventosCalendario().subscribe(
       result=>{
-        console.log(result);
-        console.log("ENTRO PARA OBTENER LOS GRUPOS")
         for( let e of result){
           if(window.sessionStorage.getItem('email')==e.responsable){
             this.eventos.push(e);
@@ -32,15 +47,20 @@ export class ActividadesDocentesComponent implements OnInit {
         }
       },
       error=>{
-        console.log(this.eventos);
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
+        console.log(error);
       });
   }
 
+  /**
+   * método que redirecciona a la vista para registrar una actividad docente
+   */
   onSubmit(){
     this.router.navigate(['/registroactividaddocente']);
   }
 
+  /**
+   * método que busca por cualquier campo de la tabla escribiendo en el buscador
+   */
   search_table(){
     var input, filter, table, tr, td, i,j;
     input = document.getElementById("myInput");
@@ -65,11 +85,19 @@ export class ActividadesDocentesComponent implements OnInit {
     }
   }
 
+  /**
+   * método que redirecciona a la vista para editar una actividad docente y guarda el id en el sessionStorage
+   * @param id
+   */
   editar(id){
     window.sessionStorage.setItem('editar',id);
     this.router.navigate(['/editaractividaddocente']);
   }
 
+  /**
+   * método que, si se confirma, llama al servicio para eliminar una actividad docente a partir de su id
+   * @param evento
+   */
   eliminar(evento){
     if(confirm("¿Estás seguro de querer eliminar "+evento.nombre+" de "+evento.id_grupo+"?")) {
       this.calendarioService.eliminar(evento.id).subscribe(

@@ -1,12 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Asignatura} from '../../../models/Asignatura';
 import {faUsers} from '@fortawesome/free-solid-svg-icons';
 import {FormControl} from '@angular/forms';
 import {ReplaySubject, Subject} from 'rxjs';
 import {MatSelect} from '@angular/material';
-import {AsignaturaService} from '../../../services/asignatura.service';
 import {take, takeUntil} from 'rxjs/operators';
-import {GrupoReducido} from '../../../models/GrupoReducido';
 import {UsuarioGrupo} from '../../../models/UsuarioGrupo';
 import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 
@@ -17,6 +14,10 @@ import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
 })
 export class SelectGruposComponent implements OnInit {
 
+  /**
+   * todos los métodos y variables usados en esta clase son exactamente iguales que los descritos
+   * en el multi select de asignaturas
+   */
   public grupos: UsuarioGrupo[];
   icono = faUsers;
 
@@ -40,17 +41,13 @@ export class SelectGruposComponent implements OnInit {
       result=>{
         for( let a of result){
           this.grupos.push(a);
-          console.log(a.id);
         }
-        //this.seleccionada= this.asignaturas[0].id;
       },
       error=>{
         console.log(error);
-        console.log("DIO ERROR AL OBTENER LOS GRUPOS QUE EL TIENE");
       });
     this.filteredGrupos.next(this.grupos);
 
-    // listen for search field value changes
     this.grupoFilterCtrl.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {this.filterGrupos();});
   }
 
@@ -77,7 +74,6 @@ export class SelectGruposComponent implements OnInit {
     if (!this.grupos) {
       return;
     }
-    // get the search keyword
     let search = this.grupoFilterCtrl.value;
     if (!search) {
       this.filteredGrupos.next(this.grupos.slice());

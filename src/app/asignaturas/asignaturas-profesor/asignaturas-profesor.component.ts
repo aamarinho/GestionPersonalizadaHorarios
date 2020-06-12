@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Asignatura} from '../../../models/Asignatura';
-import {faBook, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import {AsignaturaService} from '../../../services/asignatura.service';
 import {Router} from '@angular/router';
 
@@ -11,34 +11,46 @@ import {Router} from '@angular/router';
 })
 export class AsignaturasProfesorComponent implements OnInit {
 
+  /**
+   * array de asignaturas posteriormente rellenado con las asignaturas de un profesor
+   */
   public asignaturas : Asignatura[];
+  /**
+   * icono de lupa mostrado en el formulario
+   */
   iconolupa = faSearch;
-  iconolibro = faBook;
 
+  /**
+   * constructor que instancia objetos de la clase pasándole un objeto AsignaturaService y el router para
+   * redireccionar a otra vista
+   * @param asignaturaService
+   * @param router
+   */
   constructor(private asignaturaService: AsignaturaService, private router: Router) {
     this.asignaturas = new Array<Asignatura>();
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista donde vamos a rellenar el array
+   * de asignaturas con las asignaturas de ese profesor a partir de su email
+   */
   ngOnInit() {
     this.asignaturas.splice(0,this.asignaturas.length);
     this.asignaturaService.getAsignaturasProfesor(window.sessionStorage.getItem('email')).subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LAS ASIGNATURAS")
         for( let a of result){
           a.email=window.sessionStorage.getItem('email');
           this.asignaturas.push(a);
         }
       },
       error=>{
-        console.log(this.asignaturas);
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
+        console.log(error);
       });
   }
 
-  onSubmit(){
-    this.router.navigate(['/registroasignatura']);
-  }
-
+  /**
+   * método que sirve para buscar por cualquier campo en la tabla de asignaturas
+   */
   search_table(){
     var input, filter, table, tr, td, i,j;
     input = document.getElementById("myInput");
@@ -63,6 +75,11 @@ export class AsignaturasProfesorComponent implements OnInit {
     }
   }
 
+  /**
+   * método que redirecciona a la vista para ver los estudiantes de una asignatura de un profesor
+   * almacenando en el sessionStorage la abreviatura de la asignatura
+   * @param asignatura
+   */
   gestionarEstudiantes(asignatura: Asignatura) {
     window.sessionStorage.setItem('gestionestudiantes',asignatura.id);
     this.router.navigate(['/estudiantesprofesor']);

@@ -18,61 +18,85 @@ import {Router} from '@angular/router';
 })
 export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, OnDestroy {
 
+  /**
+   * array de asignaturas para seleccionar
+   */
   public asignaturas : Asignatura[];
+  /**
+   * resultado final de las asignaturas seleccionadas
+   */
   public resultado : Asignatura[];
+  /**
+   * array de asignaturas ya asignadas a ese usuario
+   */
   public asignaturasAsignadas : UsuarioAsignatura[];
-  public a : UsuarioAsignatura;
+  /**
+   * icono de libro mostrado en la vista
+   */
   iconoLibro = faBook;
-
+  /**
+   * control para la asignatura seleccionada para la multiseleccion
+   */
   public asignaturasMultiCtrl: FormControl = new FormControl();
-
+  /**
+   * control para el filtro del MatSelect cuando se teclea
+   */
   public asignaturasMultiFilterCtrl: FormControl = new FormControl();
-
+  /**
+   * asignaturas filtradas por lo que se introdujo por teclado
+   */
   public filteredAsignaturasMulti: ReplaySubject<Asignatura[]> = new ReplaySubject<Asignatura[]>(1);
 
   @ViewChild('multiSelect', { static: true }) multiSelect: MatSelect;
 
+  /**
+   * notifica cuando el componente fue destruido
+   */
   protected _onDestroy = new Subject<void>();
 
-
+  /**
+   * constructor para instanciar objetos de esta clase a partir de objetos AsignaturaService, UsuarioAsignaturaService
+   * y el router para redireccionar a otra vista
+   * @param asignaturaService
+   * @param usuarioAsignaturaService
+   * @param router
+   */
   constructor(private asignaturaService : AsignaturaService, private usuarioAsignaturaService:UsuarioasignaturaService, private router: Router) {
     this.asignaturas=new Array<Asignatura>();
     this.resultado=new Array<Asignatura>();
     this.asignaturasAsignadas=new Array<UsuarioAsignatura>();
-    this.a=new UsuarioAsignatura('','');
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista para obtener las asignaturas ya asignadas a ese usuario
+   * y las no asignadas
+   */
   ngOnInit() {
     this.asignaturasAsignadas.splice(0,this.asignaturasAsignadas.length);
     this.asignaturas.splice(0,this.asignaturas.length);
     this.asignaturasMultiCtrl.reset();
     this.usuarioAsignaturaService.getUsuariosAsignaturas(window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
-        console.log(result);
         for( let a of result){
           this.asignaturasAsignadas.push(a);
         }
       },
       error=>{
         console.log(error);
-        console.log("ERROR OBTENIENDO LAS ASIGNATURAS ASIGNADAS A UN USUARIO");
       });
 
     this.usuarioAsignaturaService.getUsuariosAsignaturasSinAsignadas(window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
-        console.log("ENTRO PARA OBTENER LOS IDS DE ASIGNATURA");
         for( let a of result){
             this.asignaturas.push(a);
         }
       },
       error=>{
-        console.log("DIO ERROR AL OBTENER LAS ASIGNATURAS");
+        console.log(error);
       });
-
 
     this.filteredAsignaturasMulti.next(this.asignaturas);
 
-    // listen for search field value changes
     this.asignaturasMultiFilterCtrl.valueChanges
       .pipe()
       .subscribe(() => {
@@ -80,15 +104,24 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
       });
   }
 
+  /**
+   * método que se ejecuta cuando se ha cargado ya toda la vista
+   */
   ngAfterViewInit() {
     this.setInitialValue();
   }
 
+  /**
+   * método que se ejecuta cuando se destruye un elemento
+   */
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
   }
 
+  /**
+   * pone el valor inicial después de que el filtro de asignaturas es cargado
+   */
   protected setInitialValue() {
     this.filteredAsignaturasMulti
       .pipe(take(1), takeUntil(this._onDestroy))
@@ -97,6 +130,9 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
       });
   }
 
+  /**
+   * filtra las asignaturas por id nombre y curso
+   */
   protected filterAsignaturasMulti() {
     if (!this.asignaturas) {
       return;
@@ -114,6 +150,10 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     );
   }
 
+  /**
+   * introduce o elimina un valor cuando se pulsa en el select
+   * @param value
+   */
   onSubmit(value){
     if(!this.resultado.includes(value)){
       this.resultado.push(value);
@@ -123,11 +163,20 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     console.log(this.resultado);
   }
 
+  /**
+   * elimina una asignatura del array
+   * @param arr
+   * @param item
+   */
   removeItemFromArr ( arr, item ) {
     var i = arr.indexOf( item );
     arr.splice( i, 1 );
   }
 
+  /**
+   * llama al servicio para eliminar a un usuario de una asignatura
+   * @param value
+   */
   eliminar(value){
     this.usuarioAsignaturaService.eliminar(value,window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
@@ -138,6 +187,9 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     );
   }
 
+  /**
+   * llama al servicio para registrar a un usuario en una asignatura
+   */
   registrar(){
     this.usuarioAsignaturaService.registrar(this.resultado,window.sessionStorage.getItem('gestionasignaturas')).subscribe(
       result=>{
@@ -148,6 +200,9 @@ export class MultiSelectAsignaturasComponent implements OnInit,AfterViewInit, On
     );
   }
 
+  /**
+   * método que redirecciona a la vista dependiendo de que tipo de usuario se esté editando
+   */
   volver(){
     if(window.sessionStorage.getItem('tipousuario')=='3'){
       this.router.navigate(['/estudiantes']);
