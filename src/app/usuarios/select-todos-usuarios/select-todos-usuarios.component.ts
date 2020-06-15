@@ -16,7 +16,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./select-todos-usuarios.component.css']
 })
 export class SelectTodosUsuariosComponent implements OnInit,OnDestroy,AfterViewInit {
-
+  /**
+   * los métodos y variables de esta clase están definidos en la clase multi select de asignaturas
+   */
   public usuarios: Usuario[];
   icono = faUser;
 

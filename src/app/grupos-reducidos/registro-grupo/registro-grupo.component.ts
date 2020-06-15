@@ -78,7 +78,7 @@ export class RegistroGrupoComponent implements OnInit {
    * @param router
    * @param asignaturaService
    */
-  constructor(private grupoService : GruposreducidosService, private router:Router, private asignaturaService : AsignaturaService) {
+  constructor(private grupoService : GruposreducidosService, public router:Router, private asignaturaService : AsignaturaService) {
     this.grupo = new GrupoReducido('','','','','','','');
     this.asignaturas=new Array<Asignatura>();
     this.seleccionDia=this.dias[0].name;

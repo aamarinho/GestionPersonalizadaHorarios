@@ -3,10 +3,9 @@ import {Usuario} from '../../../models/Usuario';
 import * as XLSX from 'xlsx';
 import {UsuarioService} from '../../../services/usuario.service';
 import {UsuariogrupoService} from '../../../services/usuariogrupo.service';
-import {GrupoReducido} from '../../../models/GrupoReducido';
 import{faIdCard} from '@fortawesome/free-solid-svg-icons';
 import {GruposreducidosService} from '../../../services/gruposreducidos.service';
-import {Router, Routes} from '@angular/router';
+import {Router} from '@angular/router';
 import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.service';
 
 @Component({
@@ -16,27 +15,88 @@ import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.serv
 })
 export class ImportarEstudiantesGruposComponent implements OnInit {
 
+  /**
+   * variable usada para almacenar las asignaturas del fichero Excel
+   */
   asignaturas:String[];
+  /**
+   * variable usada para almacenar las asignaturas asignadas a un usuario
+   */
   asignaturasAsignadas:String[];
+  /**
+   * variable usada para almacenar los grupos que se van a asignar a un usuario
+   */
   grupos: String[];
+  /**
+   * variable usada para almacenar cuantos grupos tiene la primera asignatura
+   */
   gruposasignatura1:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la segunda asignatura
+   */
   gruposasignatura2:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la tercera asignatura
+   */
   gruposasignatura3:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la cuarta asignatura
+   */
   gruposasignatura4:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la quinta asignatura
+   */
   gruposasignatura5:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la sexta asignatura
+   */
   gruposasignatura6:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la séptima asignatura
+   */
   gruposasignatura7:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la octava asignatura
+   */
   gruposasignatura8:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la novena asignatura
+   */
   gruposasignatura9:number;
+  /**
+   * variable usada para almacenar cuantos grupos tiene la décima asignatura
+   */
   gruposasignatura10:number;
+  /**
+   * booleano usado para comprobar cuando hay más de 5 asignaturas
+   */
   diferente:boolean;
-  iconoApellidos=faIdCard;
+  /**
+   * variable usada para almacenar el mensaje mostrado en las cajas
+   */
   mensaje:string;
+  /**
+   * variable usada para mostrar o no la caja verde de correcto funcionamiento
+   */
   mostrarbien:boolean;
+  /**
+   * variable usada para mostrar o no la caja roja de incorrecto funcionamiento
+   */
   mostrarmal:boolean;
+  /**
+   * booleano usado para mostrar o no la caja amarilla de información
+   */
   mostrarinfo:boolean;
 
-  constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService,private router:Router) {
+  /**
+   * constructor usado para isntanciar objetos de esta clase
+   * @param usuarioService
+   * @param usuarioGrupoService
+   * @param grupoReducidoService
+   * @param usuarioAsignaturaService
+   * @param router
+   */
+  constructor(private usuarioService : UsuarioService,private usuarioGrupoService : UsuariogrupoService, private grupoReducidoService:GruposreducidosService,private usuarioAsignaturaService:UsuarioasignaturaService,public router:Router) {
     this.asignaturas=new Array<String>();
     this.asignaturasAsignadas=new Array<String>();
     this.gruposasignatura1=0;
@@ -49,7 +109,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     this.gruposasignatura8=0;
     this.gruposasignatura9=0;
     this.gruposasignatura10=0;
-    this.diferente=false;//aqui
+    this.diferente=false;
     this.grupos=new Array<String>();
     this.mensaje='';
     this.mostrarbien=false;
@@ -57,6 +117,10 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     this.mostrarinfo=true;
   }
 
+  /**
+   * método usado para almacenar en la base de datos los datos del fichero Excel
+   * @param ev
+   */
   subirFichero(ev) {
 
     let workBook = null;
@@ -73,7 +137,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       }, {});
       let data1 = Object.keys(jsonData).map(key=>jsonData[key]);
 
-      console.log(data1);
       for( let e of data1){//guardar asignaturas
         for(let e2 of e){
           this.asignaturas.push(e2['__EMPTY'].replace(' ',''));
@@ -91,7 +154,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
             for(let e2 of e){
               this.asignaturas.push(e2['__EMPTY'].replace(' ',''));
               this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura1].replace(' ',''));
-              console.log(this.asignaturas);
               this.grupoReducidoService.countGrupos(this.asignaturas[1]).subscribe(
                 result=>{
                   this.gruposasignatura2=result['contador'];
@@ -102,7 +164,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                       this.asignaturas.push(e2['__EMPTY'].replace(' ',''));
                       this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura1].replace(' ',''));
                       this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura2].replace(' ',''));
-                      console.log(this.asignaturas);
                       this.grupoReducidoService.countGrupos(this.asignaturas[2]).subscribe(
                         result=>{
                           this.gruposasignatura3=result['contador'];
@@ -114,7 +175,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                               this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura1].replace(' ',''));
                               this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura2].replace(' ',''));
                               this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura3].replace(' ',''));
-                              console.log(this.asignaturas);
                               this.grupoReducidoService.countGrupos(this.asignaturas[3]).subscribe(
                                 result=>{
                                   this.gruposasignatura4=result['contador'];
@@ -129,14 +189,9 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                       this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura3].replace(' ',''));
                                       this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura4].replace(' ',''));
 
-                                      //console.log(e2['__EMPTY_'+this.gruposasignatura5]);
-                                      //if(e2['__EMPTY_'+this.gruposasignatura5]!=undefined){
-                                      console.log(this.asignaturas);
-
                                       if(this.diferente==true){
                                         this.grupoReducidoService.countGrupos(this.asignaturas[4]).subscribe(
                                           result=>{
-                                            console.log("HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLI");
                                             this.gruposasignatura5=result['contador'];
                                             this.asignaturas.splice(0,this.asignaturas.length);
                                             for( let e of data1){
@@ -148,7 +203,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura3].replace(' ',''));
                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura4].replace(' ',''));
                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura5].replace(' ',''));
-                                                console.log(this.asignaturas);
                                                 this.grupoReducidoService.countGrupos(this.asignaturas[5]).subscribe(
                                                   result=>{
                                                     this.gruposasignatura6=result['contador'];
@@ -163,7 +217,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura4].replace(' ',''));
                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura5].replace(' ',''));
                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura6].replace(' ',''));
-                                                        console.log(this.asignaturas);
                                                         this.grupoReducidoService.countGrupos(this.asignaturas[6]).subscribe(
                                                           result=>{
                                                             this.gruposasignatura7=result['contador'];
@@ -179,7 +232,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura5].replace(' ',''));
                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura6].replace(' ',''));
                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura7].replace(' ',''));
-                                                                console.log(this.asignaturas);
                                                                 this.grupoReducidoService.countGrupos(this.asignaturas[7]).subscribe(
                                                                   result=>{
                                                                     this.gruposasignatura8=result['contador'];
@@ -196,7 +248,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura6].replace(' ',''));
                                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura7].replace(' ',''));
                                                                         this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura8].replace(' ',''));
-                                                                        console.log(this.asignaturas);
                                                                         this.grupoReducidoService.countGrupos(this.asignaturas[8]).subscribe(
                                                                           result=>{
                                                                             this.gruposasignatura9=result['contador'];
@@ -215,7 +266,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura7].replace(' ',''));
                                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura8].replace(' ',''));
                                                                                 this.asignaturas.push(e2['__EMPTY_'+this.gruposasignatura9].replace(' ',''));
-                                                                                console.log(this.asignaturas);
 
                                                                                 for( let e of data1){
                                                                                   for(let e2 of e){
@@ -233,18 +283,16 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                                                       email=email.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
                                                                                       email=email+'@esei.uvigo.es';
                                                                                       var actual = new Usuario(email,usuarionombre,usuarioapellidos,3,usuarionombre);
-                                                                                      //console.log(actual);
                                                                                       //registrar a los alumnos
-                                                                                      /*this.usuarioService.registrar(actual).subscribe(
+                                                                                      this.usuarioService.registrar(actual).subscribe(
                                                                                         result=>{
-                                                                                          console.log("bien");
                                                                                         } , error=>{
                                                                                           this.mostrarbien=false;
                                                                                           this.mostrarmal=true;
                                                                                           this.mensaje="Ocurrió un error registrando los estudiantes";
                                                                                           console.log(error);
                                                                                         }
-                                                                                      );*/
+                                                                                      );
                                                                                     }
                                                                                   }
                                                                                 }
@@ -264,7 +312,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                                                                       email=email+'@esei.uvigo.es';
                                                                                       this.grupos.splice(0,this.grupos.length);
                                                                                       this.asignaturasAsignadas.splice(0,this.asignaturasAsignadas.length);
-                                                                                      this.comprobarAsignaturasYGrupos(e2,email,this.diferente);
+                                                                                      this.comprobarAsignaturasYGrupos(e2,email);
                                                                                     }
                                                                                   }
                                                                                 }
@@ -325,18 +373,16 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                               email = email.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
                                               email = email + '@esei.uvigo.es';
                                               var actual = new Usuario(email, usuarionombre, usuarioapellidos, 3, usuarionombre);
-                                              //console.log(actual);
                                               //registrar a los alumnos
-                                              /*this.usuarioService.registrar(actual).subscribe(
+                                              this.usuarioService.registrar(actual).subscribe(
                                                 result=>{
-                                                  console.log("bien");
                                                 } , error=>{
                                                   this.mostrarbien=false;
                                                   this.mostrarmal=true;
                                                   this.mensaje="Ocurrió un error registrando los estudiantes";
                                                   console.log(error);
                                                 }
-                                              );*/
+                                              );
                                             }
                                           }
                                         }
@@ -356,7 +402,7 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
                                               email = email + '@esei.uvigo.es';
                                               this.grupos.splice(0, this.grupos.length);
                                               this.asignaturasAsignadas.splice(0, this.asignaturasAsignadas.length);
-                                              this.comprobarAsignaturasYGrupos(e2, email, this.diferente);
+                                              this.comprobarAsignaturasYGrupos(e2, email);
                                             }
                                           }
                                         }
@@ -392,18 +438,17 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
         error=>{
           console.log(error);
         });
-
-
-
-      /*const dataString = JSON.stringify(jsonData);
-      document.getElementById('output').innerHTML = dataString;
-      this.setDownload(dataString);*/
     };
     reader.readAsBinaryString(file);
   }
 
-  comprobarAsignaturasYGrupos(value,email,diferente){
-    console.log(this.asignaturas);
+  /**
+   * método usado para comprobar los grupos y asignaturas que tiene un usuario
+   * @param value
+   * @param email
+   * @param diferente
+   */
+  comprobarAsignaturasYGrupos(value,email){
     let asignatura=this.asignaturas[0];
     let grupo='';
     let grupogrande='';
@@ -484,7 +529,6 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
       b++;
       a++;
     }
-    //if(diferente==true){
       a=this.gruposasignatura5;
       b=1;
       while(a<this.gruposasignatura6){
@@ -555,14 +599,10 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
         b++;
         a++;
       }
-    //}
-    console.log(email);
-    console.log(this.grupos);
-    /*console.log(this.asignaturasAsignadas);
+
 
     this.usuarioAsignaturaService.registrarAsignaturas(this.asignaturasAsignadas,email).subscribe(
       result=>{
-        console.log("BIEEN ASIGNATURAS");
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
@@ -573,22 +613,21 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
 
     this.usuarioGrupoService.registrarImportacion(this.grupos,email).subscribe(
       result=>{
-        console.log("BIEEN GRUPOS");
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
         this.mensaje="Ocurrió un error registrando los grupos";
         console.log(error);
       }
-    );*/
+    );
 
-   // document.getElementById('output').innerHTML = "DATOS IMPORTADOS";
     this.mostrarbien=true;
     this.mensaje="Importados todos los datos correctamente";
-    console.log("-----------------------------------------------------------");
   }
 
-
+  /**
+   * primer método que se ejecuta al cargar la vista, usado para incializar variables
+   */
   ngOnInit(){
     this.mensaje='';
     this.mostrarbien=false;
@@ -596,14 +635,23 @@ export class ImportarEstudiantesGruposComponent implements OnInit {
     this.mostrarinfo=true;
   }
 
+  /**
+   * método usado para cerrar la caja verde de correcto funcionamiento
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método usado para cerrar la caja roja de incorrecto funcionamiento
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }
 
+  /**
+   * método usado para cerrar la caja amarilla de información
+   */
   cambiarinfo(){
     this.mostrarinfo=false;
   }

@@ -14,7 +14,9 @@ import {take, takeUntil} from 'rxjs/operators';
   styleUrls: ['./select-estudiantes.component.css']
 })
 export class SelectEstudiantesComponent implements OnInit {
-
+  /**
+   * los métodos y variables de esta clase están definidos en la clase multi select de asignaturas
+   */
   public usuarios: Usuario[];
   icono = faUser;
 

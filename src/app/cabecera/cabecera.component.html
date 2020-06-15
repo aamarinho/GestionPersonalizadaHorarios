@@ -26,7 +26,7 @@
 
     <div class="collapse navbar-collapse"
          [ngClass]="{ 'show': navbarOpen }">
-        <div *ngIf="tipo==1">
+        <div *ngIf="tipo=='1'">
           <ul class="navbar-nav mr-auto">
             <li type="button" class="ml-4 boton" (click)="router.navigate(['/usuarios'])">USUARIOS</li>
             <li type="button" class="ml-4 boton" (click)="router.navigate(['/asignaturas'])">ASIGNATURAS</li>
@@ -35,14 +35,14 @@
             <li type="button" class="ml-4 boton" (click)="router.navigate(['/configuracion'])">CONFIGURACIÓN</li>
           </ul>
         </div>
-        <div *ngIf="tipo==2">
+        <div *ngIf="tipo=='2'">
           <ul class="navbar-nav mr-auto">
             <li type="button" class="ml-4 boton" (click)="irACalendarioProfesor()">HORARIO</li>
             <li type="button" class="ml-4 boton" (click)="irAAsignaturas()">ASIGNATURAS</li>
             <li type="button" class="ml-4 boton" (click)="router.navigate(['/actividadesdocentes'])">ACTIVIDADES DOCENTES</li>
           </ul>
         </div>
-        <div *ngIf="tipo==3">
+        <div *ngIf="tipo=='3'">
           <ul class="navbar-nav mr-auto">
             <li type="button" class="ml-4 boton" (click)="irACalendarioEstudiante()">HORARIO</li>
           </ul>

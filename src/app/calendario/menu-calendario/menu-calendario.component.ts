@@ -17,7 +17,7 @@ export class MenuCalendarioComponent implements OnInit {
    * constructor usado para instanciar objetos de esta clase pasándole el router para redireccionar a otra vista
    * @param router
    */
-  constructor(private router:Router) { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }

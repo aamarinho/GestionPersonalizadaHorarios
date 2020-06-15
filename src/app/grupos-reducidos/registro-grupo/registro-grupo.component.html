@@ -56,7 +56,7 @@
       <fa-icon [icon]="iconoSitio"></fa-icon>
       <label for="nombre" class="labels ml-2">Aula</label>
       <br/>
-      <input type="text" name="nombre" class="col inputs" #aula="ngModel" [(ngModel)]="grupo.aula" required />
+      <input type="text" name="aula" class="col inputs" #aula="ngModel" [(ngModel)]="grupo.aula" required />
       <span class="validaciones" *ngIf="aula.touched && !aula.valid">
       El aula no es válida
     </span>

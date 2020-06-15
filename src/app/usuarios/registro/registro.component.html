@@ -3,8 +3,8 @@
   <div class="vl">
     <form #formRegistroEstudiante="ngForm" (ngSubmit)="registrar()" class="form-registro-estudiante" >
 
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==3">REGISTRAR A UN ESTUDIANTE</h4>
-      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo==2">REGISTRAR A UN PROFESOR</h4>
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo=='3'">REGISTRAR A UN ESTUDIANTE</h4>
+      <h4 class="mt-4 mb-4 titulo" *ngIf="tipo=='2'">REGISTRAR A UN PROFESOR</h4>
       <fa-icon [icon]="iconoUsuario"></fa-icon>
       <label for="nombre" class="labels ml-2">Nombre</label>
       <br/>

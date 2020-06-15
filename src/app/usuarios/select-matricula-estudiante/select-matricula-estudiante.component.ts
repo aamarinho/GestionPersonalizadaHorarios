@@ -15,7 +15,9 @@ import {UsuarioasignaturaService} from '../../../services/usuarioasignatura.serv
   styleUrls: ['./select-matricula-estudiante.component.css']
 })
 export class SelectMatriculaEstudianteComponent implements OnInit,AfterViewInit,OnDestroy {
-
+  /**
+   * los métodos y variables de esta clase están definidos en la clase multi select de asignaturas
+   */
   public usuarios: Usuario[];
   icono = faUser;
   public asignatura=window.sessionStorage.getItem('gestionestudiantes');

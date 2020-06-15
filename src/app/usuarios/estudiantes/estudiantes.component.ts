@@ -11,43 +11,63 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 })
 export class EstudiantesComponent implements OnInit {
 
+  /**
+   * variable usada para almacenar todos los estudiantes registrados en el sistema
+   */
   public estudiantes : Usuario[];
+  /**
+   * icono de lupa mostrado en la vista
+   */
   iconolupa = faSearch;
-  myInput;
-  table;
-  cells;
-  cellArr;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  /**
+   * constructor usado para instanciar objetos de esta clase a partir de un objeto usuarioService
+   * y el router para redireccionar a otra vista
+   * @param usuarioService
+   * @param router
+   */
+  constructor(private usuarioService: UsuarioService, public router: Router) {
     this.estudiantes = new Array<Usuario>();
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista, utilizada para rellenar el array
+   * con todos los estudiantes
+   */
   ngOnInit() {
     this.estudiantes.splice(0,this.estudiantes.length);
-    this.usuarioService.getEstudiantes().subscribe( //me pierdo
+    this.usuarioService.getEstudiantes().subscribe(
       result=>{
-        console.log(result);
-        console.log("ENTRO PARA OBTENER LOS ESTUDIANTES")
         for( let e of result){
           this.estudiantes.push(e);
         }
       },
       error=>{
-        console.log(this.estudiantes);
-        console.log("DIO ERROR AL OBTENER LOS ESTUDIANTES");
+        console.log(error);
       });
   }
 
+  /**
+   * método usado para redireccionar a la vista de registro
+   */
   onSubmit(){
     window.sessionStorage.setItem('tipousuario','3');
     this.router.navigate(['/registro']);
   }
 
+  /**
+   * método usado para redireccionar a la vista para gestionar las asignaturas de ese usuario
+   * @param value
+   */
   registrarAsignaturas(value){
     window.sessionStorage.setItem('gestionasignaturas',value.email);
     this.router.navigate(['/gestionasignaturas']);
   }
 
+  /**
+   * método usado para redireccionar a la vista para gestionar los grupos reducidos de ese usuario
+   * @param value
+   */
   registrarGrupos(value){
     window.sessionStorage.setItem('gestiongrupos',value.email);
     this.router.navigate(['/gestiongrupos']);

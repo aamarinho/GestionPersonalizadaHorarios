@@ -17,7 +17,10 @@
     <span class="validaciones" *ngIf="contrasena.touched && !contrasena.valid">
       Debes introducir la contraseña
     </span>
-
+    <div *ngIf="mostrarmal==true" class="alert alert-danger alert-dismissable mt-3" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="cambiarmal()"><span aria-hidden="true">&times;</span></button>
+      {{mensaje}}
+    </div>
     <input type="submit" value="ENTRAR" class="btn btn-lg botoninicio" [disabled]="!formIniciarSesion.form.valid" />
 
   </form>

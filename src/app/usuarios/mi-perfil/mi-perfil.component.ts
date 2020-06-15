@@ -10,7 +10,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./mi-perfil.component.css']
 })
 export class MiPerfilComponent implements OnInit {
-
+  /**
+   * los métodos y variables de esta clase son exactamente iguales que los definidos en la clase
+   * EditarUsuarioComponent
+   */
   public usuario: Usuario;
   iconoUsuario = faUser;
   iconoEmail = faEnvelope;

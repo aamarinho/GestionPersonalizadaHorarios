@@ -61,7 +61,7 @@ export class RegistroAsignaturaComponent implements OnInit {
    * @param router
    * @param usuarioService
    */
-  constructor(private asignaturaService : AsignaturaService, private router:Router, private usuarioService : UsuarioService) {
+  constructor(private asignaturaService : AsignaturaService, public router:Router, private usuarioService : UsuarioService) {
     this.asignatura = new Asignatura('','','',null,null,);
     this.profesores=new Array<Usuario>();
     this.mostrarbien=false;

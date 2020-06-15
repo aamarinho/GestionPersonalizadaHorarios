@@ -11,10 +11,14 @@ import {faSearch} from '@fortawesome/free-solid-svg-icons';
 })
 export class ProfesoresComponent implements OnInit {
 
+  /**
+   * los métodos y variables de esta clase son exactamente iguales que los definidos
+   * en la clase EstudiantesComponent
+   */
   public profesores : Usuario[];
   iconolupa = faSearch;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(private usuarioService: UsuarioService, public router: Router) {
     this.profesores = new Array<Usuario>();
   }
 

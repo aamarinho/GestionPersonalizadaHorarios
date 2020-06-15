@@ -82,7 +82,7 @@ export class EditarGrupoComponent implements OnInit {
    * @param router
    * @param asignaturaService
    */
-  constructor(private grupoService : GruposreducidosService, private router:Router, private asignaturaService : AsignaturaService) {
+  constructor(private grupoService : GruposreducidosService, public router:Router, private asignaturaService : AsignaturaService) {
     this.grupo = new GrupoReducido('','','','','','','');
     this.asignaturas=new Array<Asignatura>();
     this.seleccionDia=this.dias[0].name;
@@ -123,7 +123,9 @@ export class EditarGrupoComponent implements OnInit {
           this.seleccionTipo=this.tipos[0].name;
         }
         this.grupo.dia=result['dia'];
-        if(this.grupo.dia=="Tuesday"){
+        if(this.grupo.dia=="Monday"){
+          this.seleccionDia=this.dias[0].name;
+        } else if(this.grupo.dia=="Tuesday"){
           this.seleccionDia=this.dias[1].name;
         } else if(this.grupo.dia=="Wednesday"){
           this.seleccionDia=this.dias[2].name;
@@ -157,6 +159,17 @@ export class EditarGrupoComponent implements OnInit {
     this.grupo.id_asignatura=window.sessionStorage.getItem('asignatura');
     this.grupo.tipo=this.seleccionTipo;
     this.grupo.dia=this.seleccionDia;
+    if(this.grupo.dia=="Lunes"){
+      this.grupo.dia="Monday";
+    } else if(this.grupo.dia=="Martes"){
+      this.grupo.dia="Tuesday";
+    } else if(this.grupo.dia=="Miercoles"){
+      this.grupo.dia="Wednesday";
+    } else if(this.grupo.dia=="Jueves"){
+      this.grupo.dia="Thursday";
+    } else{
+      this.grupo.dia="Friday";
+    }
     this.grupoService.editar(this.grupo).subscribe(
       result=>{
         this.mostrarmal=false;

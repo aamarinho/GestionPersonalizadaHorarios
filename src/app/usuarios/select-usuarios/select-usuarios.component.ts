@@ -15,7 +15,9 @@ import {UsuarioService} from '../../../services/usuario.service';
   styleUrls: ['./select-usuarios.component.css']
 })
 export class SelectUsuariosComponent implements OnInit {
-
+  /**
+   * los métodos y variables de esta clase están definidos en la clase multi select de asignaturas
+   */
   public usuarios: Usuario[];
   icono = faUser;
 

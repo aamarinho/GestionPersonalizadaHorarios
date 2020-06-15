@@ -5,6 +5,7 @@ import { faLock} from '@fortawesome/free-solid-svg-icons';
 import {UsuarioService} from '../../services/usuario.service';
 import {Router} from '@angular/router';
 import {CabeceraComponent} from '../cabecera/cabecera.component';
+import {error} from 'util';
 
 @Component({
   providers: [CabeceraComponent],
@@ -26,6 +27,14 @@ export class InicioComponent implements OnInit {
    * icono de candado mostrado en la vista
    */
   iconoCandado = faLock;
+  /**
+   * booleano que muestra o no la caja roja del incorrecto funcionamiento
+   */
+  public mostrarmal:boolean;
+  /**
+   * mensaje que va en alguna de las cajas
+   */
+  public mensaje:string;
 
   /**
    * constructor usado para instanciar objetos de esta clase a partir de un objeto UsuarioService, el
@@ -36,6 +45,8 @@ export class InicioComponent implements OnInit {
    */
   constructor(private usuarioService: UsuarioService, private router: Router, private comp: CabeceraComponent) {
     this.usuario = new Usuario('','','',null,'');
+    this.mostrarmal=false;
+    this.mensaje='';
   }
 
   /**
@@ -72,13 +83,24 @@ export class InicioComponent implements OnInit {
             this.router.navigate(['/calendario']);
           }
         } else{
-          console.log("NO OK");
+          console.log(error);
+          this.mostrarmal=true;
+          this.mensaje="El usuario o la contraseña son incorrectos";
         }
       },
       error=>{
         console.log(error);
+        this.mostrarmal=true;
+        this.mensaje="El usuario o la contraseña son incorrectos";
       }
     );
+  }
+
+  /**
+   * método usado para cerrar la caja de incorrecto funcionamiento
+   */
+  cambiarmal(){
+    this.mostrarmal=false;
   }
 
 }

@@ -50,7 +50,7 @@ export class EditarActividadDocenteComponent implements OnInit {
    * @param calendarioService
    * @param router
    */
-  constructor(private calendarioService : CalendarioService, private router:Router) {
+  constructor(private calendarioService : CalendarioService, public router:Router) {
     this.calendario=new Calendario('','','','','','','','','');
     this.mostrarbien=false;
     this.mostrarmal=false;

@@ -14,14 +14,39 @@ import {AsignaturaService} from '../../../services/asignatura.service';
 })
 export class ImportarProfesoresGruposComponent implements OnInit {
 
+  /**
+   * array usado para guardar las asignaturas posteriormente asignadas a un profesor
+   */
   asignaturasAsignadas:String[];
+  /**
+   * array usado para almacenar los grupos que imparte de una asignatura
+   */
   grupos: String[];
+  /**
+   * mensaje mostrado en las cajas
+   */
   mensaje:string;
+  /**
+   * booleano usado para mostrar o no la caja verde de correcto funcionamiento
+   */
   mostrarbien:boolean;
+  /**
+   * booleano usado para mostrar o no la caja roja de incorrecto funcionamiento
+   */
   mostrarmal:boolean;
+  /**
+   * booleano usado para mostrar o no la caja amarilla de información
+   */
   mostrarinfo:boolean;
 
-  constructor(private router : Router, private usuarioAsignaturaService: UsuarioasignaturaService, private asignaturaService:AsignaturaService,private usuarioService:UsuarioService) {
+  /**
+   * constructor usado para instanciar objetos de esta clase
+   * @param router
+   * @param usuarioAsignaturaService
+   * @param asignaturaService
+   * @param usuarioService
+   */
+  constructor(public router : Router, private usuarioAsignaturaService: UsuarioasignaturaService, private asignaturaService:AsignaturaService,private usuarioService:UsuarioService) {
     this.asignaturasAsignadas=new Array<String>();
     this.grupos=new Array<String>();
     this.mensaje='';
@@ -30,6 +55,10 @@ export class ImportarProfesoresGruposComponent implements OnInit {
     this.mostrarinfo=true;
   }
 
+  /**
+   * método usado para almacenar en la base de datos la información del fichero Excel
+   * @param ev
+   */
   subirFichero(ev) {
 
     let workBook = null;
@@ -62,19 +91,17 @@ export class ImportarProfesoresGruposComponent implements OnInit {
             email=email.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
             email=email+'@uvigo.es';
             var actual = new Usuario(email,usuarionombre,usuarioapellidos,2,usuarionombre);
-            //console.log(actual);
+
             //registrar a los profesores
-            /*this.usuarioService.registrar(actual).subscribe(
+            this.usuarioService.registrar(actual).subscribe(
               result=>{
-                console.log("bien");
               } , error=>{
                 this.mostrarbien=false;
                 this.mostrarmal=true;
                 this.mensaje="Ocurrió un error registrando los profesores";
                 console.log(error);
               }
-            );*/
-            console.log(actual);
+            );
           }
         }
       }
@@ -103,6 +130,11 @@ export class ImportarProfesoresGruposComponent implements OnInit {
     reader.readAsBinaryString(file);
   }
 
+  /**
+   * método usado para comprobar las asignaturas y grupos que imparte un profesor
+   * @param value
+   * @param email
+   */
   comprobarAsignaturasYGrupos(value,email){
     let arrayAsignaturas=value['__EMPTY'].split(',');
     for(let asignatura of arrayAsignaturas){
@@ -110,42 +142,49 @@ export class ImportarProfesoresGruposComponent implements OnInit {
         this.asignaturasAsignadas.push(asignatura);
       }
     }
-    console.log(this.asignaturasAsignadas);
+
 
     //en este servicio se va a editar el responsable de todas esas asignaturas, añadir a la tabla usuarioasignatura cada asignatura de cada profesor, y en la tabla usuarioGrupo los grupos de cada profesor
-    /*this.usuarioAsignaturaService.registrarAsignaturasProfesor(this.asignaturasAsignadas,email).subscribe(
+    this.usuarioAsignaturaService.registrarAsignaturasProfesor(this.asignaturasAsignadas,email).subscribe(
       result=>{
-        console.log("BIEEN ASIGNATURAS GRUPOS Y EDICION RESPONSABLE ASIGNATURAS");
       } , error=>{
         this.mostrarbien=false;
         this.mostrarmal=true;
         this.mensaje="Ocurrió un error registrando las asignaturas y los grupos";
         console.log(error);
       }
-    );*/
+    );
 
-
-
-    // document.getElementById('output').innerHTML = "DATOS IMPORTADOS";
     this.mostrarbien=true;
     this.mensaje="Importados todos los datos correctamente";
-    console.log("-----------------------------------------------------------");
   }
 
+  /**
+   * primer método que se ejecuta al cargar la vista usado para inicializar variables
+   */
   ngOnInit() {
     this.mensaje='';
     this.mostrarbien=false;
     this.mostrarmal=false;
   }
 
+  /**
+   * método usado para cerrar la caja verde de correcto funcionamiento
+   */
   cambiarbien(){
     this.mostrarbien=false;
   }
 
+  /**
+   * método usado para cerrar la caja roja de incorrecto funcionamiento
+   */
   cambiarmal(){
     this.mostrarmal=false;
   }
 
+  /**
+   * método usado para cerrar la caja amarilla de información
+   */
   cambiarinfo(){
     this.mostrarinfo=false;
   }
